@@ -22,15 +22,14 @@ class WelcomeController < ApplicationController
       if @client.save
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
-        Devise::Mailer.reset_password_instructions(@client, token).deliver_now
+        UserMailer.delay.set_password_instructions(@client, token)
         if @order.save
           redirect_to root_path, notice: 'Заказ успешно создан. Вы получите на email инструкцию для входа в личный кабинет'
         else
-          redirect_to root_path
+          redirect_to root_path, notice: 'Ошибка'
         end
       else
-        flash[:notice] = 'Такой email уже зарегистрирован в системе'
-        redirect_to root_path
+        redirect_to root_path, notice: 'Такой email уже зарегистрирован в системе'
       end
     end
   end

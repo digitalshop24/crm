@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
   ROLES = ['admin', 'manager', 'employee', 'client']
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
   self.inheritance_column = 'role'
   has_many :sended_messages, foreign_key: "sender_id", class_name: "Message"
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"
+  has_one :account
 
   def send_password_reset
     generate_token(:password_reset_token)
@@ -34,5 +33,8 @@ class User < ActiveRecord::Base
 
   def name_for_select
     "#{self.name} (#{self.email})"
+  end
+  def add_account
+    Account.create(user_id: self.id, amount: 0, currency: 'RUB')
   end
 end

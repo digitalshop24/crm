@@ -23,6 +23,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'maskedinput-rails', '~> 1.4'
 
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'sinatra', require: false
+gem 'sidekiq'
 
 group :production do
   gem 'unicorn', '~> 4.9'

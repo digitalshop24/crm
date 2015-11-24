@@ -14,7 +14,6 @@ function checkphone(value) {
     return true;
 };
 
-
 function validate_form() {
     s = document.getElementById("order_worktype_id").value;
     if (s == "") {
@@ -40,7 +39,7 @@ function validate_form() {
     };
 
     s = document.getElementById("order_client_phone").value;
-    if(!checkphone(s)){
+    if (!checkphone(s)) {
         document.getElementById("txt5").innerHTML = "<div class='ghost' >Неверный телефон</div>";
         return false;
     };
@@ -53,4 +52,17 @@ function win_close() {
     document.getElementById("txt3").innerHTML = "";
     document.getElementById("txt4").innerHTML = "";
     document.getElementById("txt5").innerHTML = "";
+};
+
+function validate_form2() {
+    s = document.getElementById("tipRaboty2").value;
+    if (s == "") {
+        document.getElementById("txt6").innerHTML = "<div class='ttt' >не выбран тип работы </div>";
+        return false;
+    };
+    document.forms.insertForm2.submit();
+};
+
+function win_close2() {
+    document.getElementById("txt6").innerHTML = "";
 };

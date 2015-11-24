@@ -1,0 +1,19 @@
+<%= render "dashboard/#{current_user.role.downcase}/header" %>
+<h3>Счет №<%= @payment.id %></h3>
+<% if @payment.waiting? %>
+  <h4>Оплата в банке</h4>
+  <p><strong>Сумма: </strong><%= @payment.amount %></p>
+  <p><strong>Реквизиты для оплаты: </strong>3423423423423434</p>
+  <p>Если вы оплатили, можете загрузить фотографию чека:</p>
+  <%= form_for @payment do |f| %>
+    <%= f.file_field :check %>
+    <%= f.submit 'Загрузить' %>
+  <% end %>
+  <h4>Оплата через PayMaster</h4>
+  <p>Paymaster принимает Visa, Mastercard, Webmonry</p>
+  <%= link_to 'Оплатить', @payment.paymaster_link %>
+<% elsif @payment.approved? %>
+  <p><strong>Статус: </strong><%= @payment.status %></p>
+  <p><strong>Дата выставления: </strong><%= @payment.created_at %></p>
+  <p><strong>Дата оплаты: </strong><%= @payment.sys_date %></p>
+<% end %>

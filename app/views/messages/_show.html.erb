@@ -46,7 +46,10 @@
           <%= link_to '', approve_order_message_path(@order, message), 
               class: 'glyphicon glyphicon-ok', title: 'Одобрить' %>
         <% end %>
-        <span class="glyphicon glyphicon-share-alt" aria-hidden="true" title="Переслать"></span>
+        <% if (( message.sender.role == 'Client' && @order.employee ) || ( message.sender.role == 'Employee' && @order.client )) %>
+          <%= link_to '', resend_order_message_path(@order, message), 
+              class: 'glyphicon glyphicon-share-alt', title: 'Переслать' %>
+        <% end %>
         <%= link_to '', message, class: 'glyphicon glyphicon-remove', 
             title: 'Одобрить', method: :delete, data: { confirm: 'Вы уверены?' } %>
       </div>

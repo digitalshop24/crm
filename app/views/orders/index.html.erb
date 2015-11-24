@@ -1,45 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Worktype</th>
-      <th>Wortype other</th>
-      <th>Speciality</th>
-      <th>Speciality other</th>
-      <th>Institution</th>
-      <th>Theme</th>
-      <th>Uniqueness</th>
-      <th>Comment</th>
-      <th>Deadline</th>
-      <th>Page number</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.worktype %></td>
-        <td><%= order.worktype_other %></td>
-        <td><%= order.speciality %></td>
-        <td><%= order.speciality_other %></td>
-        <td><%= order.institution %></td>
-        <td><%= order.theme %></td>
-        <td><%= order.uniqueness %></td>
-        <td><%= order.comment %></td>
-        <td><%= order.deadline %></td>
-        <td><%= order.page_number %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<%= render "dashboard/#{current_user.role.downcase}/header" %>
+<h2 class="text-center">Все заказы</h2>
+<%= render 'orders/table' %>
+<%= will_paginate @orders, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
 <br>
-
-<%= link_to 'New Order', new_order_path %>
+<%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>

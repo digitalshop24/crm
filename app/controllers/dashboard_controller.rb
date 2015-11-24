@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
       render 'dashboard/client/orders'
     when 'Manager'
       @orders = Order.paginate(page: params[:page], per_page: 15)
-      render 'dashboard/manager/orders'
+      render 'orders/index'
     when 'Employee'
       @orders = current_user.orders.paginate(:page => params[:page])
       render 'dashboard/employee/my_orders'
@@ -17,7 +17,7 @@ class DashboardController < ApplicationController
   end
 
   def new_orders
-     @orders = Order.approved.where(speciality_id: current_user.speciality_id).paginate(:page => params[:page])
+     @orders = Order.employee_searching.where(speciality_id: current_user.speciality_id).paginate(:page => params[:page])
      render 'dashboard/employee/new_orders'
   end
 

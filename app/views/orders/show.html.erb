@@ -1,5 +1,6 @@
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
-<%= render 'show' %>
-<% if can? :manage, @order %>
-	<%= render "manage_links" %>
+<% if @order.moderation? %>
+  <%= render 'show' %>
+<% else %>
+  <%= render 'page' %>
 <% end %>

@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:approve, :destroy]
+  before_action :set_message, only: [:approve, :destroy, :resend]
   load_and_authorize_resource  
 
   def create
@@ -31,6 +31,12 @@ class MessagesController < ApplicationController
     else
       redirect_to order_path(@message.order_id), notice: 'Ошибка'
     end
+  end
+
+  def resend
+    receiver_id = @message.sender.role == 'Client' ? @message.order.employee_id : @message.order.client_id
+    @message.update(status: :approved, receiver_id: receiver_id)
+    redirect_to order_path(@message.order_id)
   end
 
   def destroy

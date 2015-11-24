@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Bitter:400,700);
 
 
-
 /* 1- Изменение стандартных стиелей */
 /* 2- Изменение бутстрап-стилей нвигации*/
 /* 3- Первая секция(слайдер) */
@@ -11,53 +10,90 @@
 /* 7- Футер */
 
 
-
-
 /*  Изменение стандартных стиелей */
-body {font-family: 'Bitter', serif;}
-ul {list-style-type: none;}
-a {outline: none !important;}
-.row {margin: 0;}
+body {
+	font-family: 'Bitter', serif;
+}
+ul {
+	list-style-type: none;
+}
+a {
+	outline: none !important;
+}
+.row {
+	margin: 0;
+}
 /*  Изменение стандартных стиелей */
 /*Изменение бутстрап-стилей нвигации*/
 .navbar-inverse {
 	background-color: #cc0000;
 	border: none;
 }
+.navbar-brand {padding: 15px 0}
+.navbar-brand > img {margin-top: -4px;}
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:focus,
 .navbar-inverse .navbar-nav > .active > a:hover {
 	background-color:transparent; 
 }
-.navbar-inverse .navbar-nav > li > a {
-	color: #fff;
+.navbar-nav > li {
 	font-size: 21px;
 	line-height: 26px;
+	text-align: center;
+}
+.navbar-inverse .navbar-nav > li > a {
+	color: #fff;	
 }
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:focus,
 .navbar-inverse .navbar-nav > .active > a:hover {
-	color: #424242;
+	color: #000;
 }
-.navbar-nav {float: right;}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:focus,
+.navbar-inverse .navbar-nav > .open > a:hover{
+	background-color: #cc0000; 
+}
+/*.navbar-nav {float: right;}*/
 
-.navbar-nav li:last-child a,
-.navbar-nav li:last-child a:focus,
-.navbar-nav li:last-child a:hover {
+.navbar-nav li.singInBtn a,
+.navbar-nav li.singInBtn a:focus,
+.navbar-nav li.singInBtn a:hover {
 	padding: 8px 10px;
 	margin-top: 5px;
 	background-color:rgba(42,42,42,0.35);
-	border-radius: 5px;}
+	border-radius: 5px; text-align: center;}
+
+.dropdown-menu {
+	background-color: rgb(188, 0, 0);
+	border:none;min-width: 147px;
+	}
+.dropdown-menu > li > a {
+	color: #fff;
+	transition:all .6s ease;
+	font-size: 17px
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	background-color:transparent; color: #fff
+}
+.dropdown-menu > li:hover {
+	background-color:#cc0000;
+}
+.navbar-right .dropdown-menu {
+	left: 0px;
+	right: auto;
+}
 /*Изменение бутстрап-стилей нвигации*/
 
 /* Первая секция(слайдер) */
 ul.list li:nth-child(1){display: none;} /* изменение плагина nice-select */
-.HeroSection {margin-top: 54px;
-	background-image: image-url('moscow.png') ;
+.HeroSection {margin-top: 50px;
+	background-image: image-url('moscow.png');
 	background-size: cover;
 	}
 .HeroTitle {
-	padding: 50px 0 20px 0;
+	padding: 40px 0 20px 0;
 	font-size: 40px;
 	line-height: 50px;
 	text-transform: uppercase;
@@ -65,16 +101,18 @@ ul.list li:nth-child(1){display: none;} /* изменение плагина nic
 }
 .leftSlide{
 	background-color: rgba(255,255,255,0.8);
-	border-radius: 20px;}
-.leftSlide h3 {
-	font-size: 30px;
-	line-height: 35px;
-	font-weight: 700;
-	padding: 20px 20px 5px 20px;
+	border-radius: 20px;
 }
+.leftSlide h3 {
+	font-size: 26px;
+	line-height: 30px;
+	font-weight: 700;
+	padding: 0 20px;
+}
+
 .leftSlide p {
-	font-size: 21px;
-	padding: 5px 20px 20px 20px;
+	font-size: 19px;
+	padding: 0 20px;
 }
 .leftSlide button {
 	background: transparent;
@@ -84,8 +122,12 @@ ul.list li:nth-child(1){display: none;} /* изменение плагина nic
 	margin: 0 0 40px 20px;
 	font-size: 20px;
 }
-.oneItem {margin-bottom: 20px;}
-.HeroSection .nice-select, .list {
+.oneItem {
+	margin-bottom: 20px;
+}
+.nice-select {color: #999999 !important}
+.HeroSection .nice-select,
+.list {
 	width: 100%;
 	background-color:rgba(255,255,255,0.8);
 }
@@ -96,7 +138,6 @@ ul.list li:nth-child(1){display: none;} /* изменение плагина nic
     height: 42px;
     line-height: 2em;      
 }
-
 .file_upload > div{
     padding-left: 1em;
 }
@@ -117,17 +158,18 @@ ul.list li:nth-child(1){display: none;} /* изменение плагина nic
     cursor: pointer
 }
 .file_upload .imgPort {
-position: absolute;
-background-color: #968585;
-margin: -41px -30px 0 0;
-width: 40px;
-right: 32px;
-height: 40px;
-border-top-right-radius:4px;
-border-bottom-right-radius:4px;
+	position: absolute;
+	background-color: #968585;
+	margin: -41px -30px 0 0;
+	width: 40px;
+	right: 32px;
+	height: 40px;
+	border-top-right-radius:4px;
+	border-bottom-right-radius:4px;
 }
-.file_upload .imgPort img {margin-top: 10px;}
-
+.file_upload .imgPort img {
+	margin-top: 10px;
+}
 .MySend {
 	width: 100%;
 	height: 42px;
@@ -136,7 +178,7 @@ border-bottom-right-radius:4px;
 	border:none;
 	font-weight: 700;
 	font-size: 16px;
-	}
+}
 .RedBTN {background-color:#d61521 !important;}
 /* Первая секция(слайдер) */
 
@@ -144,31 +186,57 @@ border-bottom-right-radius:4px;
 .CoastSection {
 	background-image: image-url('pioners.png');
 	background-repeat: no-repeat;
-	background-size: 100vw; }
-.CoastSection .HeroTitle {color: #424242}
-.MyTable {margin: 20px 0 60px 0;}
-.MyTable th{padding: 16px 0 !important; }
-.oneTh {padding-left: 10px; font-size: 400 !important;}
-.MyTable thead {font-size: 24px; color:#fff; }
-.MyTable tbody {font-size: 18px;}
-.MyTable .MHEAD, .RHEAD, .LHEAD {background-color: #cf000f;}
-.MyTable .LHEAD { border-top-left-radius: 15px;  }
+	background-size: 100vw;
+}
+.CoastSection .HeroTitle {
+	color: #424242
+}
+.MyTable {
+	margin: 20px 0 60px 0;
+}
+.MyTable th{
+	padding: 16px 0 !important;
+}
+.oneTh {
+	padding-left: 10px; 
+	font-size: 400 !important;
+}
+thead {
+	font-size: 24px;
+	color:#fff;
+}
+tbody {font-size: 18px;}
+.MyTable .MHEAD,
+.RHEAD,
+.LHEAD {
+	background-color: #cf000f;
+}
+.MyTable .LHEAD {
+	border-top-left-radius: 15px;
+}
 .MyTable .RHEAD {
 	border-top-right-radius: 15px;
 	max-width: 40px;
-	text-align: center; }
+	text-align: center;
+}
 .MyTable .MHEAD {
 	max-width: 40px;
-	text-align: center;}
+	text-align: center;
+}
 /* Вторая секция (услуги и цены)*/
 
 /* Преимущества */
 .WeAreTheBest {
-	background-image: image-url('WeAreTheBest.png') ;
+	background-image: image-url('WeAreTheBest.png');
 	background-repeat: no-repeat;
-	background-size: cover;}
-.WeAreTheBest .HeroTitle {padding: 50px 0;}
-.WeAreTheBest .figTitle {padding: 15px 0 0 0;}
+	background-size: cover;
+}
+.WeAreTheBest .HeroTitle {
+	padding: 50px 0;
+}
+.WeAreTheBest .figTitle {
+	padding: 15px 0 0 0;
+}
 .WeAreTheBest .figExcerpt {
 	color: #fff;
 	font-size: 20px;
@@ -178,7 +246,7 @@ border-bottom-right-radius:4px;
 .WeAreTheBest .formParth { 
 	padding:40px 0;
 	margin:auto;
-	max-width: 680px}
+	max-width: 705px}
 .WeAreTheBest button,
 .WeAreTheBest input,
 .WeAreTheBest select {
@@ -218,12 +286,25 @@ border-bottom-right-radius:4px;
 .TheDate {color: #BDC3C7}
 
 /* 7- Футер */
-footer {background-color:#d41515; margin-top: 40px; color: #fff;}
-.footTitle {font-weight: 700; padding-top: 30px; }
-footer ul {padding:20px 0; }
-footer ul li {padding:4px 0;}
+footer {
+	background-color:#d41515;
+	margin-top: 40px;
+	color: #fff;
+}
+.footTitle {
+	font-weight: 700;
+	padding-top: 30px;
+}
+footer ul {
+	padding:20px 0;
+}
+footer ul li {
+	padding:4px 0;
+}
 footer ul li a,
-footer ul li a:hover {color: #fff; }
+footer ul li a:hover {
+	color: #fff; 
+}
 /* 7- Футер */
 
 .ghost {
@@ -233,8 +314,10 @@ footer ul li a:hover {color: #fff; }
 	color: #CC0000;
 }
 
-.ttt {color: rgb(214, 21, 33);
-margin-left: 22px;}
+.ttt {
+	color: rgb(214, 21, 33);
+	margin-left: 22px;
+}
 
 .owl-theme .owl-controls{
 	margin-top: 10px;
@@ -266,10 +349,120 @@ margin-left: 22px;}
 	opacity: 1;
 	text-decoration: none;
 }
-.icon-chevron-right {margin: -350px 0 0 570px;
-position: absolute; max-width: 80px;}
-.icon-chevron-left {position: absolute;
-margin: -350px 0 0 -700px; max-width: 80px;}
+
+.singInBtn {
+	margin-top: 2px;
+}
+a.details {
+	text-decoration:none;
+	color: #fff;
+	width: 200px;
+	height: 45px;
+	padding: 300px;
+	font-size: 16px;
+}
+.detailsBtn {
+	margin-top:20px;
+	text-align: center;
+	background-color:#008476;
+	padding: 10px;
+	max-width: 200px;
+	max-height: 45px;
+	border-radius: 10px;
+	text-decoration:none;
+}
+.ttt {
+	max-width: 200px;
+	overflow: hidden;
+	margin: 0;
+}
+.advantage .current{
+	padding: 0 50px;
+}
+
+.VabhceNiz {
+	color: #fff;
+	background-color: #333;
+}
+.LogoDShop {
+	text-align: right;
+}
+.VabhceNiz img {
+	margin:8px 0;
+}
+.VabhceNiz h4 {
+	padding-top: 8px;
+}
 .icon-chevron-right,
-.icon-chevron-left {transition:all 0.6s ease;}
-.singInBtn {margin-top: 2px;}
+.icon-chevron-left {
+	display: none;
+}
+
+@media screen and (min-width: 0px) and (max-width:768px){
+	.HeroTitle {
+		padding: 25px 0 15px 0;
+		font-size: 20px;
+		line-height: 25px;
+	}
+	.leftSlide {
+		margin-bottom: 10px;
+	}
+	.leftSlide h3 {
+		padding: 0;
+		font-size: 18px;
+		line-height: 22px;
+	}
+	
+	.leftSlide p {
+		padding: 0;
+		font-size: 14px;
+	}
+	.leftSlide button {
+		padding: 5px;
+		margin: 0 0 5px 0;
+		font-size: 16px;
+	}
+	
+	.WeAreTheBest .formParth .nice-select{
+		float: none;
+		width: 220px;
+	}
+	.WeAreTheBest .formParth .nice-select,
+	.WeAreTheBest .formParth input {
+		margin: auto;
+		display: block;
+		margin-bottom: 10px;
+	}
+	thead {
+		font-size: 14px;
+	}
+	.MyTable .RHEADMOB {
+		border-top-right-radius: 15px;
+		max-width: 40px;
+		text-align: center;
+	}
+	.LogoDShop {
+		text-align: center;
+	}
+}
+
+@media screen and (min-width: 1280px) and (max-width:4000px){
+	.icon-chevron-right,
+	.icon-chevron-left {
+		display: none;
+		transition:all 0.6s ease;
+		top: 50%;
+		position: absolute;
+		margin-top: -20px;
+		max-width: 40px;
+	}
+	.icon-chevron-right {	
+		right: 0;
+		margin-right: -40px;	
+	}
+	.icon-chevron-left {
+		margin-left: -50px;
+		left: 0;
+	}
+}
+.table > thead > tr > th {vertical-align: middle;}

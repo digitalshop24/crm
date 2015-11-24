@@ -1,11 +1,12 @@
-<%= render "dashboard/#{current_user.role.downcase}/header" %>
 <div class="container">
   <!-- ================================================== -->
   <div class="page-header">
     <h2 class="text-center">Заказ №<%= @order.id%>
-      <% if can? :manage, @order %>
+      <% if can? :update, @order %>
         <%= link_to '', edit_order_path(@order), 
               class: 'glyphicon glyphicon-edit', title: 'Редактировать' %>
+      <% end %>
+      <% if can? :manage, @order %>
         <%= link_to 'Завершить заказ', change_status_order_path(@order, :finished), class: "btn btn-info" %>
       <% end %>
     </h2>
@@ -37,11 +38,13 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <!-- ================================================== -->
-          <div>
-            <button type="button" class="btn btn-success pull-left"><%= @order.display_status %></button>
-            <button type="button" class="btn btn-primary pull-right">Поиск исполнителя</button>
-          </div>
-          <div class="clearfix"></div>
+          <% if can? :manage, @order %>
+            <div>
+              <span class="label label-success"><%= @order.display_status %></span>
+              <%= link_to "Поиск исполнителя", search_employee_order_path, class: "btn btn-primary pull-right" %>
+            </div>
+          <% end %>
+          <!--
           <h3>Примечания (по всему заказу)</h3>
           <form>
             <div class="form-group">
@@ -52,9 +55,10 @@
               <label for="note_author">Заметки для автора</label>
               <textarea class="form-control" rows="3" id="note_author"></textarea>
             </div>
-            <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-          </form>
+            <button type="submit" class="btn btn-default">Submit</button> 
+          </form>-->
           <!-- ================================================== -->
+          <br><br>
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <% if can? :upload, Part %>
               <% if @order.parts %>
@@ -76,7 +80,7 @@
           <div class="clearfix"></div>
           <!--<br/>-->
           <!-- ================================================== -->
-          <div class="panel panel-default">
+          <!--<div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Доработки</h3>
             </div>
@@ -114,9 +118,9 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div>-->
           <!-- ================================================== -->
-          <div class="panel panel-default">
+          <!--<div class="panel panel-default">
             <div class="panel-body">
               <form>
                 <p class="text-muted text-uppercase text-center"><strong>Перетащите файлы сюда</strong></p>
@@ -127,7 +131,7 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div>-->
           <!-- ================================================== -->
         </div>
       </div>
@@ -172,36 +176,54 @@
       <%= render 'messages/form' %>
       <!-- panel -->
       <!-- ================================================== -->
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h3>Оплаты</h3>
-          <form>
+      <% if can? :manage, @order %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3>Оплаты</h3>
             <table class="table table-striped">
-              <tr>
-                <td>Стоимость проекта</td>
-                <td><input type="number"></td>
-                <td>Стоимость для автора</td>
-                <td><input type="number"></td>
-              </tr>
+              <%= form_for(@order) do |f| %>
+                <tr>
+                  <td>Стоимость проекта</td>
+                  <td><%= f.number_field :price %></td>
+                  <td>Стоимость для автора</td>
+                  <td><%= f.number_field :employee_price %></td>
+                </tr>
+                <tr>
+                  <td colspan=4>
+                    <%= f.button "Сохранить", class: 'btn btn-primary pull-right' %>
+                  </td>
+                </tr>
+              <% end %>
               <tr>
                 <td>Получено от клиента</td>
-                <td><strong>1 000 000</strong></td>
+                <td><strong><%= @order.received_cash %></strong></td>
                 <td>Оплачено работы</td>
                 <td></td>
               </tr>
-              <tr>
-                <td>Выписать счет</td>
-                <td><input type="number"></td>
-                <td>Оптравить на оплату</td>
-                <td><input type="number"></td>
-              </tr>
+              <%= form_for(Payment.new) do |f| %>
+                <%= f.hidden_field :order_id, value: @order.id %>
+                <%= f.hidden_field :client_id, value: @order.client.id %>
+                <tr>
+                  <td>Выписать счет</td>
+                  <td><%= f.number_field :amount %></td>
+                  <td>Оптравить на оплату</td>
+                  <td><input type="number"></td>
+                </tr>
+                <tr>
+                  <td colspan=2>
+                    <%= f.button "Выписать", class: 'btn btn-primary pull-right' %>
+                  </td>
+                  <td colspan=2></td>
+                </tr>
+              <% end %>
               <tr>
                 <td>Стоит на оплате</td>
-                <td>1000</td>
+                <td><%= @order.waiting_cash %></td>
                 <td>Суммарно на оплату</td>
                 <td>0</td>
               </tr>
             </table>
+            <!--
             <div class="row">
               <div class="col-sm-7 col-xs-12">
                 <p>Подтвердить платеж</p>
@@ -212,17 +234,17 @@
               <div class="col-sm-5 col-xs-12">
                 <button type="submit" class="btn btn-primary pull-right">Сохранить</button>
               </div>
-            </div>
-          </form>
+            </div>-->
+          </div>
         </div>
-      </div>
+      <% end %>
       <!-- ================================================== -->
     </div>
     <!-- col-lg-8 -->
   </div>
   <!-- row -->
   <!-- ================================================== -->
-  <button class="btn btn-default btn-block btn-lg" type="button" data-toggle="collapse" data-target="#order_info" aria-expanded="false" aria-controls="order_info">
+  <!--<button class="btn btn-default btn-block btn-lg" type="button" data-toggle="collapse" data-target="#order_info" aria-expanded="false" aria-controls="order_info">
     Информация о заказе <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
   </button>
   <div class="collapse" id="order_info">
@@ -267,7 +289,7 @@
       </div>
     </div>
   </div>
-  <br/>
+  <br/>-->
   <!-- ================================================== -->
 </div>
 <!-- container -->

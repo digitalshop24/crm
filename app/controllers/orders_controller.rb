@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :approve]
   load_and_authorize_resource
 
   # GET /orders
@@ -9,12 +9,6 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
-    puts @order.status
-    if @order.status == 'moderation'
-      render 'orders/show'
-    else
-      render "dashboard/order"
-    end
   end
 
   # GET /orders/new
@@ -30,6 +24,9 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.client_id = current_user.id if current_user.role == "Client"
+    unless @order[:employee_deadline]
+      @order.set_employee_deadline
+    end
 
     if @order.save
       redirect_to @order, notice: 'Заказ успешно создан.'
@@ -53,6 +50,15 @@ class OrdersController < ApplicationController
     redirect_to dashboard_index_path, notice: 'Заказ успешно удален'
   end
 
+  def approve
+    parms = {status: :approved}    
+    unless @order.manager_id
+      parms.merge!({ manager_id: current_user.id }) if current_user.role == "Manager"
+    end
+    @order.update(parms)
+    redirect_to @order, notice: 'Заказ одобрен'
+  end
+
   def change_status
     if Order.statuses.map(&:first).include? params[:status]
       @order.update(status: params[:status].to_sym)
@@ -63,14 +69,18 @@ class OrdersController < ApplicationController
     end
   end
 
-  def set_employee
-    @order.update(employee_id: params[:employee_id], status: :in_work)
+  def search_employee
+    @order.update(status: :employee_searching)
+    redirect_to @order, notice: 'Поиск исполнителя запущен'
+  end
 
+  def set_employee
+    @order.update(employee_id: params[:employee_id], status: :prepayment_waiting)
     redirect_to @order, notice: 'Исполнитель назначен'
   end
 
   def unset_employee
-    @order.update(employee_id: nil, status: :approved)
+    @order.update(employee_id: nil, status: :employee_searching)
     redirect_to @order, notice: 'Исполнитель снят'
   end
 
@@ -84,7 +94,7 @@ class OrdersController < ApplicationController
     permitted_arr = [:worktype_id, :worktype_other, :speciality_id, :speciality_other,
                      :institution, :theme, :uniqueness, :document, :comment, :deadline, :page_number]
     if ["Admin", "Manager"].include?(current_user.role)
-      permitted_arr << [:client_id, :employee_id, :employee_deadline, :inform_date, :status, :price]
+      permitted_arr << [:client_id, :employee_id, :employee_deadline, :inform_date, :status, :price, :employee_price]
     end
     params.require(:order).permit(permitted_arr)
   end

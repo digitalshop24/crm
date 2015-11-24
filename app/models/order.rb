@@ -6,6 +6,7 @@ class Order < ActiveRecord::Base
   belongs_to :manager, class_name: "Manager"
   has_many :parts
   has_many :messages
+  has_many :payments
 
   has_attached_file :document
   validates_attachment_file_name :document, :matches => [/docx?\Z/, /pdf\Z/, /xlsx?\Z/]
@@ -15,7 +16,7 @@ class Order < ActiveRecord::Base
   def display_status
     I18n.t("activerecord.attributes.#{self.class.name.downcase}.statuses.#{status}", default: status.titleize)
   end
- 
+
   def self.status_names_for_select
     names = []
     statuses.keys.each do |status|
@@ -23,5 +24,17 @@ class Order < ActiveRecord::Base
       names << [display_name, status]
     end
     names
+  end
+  def received_cash
+    self.payments.approved.sum(:amount)
+  end
+  def waiting_cash
+    self.payments.waiting.sum(:amount)
+  end
+  def set_employee_deadline
+    deadline = self[:deadline]
+    if self[:deadline]
+      self[:employee_deadline] = Time.now + (Time.new(deadline.year, deadline.month, deadline.day) - Time.now)/2
+    end
   end
 end

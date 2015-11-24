@@ -1,6 +1,5 @@
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
 <h2 class="text-center">Редактирование заказа</h2>
-
 <%= render 'form' %>
-
-<br><%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>
+<br>
+<%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>

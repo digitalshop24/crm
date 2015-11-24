@@ -1,0 +1,11 @@
+Баланс: <%= @account.amount %>
+<%= form_for Payment.new do |f| %>
+  <%= f.hidden_field :client_id, value: current_user.id %>
+  <%= f.text_field :amount %>
+  <%= f.submit 'Пополнить' %>
+<% end %>
+<br>
+<% if current_user.role == 'Client' %>
+  <% @payments = @account.user.payments %>
+  <%= render 'payments/table' %>
+<% end %>

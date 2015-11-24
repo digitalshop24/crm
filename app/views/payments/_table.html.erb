@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Сумма</th>
+      <th>Дата выставления</th>
+      <th>Заказ</th>
+      <th>Статус</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payments.each do |payment| %>
+      <tr>
+        <td><%= payment.amount %></td>
+        <td><%= payment.created_at %></td>
+        <td><%= link_to payment.order.id, payment.order if payment.order %></td>
+        <td><%= payment.status %></td>
+        <% link = payment.waiting? ? 'Оплатить' : 'Посмотреть' %>
+        <td><%= link_to link, payment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
