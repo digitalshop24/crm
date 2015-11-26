@@ -32,6 +32,17 @@
       <% end %>
     </div>
   </div>
+  <% if((current_user.role == 'Employee') && (can? :read, @order)) %>
+    <button class="btn btn-default btn-block btn-lg" type="button" data-toggle="collapse" data-target="#order_info" aria-expanded="false" aria-controls="order_info">
+      Информация о заказе <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+    </button>
+    <div class="collapse" id="order_info">
+      <div class="well">
+        <%= render 'orders/show' %>
+      </div>
+    </div>
+    <br>
+  <% end %>
   <!-- ================================================== -->
   <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -58,7 +69,8 @@
             <button type="submit" class="btn btn-default">Submit</button> 
           </form>-->
           <!-- ================================================== -->
-          <br><br>
+          <br>
+          <br>
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <% if can? :upload, Part %>
               <% if @order.parts %>
@@ -244,52 +256,21 @@
   </div>
   <!-- row -->
   <!-- ================================================== -->
-  <!--<button class="btn btn-default btn-block btn-lg" type="button" data-toggle="collapse" data-target="#order_info" aria-expanded="false" aria-controls="order_info">
+  <% if can? :update, @order %>
+  <button class="btn btn-default btn-block btn-lg" type="button" data-toggle="collapse" data-target="#order_info" aria-expanded="false" aria-controls="order_info">
     Информация о заказе <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
   </button>
   <div class="collapse" id="order_info">
     <div class="well">
       <div class="row">
-        <div class="col-lg-6 col-md-7 col-sm-10 col-xs-12">
-          <form>
-            <div class="form-group">
-              <label for="">Специальность</label>
-              <select class="form-control">
-                <option>Программирование</option>
-                <option>Нанотехнологии</option>
-                <option>Контроль разума</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="">Наименование</label>
-              <input type="test" class="form-control" id="" placeholder="Наименование">
-            </div>
-            <div class="form-group">
-              <label for="">Содержание</label>
-              <textarea class="form-control" rows="5"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="">Дополнительные требования или рекомендации</label>
-              <textarea class="form-control" rows="5"></textarea>
-            </div>
-            <p>Сроки выполнения</p>
-            <table class="table table-striped">
-              <tr>
-                <th>Наименование</th>
-                <th>Дата/время</th>
-              </tr>
-              <tr>
-                <td>Дата оформления</td>
-                <td><input type="datetime-local"></td>
-              </tr>
-            </table>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-          </form>
+        <div class="col-lg-9 col-md-7 col-sm-10 col-xs-12">
+          <%= render 'orders/form' %>
         </div>
       </div>
     </div>
   </div>
-  <br/>-->
+  <% end %>
+  <br/>
   <!-- ================================================== -->
 </div>
 <!-- container -->

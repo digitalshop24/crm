@@ -9,14 +9,14 @@ ready = function() {
     $(".mobile-phone").mask("+999 (99) 999 99 99");
     $(".datepicker").mask("99.99.9999");
     $('.datetimepicker').datetimepicker({
-        minDate: "10/01/2015",
-        maxDate: "01.01.2020",
+        minDate: "01/01/2015",
+        maxDate: "01/01/2020",
         stepping: 10,
         sideBySide: true
     });
     $('.datepicker').datetimepicker({
-        minDate: "01.01.2015",
-        maxDate: "01.01.2020",
+        minDate: "01/01/2015",
+        maxDate: "01/01/2020",
         widgetPositioning: { vertical: 'top'}
     });
     $('select.oneItem').niceSelect();

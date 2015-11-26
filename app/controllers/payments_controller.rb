@@ -26,7 +26,12 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def upload_check
+  def upload
+    if @payment.update(upload_params)
+      redirect_to :back, notice: 'Чек загружен'
+    else
+      redirect_to :back, notice: 'Ошибка'
+    end
   end
 
   def update
@@ -65,6 +70,10 @@ class PaymentsController < ApplicationController
   private
   def set_payment
     @payment = Payment.find(params[:id])
+  end
+
+  def upload_params
+    params.require(:payment).permit(:check)
   end
 
   def payment_params

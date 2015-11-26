@@ -1,22 +1,21 @@
-<div class="page-header">
-  <h2 class="text-center">Заказ №<%= @order.id%></h2>
-</div>
 <% display_attributes = [:worktype, :worktype_other, :speciality, :speciality_other, 
   :institution, :theme, :uniqueness, :comment, :deadline, :page_number] %>
-<% display_attributes.each do |attr| %>
-  <% unless @order.send(attr).to_s.empty? %>
-    <p>
-      <strong><%= t "activerecord.attributes.order.#{attr}" %>:</strong>
-      <%= @order.send(attr).to_s %>
-    </p>
+<table class="table table-hover table-striped">
+  <% display_attributes.each do |attr| %>
+    <tr>
+      <% unless @order.send(attr).to_s.empty? %>
+        <td><%= t "activerecord.attributes.order.#{attr}" %></td>
+        <td><%= @order.send(attr).to_s %></td>
+      <% end %>
+    </tr>
   <% end %>
-<% end %>
-<% if @order.document? %>
-  <p>
-    <strong><%= t "activerecord.attributes.order.document" %>:</strong>
-    <%= link_to @order.document_file_name, @order.document.url  %>
-  </p>
-<% end %>
+  <% if @order.document? %>
+    <tr>
+      <td><%= t "activerecord.attributes.order.document" %></td>
+      <td><%= link_to @order.document_file_name, @order.document.url  %></td>
+    </tr>
+  <% end %>
+</table>
 <% if can? :manage, @order %>
   <%= render "manage_links" %>
 <% end %>

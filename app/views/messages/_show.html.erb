@@ -46,7 +46,7 @@
           <%= link_to '', approve_order_message_path(@order, message), 
               class: 'glyphicon glyphicon-ok', title: 'Одобрить' %>
         <% end %>
-        <% if (( message.sender.role == 'Client' && @order.employee ) || ( message.sender.role == 'Employee' && @order.client )) %>
+        <% if (( message.sender.role == 'Client' && @order.employee && message.receiver.role == 'Manager') || ( message.sender.role == 'Employee' && @order.client && message.receiver.role == 'Manager'))  %>
           <%= link_to '', resend_order_message_path(@order, message), 
               class: 'glyphicon glyphicon-share-alt', title: 'Переслать' %>
         <% end %>

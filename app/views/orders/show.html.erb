@@ -1,5 +1,8 @@
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
 <% if @order.moderation? %>
+  <div class="page-header">
+    <h2 class="text-center">Заказ №<%= @order.id%></h2>
+  </div>
   <%= render 'show' %>
 <% else %>
   <%= render 'page' %>
