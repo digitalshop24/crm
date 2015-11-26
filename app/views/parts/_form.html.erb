@@ -12,8 +12,8 @@
           <h4 class="panel-title">
             <% panel_title = part.name ? part.name : "Новая часть" %>
             <%= link_to panel_title, "#part#{part.id}", { role: "button", class: "collapsed",
-                          "data-toggle": "collapse", "data-parent": "#accordion",
-                          "aria-expanded": "true", "aria-controls": "part#{part.id}" } %>
+                          "data-toggle" => "collapse", "data-parent" => "#accordion",
+                          "aria-expanded" => "true", "aria-controls" => "part#{part.id}" } %>
           </h4>
         </div>
         <div class="col-xs-6">

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
   post '/orders/welcome', to: 'welcome#create_order', as: :welcome_orders
 
+  resources :notes
+  resources :events
   resources :worktypes
   resources :parts do
     patch '/upload', to: 'parts#upload', as: :upload, on: :member

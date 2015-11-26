@@ -55,20 +55,44 @@
               <%= link_to "Поиск исполнителя", search_employee_order_path, class: "btn btn-primary pull-right" %>
             </div>
           <% end %>
-          <!--
-          <h3>Примечания (по всему заказу)</h3>
-          <form>
-            <div class="form-group">
-              <label for="note">Заметки</label>
-              <textarea class="form-control" rows="3" id="note"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="note_author">Заметки для автора</label>
-              <textarea class="form-control" rows="3" id="note_author"></textarea>
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button> 
-          </form>-->
-          <!-- ================================================== -->
+
+          <%= form_tag("/notes", method: "post" ) do %>
+              <%= hidden_field_tag :current_order , @order.id %>
+              <%= hidden_field_tag :employee_id , @order.employee.id if @order.employee != nil  %>
+              <% if can? :manage, Note %>
+                <h3>Примечания (по всему заказу)</h3>
+                  <div class="form-group">
+                    <%= label_tag(:note, "Заметки") %>
+                    <% if @note.nil? %>
+                        <%= text_area_tag(:note, "",  class: "form-control", rows: "3") %>
+                    <% else %>
+                        <%= text_area_tag(:note, @note.content, class: "form-control", rows: "3") %>
+                    <% end %>
+                  </div>
+              <% end %>
+              <% if (can? :read, Commentary) && current_user.role != "Manager"%>
+                  <div class="form-group">
+                    <h3>Заметки для автора</h3>
+                    <% if @commentary.nil? %>
+                        <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
+                    <% else %>
+                        <div id = "note_author"><%= @commentary.content %></div>
+                    <% end %>
+                  </div>
+              <% elsif can? :manage, Commentary %>
+                  <div class="form-group">
+                    <%= label_tag(:note_author, "Заметки для автора") %>
+                    <% if @commentary.nil? %>
+                        <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
+                    <% else %>
+                        <%= text_area_tag(:commentary, @commentary.content, id: "note_author", class: "form-control", rows: "3") %>
+                    <% end %>
+                  </div>
+              <% end %>
+              <% if can? :manage, Note %>
+                  <%= submit_tag("Сохранить", class: "btn btn-default") %>
+              <% end %>
+          <% end %>
           <br>
           <br>
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

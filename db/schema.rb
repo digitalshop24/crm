@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120094238) do
+ActiveRecord::Schema.define(version: 20151123181751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,27 @@ ActiveRecord::Schema.define(version: 20151120094238) do
 
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
+  create_table "commentaries", force: :cascade do |t|
+    t.integer  "manager_id",  null: false
+    t.integer  "employee_id", null: false
+    t.text     "content"
+    t.integer  "order_id",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "commentaries", ["order_id"], name: "index_commentaries_on_order_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "content"
+    t.string   "link"
+    t.string   "string"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",    default: 0,   null: false
+    t.string   "event_type", default: "f", null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer  "sender_id",               null: false
     t.integer  "receiver_id",             null: false
@@ -37,6 +58,16 @@ ActiveRecord::Schema.define(version: 20151120094238) do
   end
 
   add_index "messages", ["order_id"], name: "index_messages_on_order_id", using: :btree
+
+  create_table "notes", force: :cascade do |t|
+    t.integer  "manager_id", null: false
+    t.text     "content"
+    t.integer  "order_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notes", ["order_id"], name: "index_notes_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "client_id"
