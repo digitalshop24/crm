@@ -7,6 +7,7 @@ class Order < ActiveRecord::Base
   has_many :parts
   has_many :messages
   has_many :payments
+  require 'pry'
 
   has_attached_file :document
   validates_attachment_file_name :document, :matches => [/docx?\Z/, /pdf\Z/, /xlsx?\Z/]
@@ -35,6 +36,19 @@ class Order < ActiveRecord::Base
     deadline = self[:deadline]
     if self[:deadline]
       self[:employee_deadline] = Time.now + (Time.new(deadline.year, deadline.month, deadline.day) - Time.now)/2
+    end
+  end
+  after_update :add_event
+  def add_event
+    if note_changed?
+      event_params = { :user_id => self.manager_id, :event_type => "заметка", :content  => self.note, :link => "orders/#{self.id}" }
+      event = Event.new(event_params)
+      event.save
+    end
+    if commentary_changed?
+      event_params = { :user_id => self.manager_id, :event_type => "заметка для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
+      event = Event.new(event_params)
+      event.save
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123181751) do
+ActiveRecord::Schema.define(version: 20151127122427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,17 +25,6 @@ ActiveRecord::Schema.define(version: 20151123181751) do
   end
 
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
-
-  create_table "commentaries", force: :cascade do |t|
-    t.integer  "manager_id",  null: false
-    t.integer  "employee_id", null: false
-    t.text     "content"
-    t.integer  "order_id",    null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "commentaries", ["order_id"], name: "index_commentaries_on_order_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "content"
@@ -58,16 +47,6 @@ ActiveRecord::Schema.define(version: 20151123181751) do
   end
 
   add_index "messages", ["order_id"], name: "index_messages_on_order_id", using: :btree
-
-  create_table "notes", force: :cascade do |t|
-    t.integer  "manager_id", null: false
-    t.text     "content"
-    t.integer  "order_id",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "notes", ["order_id"], name: "index_notes_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "client_id"
@@ -94,6 +73,8 @@ ActiveRecord::Schema.define(version: 20151123181751) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "employee_price"
+    t.string   "commentary"
+    t.string   "note"
   end
 
   add_index "orders", ["speciality_id"], name: "index_orders_on_speciality_id", using: :btree

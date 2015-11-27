@@ -9,8 +9,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
-    @commentary = Commentary.find_by_order_id(@order.id)
-    @note = Note.find_by_order_id(@order.id)
+    @commentary = @order.commentary
+    @note = @order.note
   end
 
   # GET /orders/new

@@ -1,47 +1,18 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-
-  # GET /notes
-  def index
-    @notes = Note.all
-  end
-
-  # GET /notes/1
-  def show
-  end
-
-  # GET /notes/new
-  def new
-    @note = Note.new
-  end
-
-  # GET /notes/1/edit
-  def edit
-  end
-
+  require 'pry'
   # POST /notes
   def create
-    if params[:employee_id].nil?
-      commentary_params= {:employee_id => "N/A", :manager_id => current_user[:id], :content => params[:commentary], :order_id => params[:current_order].to_i}
-      note_params= {:manager_id => current_user[:id], :content => params[:note], :order_id => params[:current_order].to_i}
-    else
-      commentary_params= {:employee_id => params[:employee_id], :manager_id => current_user[:id], :content => params[:commentary], :order_id => params[:current_order].to_i}
-      note_params= {:manager_id => current_user[:id], :content => params[:note], :order_id => params[:current_order].to_i}
-    end
+    binding.pry
+    @order = Order.find(params[:current_order])
 
-    @db_note = Note.find_by_order_id(params[:current_order])
-    @db_commentary = Commentary.find_by_order_id(params[:current_order])
-    if @db_note.nil?
-      @note = Note.new(note_params)
-      @note.save
-    elsif @db_note.content != note_params[:content]
-      @db_note.update(note_params)
+    if @order.note != params[:note]
+      @order.note = params[:note]
+      @order.save
     end
-    if @db_commentary.nil?
-      @commentary = Commentary.new(commentary_params)
-      @commentary.save
-    elsif @db_commentary.content != commentary_params[:content]
-      @db_commentary.update(commentary_params)
+    if @order.commentary != params[:commentary]
+      @order.commentary = params[:commentary]
+      @order.save
     end
 
     redirect_to :back

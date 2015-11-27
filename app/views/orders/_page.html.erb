@@ -58,39 +58,35 @@
 
           <%= form_tag("/notes", method: "post" ) do %>
               <%= hidden_field_tag :current_order , @order.id %>
-              <%= hidden_field_tag :employee_id , @order.employee.id if @order.employee != nil  %>
-              <% if can? :manage, Note %>
+              <% if current_user.role == 'Manager' %>
                 <h3>Примечания (по всему заказу)</h3>
                   <div class="form-group">
                     <%= label_tag(:note, "Заметки") %>
-                    <% if @note.nil? %>
+                    <% if @order.note.nil? %>
                         <%= text_area_tag(:note, "",  class: "form-control", rows: "3") %>
                     <% else %>
-                        <%= text_area_tag(:note, @note.content, class: "form-control", rows: "3") %>
+                        <%= text_area_tag(:note, @order.note, class: "form-control", rows: "3") %>
                     <% end %>
+                    <div class="form-group">
+                      <%= label_tag(:note_author, "Заметки для автора") %>
+                      <% if @order.commentary.nil? %>
+                          <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
+                      <% else %>
+                          <%= text_area_tag(:commentary, @order.commentary, id: "note_author", class: "form-control", rows: "3") %>
+                      <% end %>
+                    </div>
+                    <%= submit_tag("Сохранить", class: "btn btn-default") %>
                   </div>
               <% end %>
-              <% if (can? :read, Commentary) && current_user.role != "Manager"%>
+              <% if current_user.role == "Employee"%>
                   <div class="form-group">
                     <h3>Заметки для автора</h3>
-                    <% if @commentary.nil? %>
+                    <% if @order.commentary.nil? %>
                         <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
                     <% else %>
-                        <div id = "note_author"><%= @commentary.content %></div>
+                        <div id = "note_author"><%= @order.commentary %></div>
                     <% end %>
                   </div>
-              <% elsif can? :manage, Commentary %>
-                  <div class="form-group">
-                    <%= label_tag(:note_author, "Заметки для автора") %>
-                    <% if @commentary.nil? %>
-                        <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
-                    <% else %>
-                        <%= text_area_tag(:commentary, @commentary.content, id: "note_author", class: "form-control", rows: "3") %>
-                    <% end %>
-                  </div>
-              <% end %>
-              <% if can? :manage, Note %>
-                  <%= submit_tag("Сохранить", class: "btn btn-default") %>
               <% end %>
           <% end %>
           <br>
@@ -238,7 +234,7 @@
               </tr>
               <%= form_for(Payment.new) do |f| %>
                 <%= f.hidden_field :order_id, value: @order.id %>
-                <%= f.hidden_field :client_id, value: @order.client.id %>
+                <%= f.hidden_field :client_id, value: @order.client.id  if @order.client != nil%>
                 <tr>
                   <td>Выписать счет</td>
                   <td><%= f.number_field :amount %></td>
