@@ -7,7 +7,6 @@ class Order < ActiveRecord::Base
   has_many :parts
   has_many :messages
   has_many :payments
-  require 'pry'
 
   has_attached_file :document
   validates_attachment_file_name :document, :matches => [/docx?\Z/, /pdf\Z/, /xlsx?\Z/]
