@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
       event.save
     end
     if commentary_changed?
-      event_params = { :user_id => self.manager_id, :event_type => "заметка для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
+      event_params = { :user_id => self.manager_id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
       event = Event.new(event_params)
       event.save
     end
