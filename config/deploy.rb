@@ -105,5 +105,3 @@ namespace :faye do
     run "kill `cat #{faye_pid}` || true"
   end
 end
-before :deploy, 'faye:stop'
-after :deploy, 'faye:start'
