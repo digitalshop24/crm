@@ -1,0 +1,9 @@
+var msg = $('#messages').find('#<%= @message.id %>');
+msg.find('.glyphicon-ok').fadeOut('quick', function(){ 
+	this.remove();
+});
+msg.find('#message_content_print').removeClass('text-muted');
+
+publisher = client.publish('/order/<%= @message.order.id %>/messages/user/<%= @message.receiver_id %>', {
+  message: '<%= j render partial: "messages/message", locals: {message: @message} %>'
+});

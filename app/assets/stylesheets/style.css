@@ -44,3 +44,8 @@ a.glyphicon:hover {
 a.glyphicon:link {
 	text-decoration: none;
 }
+
+.panel-scroll {
+	max-height: 500px;
+	overflow-y: auto;
+}

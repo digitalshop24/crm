@@ -25,12 +25,14 @@ gem 'maskedinput-rails', '~> 1.4'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'sinatra', require: false
 gem 'sidekiq'
+gem 'faye-rails', '~> 2.0', '>= 2.0.1'
 
 group :production do
   gem 'unicorn', '~> 4.9'
 end
 
 group :development do
+  gem 'thin', '~> 1.6', '>= 1.6.4'
   gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
