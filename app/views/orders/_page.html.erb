@@ -58,6 +58,7 @@
 
           <%= form_tag("/notes", method: "post" ) do %>
               <%= hidden_field_tag :current_order , @order.id %>
+              <%= hidden_field_tag :current_user , @order.id %>
               <% if current_user.role == 'Manager' %>
                 <h3>Примечания (по всему заказу)</h3>
                   <div class="form-group">
