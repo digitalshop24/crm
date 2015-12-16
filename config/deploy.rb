@@ -7,6 +7,9 @@ set :rvm_type, :user
 set :rvm_ruby_version, '2.2.1'
 set :deploy_to, "/var/www/apps/#{app_name}"
 
+set :faye_pid, "#{deploy_to}/run/faye.pid"
+set :faye_config, "#{deploy_to}/current/faye.ru"
+
 lock '3.4.0'
 
 namespace :git do
@@ -20,6 +23,21 @@ namespace :git do
     end
   end
 end
+after 'git:deploy', 'deploy'
+after 'deploy:finalize_update', 'server:restart'
+
+namespace :faye do
+  desc "Start Faye"
+  task :start do
+    run "cd #{deploy_to}/current && bundle exec rackup #{faye_config} -s thin -E production -D --pid #{faye_pid}"
+  end
+  desc "Stop Faye"
+  task :stop do
+    run "kill `cat #{faye_pid}` || true"
+  end
+end
+before 'deploy:update_code', 'faye:stop'
+after 'deploy:finalize_update', 'faye:start'
 
 namespace :server do
   rails_env = 'production'
@@ -29,7 +47,8 @@ namespace :server do
       within current_path do
         execute "cd #{current_path}"
         execute :bundle, "exec unicorn_rails -c #{current_path}/config/unicorn.rb -E #{rails_env}"
-      end      
+        execute "rackup #{current_path}/faye.ru -s thin -E #{rails_env}"
+      end
     end
   end
 
@@ -42,7 +61,7 @@ namespace :server do
 
   desc "Stop the application by killing the Unicorn process"
   task :stop do
-    on roles(:all) do      
+    on roles(:all) do
       execute "kill $(cat #{deploy_to}/run/unicorn.pid)"
     end
   end

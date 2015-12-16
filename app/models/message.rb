@@ -11,7 +11,7 @@ class Message < ActiveRecord::Base
     channel = '/events'
     msg = ApplicationController.new.render_to_string @event
     # msg = event.to_json
-    client = Faye::Client.new('http://localhost:3000/faye')
+    client = Faye::Client.new('http://localhost:9292/faye')
     client.publish(channel, {message: msg })
   end
 end
