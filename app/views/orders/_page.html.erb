@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+    <%= raw render "messages_sub" %>
+  </script>
+<% end %>
 <div class="container">
   <!-- ================================================== -->
   <div class="page-header">
@@ -55,8 +60,8 @@
               <%= link_to "Поиск исполнителя", search_employee_order_path, class: "btn btn-primary pull-right" %>
             </div>
           <% end %>
-
           <%= form_tag("/notes", method: "post" ) do %>
+<<<<<<< HEAD
               <%= hidden_field_tag :current_order , @order.id %>
               <%= hidden_field_tag :current_user , @order.id %>
               <% if current_user.role == 'Manager' %>
@@ -89,6 +94,39 @@
                     <% end %>
                   </div>
               <% end %>
+=======
+            <%= hidden_field_tag :current_order , @order.id %>
+            <% if current_user.role == 'Manager' %>
+              <h3>Примечания (по всему заказу)</h3>
+              <div class="form-group">
+                <%= label_tag(:note, "Заметки") %>
+                <% if @order.note.nil? %>
+                  <%= text_area_tag(:note, "",  class: "form-control", rows: "3") %>
+                <% else %>
+                  <%= text_area_tag(:note, @order.note, class: "form-control", rows: "3") %>
+                <% end %>
+                <div class="form-group">
+                  <%= label_tag(:note_author, "Заметки для автора") %>
+                  <% if @order.commentary.nil? %>
+                    <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
+                  <% else %>
+                    <%= text_area_tag(:commentary, @order.commentary, id: "note_author", class: "form-control", rows: "3") %>
+                  <% end %>
+                </div>
+                <%= submit_tag("Сохранить", class: "btn btn-default") %>
+              </div>
+            <% end %>
+            <% if current_user.role == "Employee"%>
+              <div class="form-group">
+                <h3>Заметки для автора</h3>
+                <% if @order.commentary.nil? %>
+                  <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
+                <% else %>
+                  <div id = "note_author"><%= @order.commentary %></div>
+                <% end %>
+              </div>
+            <% end %>
+>>>>>>> bf821a0f9f3565d670b9f63787d24a364add0d33
           <% end %>
           <br>
           <br>
@@ -278,18 +316,18 @@
   <!-- row -->
   <!-- ================================================== -->
   <% if can? :update, @order %>
-  <button class="btn btn-default btn-block btn-lg" type="button" data-toggle="collapse" data-target="#order_info" aria-expanded="false" aria-controls="order_info">
-    Информация о заказе <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-  </button>
-  <div class="collapse" id="order_info">
-    <div class="well">
-      <div class="row">
-        <div class="col-lg-9 col-md-7 col-sm-10 col-xs-12">
-          <%= render 'orders/form' %>
+    <button class="btn btn-default btn-block btn-lg" type="button" data-toggle="collapse" data-target="#order_info" aria-expanded="false" aria-controls="order_info">
+      Информация о заказе <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+    </button>
+    <div class="collapse" id="order_info">
+      <div class="well">
+        <div class="row">
+          <div class="col-lg-9 col-md-7 col-sm-10 col-xs-12">
+            <%= render 'orders/form' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <% end %>
   <br/>
   <!-- ================================================== -->

@@ -19,8 +19,8 @@ ready = function() {
         maxDate: "01/01/2020",
         widgetPositioning: { vertical: 'top'}
     });
-    $('select.oneItem').niceSelect();
-
+    $('select.oneItem').niceSelect();   
+    $('#messages.panel-scroll').scrollTop(999999);
 };
 
 $(document).ready(ready);

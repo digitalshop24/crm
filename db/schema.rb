@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127122427) do
+ActiveRecord::Schema.define(version: 20151214094705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,13 @@ ActiveRecord::Schema.define(version: 20151127122427) do
     t.string   "content"
     t.string   "link"
     t.string   "string"
+    t.string   "event_type", default: "f", null: false
+    t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.integer  "user_id",    default: 0,   null: false
-    t.string   "event_type", default: "f", null: false
   end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.integer  "sender_id",               null: false
@@ -115,20 +117,6 @@ ActiveRecord::Schema.define(version: 20151127122427) do
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
-  create_table "revisions", force: :cascade do |t|
-    t.text     "comment"
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
-    t.integer  "order_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "status",                default: 0
-  end
-
-  add_index "revisions", ["order_id"], name: "index_revisions_on_order_id", using: :btree
-
   create_table "specialities", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -168,6 +156,7 @@ ActiveRecord::Schema.define(version: 20151127122427) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "events", "users"
   add_foreign_key "messages", "orders"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
@@ -178,6 +167,5 @@ ActiveRecord::Schema.define(version: 20151127122427) do
   add_foreign_key "orders", "worktypes"
   add_foreign_key "parts", "orders"
   add_foreign_key "payments", "orders"
-  add_foreign_key "revisions", "orders"
   add_foreign_key "users", "specialities"
 end

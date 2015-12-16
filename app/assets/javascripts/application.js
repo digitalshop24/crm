@@ -4,7 +4,8 @@
 //= require moment
 //= require moment/ru.js
 //= require bootstrap-sprockets
-//= require_tree .
-//= require maskedinput
 //= require bootstrap-datetimepicker
+//= require maskedinput
+//= require faye
+//= require_tree .
 

@@ -1,13 +1,15 @@
 <% if can? :manage, Message %>
-  <% messages = @order.messages %>
+  <% messages = @order.messages.preload(:sender, :receiver) %>
+  <% partial = 'messages/manage_message' %>
 <% else %>
   <% messages = (@order.messages.where(receiver_id: current_user.id).approved.to_a + 
   	@order.messages.where(sender_id: current_user.id).to_a).sort_by(&:created_at) %>
+  <% partial = 'messages/message' %>
 <% end %>
 <div class="panel panel-default">
-  <div class="panel-body">
+  <div class="panel-body panel-scroll" id="messages">
     <% messages.each do |message| %>
-      <%= render partial: 'messages/show', locals: { message: message } %>
+      <%= render partial: partial, locals: { message: message } %>
     <% end %>
   </div>
 </div>

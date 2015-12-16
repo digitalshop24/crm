@@ -1,0 +1,11 @@
+<tr>
+  <td><%= event.id %></td>
+  <td><%= "Пользователь #{event.user.name} оставил #{event.event_type} \"#{event.content}\" " %></td>
+  <td><%= event.created_at.to_s(:db) %></td>
+  <td>
+    <%= link_to("Посмотреть", "#{event.link}") %><br/>
+    <span aria-hidden="true">
+      <%= link_to "", "/events/#{event.id}", method: :delete, data: { confirm: 'Вы уверены?' }, class: "glyphicon glyphicon-remove"  %>
+    </span>
+  </td>
+</tr>

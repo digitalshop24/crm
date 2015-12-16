@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
   # GET /events
   def index
-    @events = Event.all
+    @events = Event.order(created_at: :desc).preload(:user).paginate(page: params[:page])
   end
 
   # GET /events/1
@@ -21,12 +21,16 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    @event = Event.new(event_params)
+    respond_to do |format|
+      @event = Event.new(event_params)
 
-    if @event.save
-      redirect_to @event, notice: 'Event was successfully created.'
-    else
-      render :new
+      if @event.save
+        flash.now[:success] = 'Событие сгенерировано'
+      else
+        flash.now[:error] = 'Ошибка'
+        format.html {redirect_to @event}
+        format.js
+      end
     end
   end
 

@@ -1,0 +1,43 @@
+<div class="well well-sm" id=<%= message.id %>>
+  <div class="media">
+    <div class="media-left media-middle">
+      <% klass = message.sender.glyphicon %>
+      <% if message.sender.role == 'Employee' %>
+        <% if message.order.employee.nil? %>
+          <%= link_to '', set_employee_order_path(message.order, message.sender), 
+              class: "glyphicon #{message.sender.glyphicon}", title: 'Назначить', data: { confirm: "Назначить #{ message.sender.name } исполнителем" } %>
+        <% elsif message.sender.id == message.order.employee_id %>
+          <%= link_to '', unset_employee_order_path(message.order, message.sender), 
+              class: "glyphicon #{message.sender.glyphicon} #{message.sender.text_style}",
+               title: 'Снять', data: { confirm: "Снять #{ message.sender.name } с заказа" } %>
+        <% else %>
+          <span class="glyphicon <%= message.sender.glyphicon %>" aria-hidden="true"></span>
+        <% end %>
+      <% else %>
+        <span class="glyphicon <%= message.sender.glyphicon %>" aria-hidden="true"></span>
+      <% end %>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">
+        <span class="<%= message.sender.text_style %>"><%= message.sender.name %></span>
+        <span class="text-muted glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+        <span class="<%= message.receiver.text_style %>"><%= message.receiver.name %> </span>
+        | <span class="text-muted"><%= message.created_at.strftime("%d.%m.%Y %H:%M") %> </span>
+      </h4>
+      <% css_class = "text-muted" unless message.approved? %>
+      <p class=<%= css_class %> id="message_content_print"><%= message.content %></p>
+    </div>
+    <div class="media-right">
+      <% unless message.approved? %>
+        <%= link_to '', approve_order_message_path(message.order, message), 
+              class: 'glyphicon glyphicon-ok', title: 'Одобрить', remote: true, data: { confirm: 'Вы уверены?' } %>
+      <% end %>
+      <% if (( message.sender.role == 'Client' && message.order.employee && message.receiver.role == 'Manager') || ( message.sender.role == 'Employee' && message.order.client && message.receiver.role == 'Manager'))  %>
+        <%= link_to '', resend_order_message_path(message.order, message), 
+              class: 'glyphicon glyphicon-share-alt', title: 'Переслать' %>
+      <% end %>
+      <%= link_to '', message, class: 'glyphicon glyphicon-remove', 
+            title: 'Удалить', method: :delete, remote: true, data: { confirm: 'Вы уверены?' } %>
+    </div>
+  </div>
+</div>

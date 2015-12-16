@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :approve]
+  before_action :set_order, only: [:edit, :update, :destroy, :approve]
   load_and_authorize_resource
 
   # GET /orders
@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
+    @order = Order.preload(:client, messages: [:sender, :receiver]).find(params[:id])
     @commentary = @order.commentary
     @note = @order.note
   end

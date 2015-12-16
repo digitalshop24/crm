@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :sended_messages, foreign_key: "sender_id", class_name: "Message"
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"
   has_one :account
+  has_many :events
 
   def send_password_reset
     generate_token(:password_reset_token)
