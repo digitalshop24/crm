@@ -7,7 +7,6 @@ class Order < ActiveRecord::Base
   has_many :parts
   has_many :messages
   has_many :payments
-  require 'pry'
   has_attached_file :document
   validates_attachment_file_name :document, :matches => [/docx?\Z/, /pdf\Z/, /xlsx?\Z/]
 
@@ -40,7 +39,6 @@ class Order < ActiveRecord::Base
   after_update :add_event
   def add_event
     if note_changed?
-      binding.pry
       event_params = { :user_id => self.manager_id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
       event = Event.new(event_params)
       event.save
