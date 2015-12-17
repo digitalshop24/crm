@@ -1,3 +1,16 @@
+$faye = Faye::Client.new("http://#{ENV['host']}/faye")
+class FayeWrapper
+  def self.publish(channel, msg)
+    run_event_machine
+    $faye.publish(channel, msg)
+  end
+
+  def self.run_event_machine
+    Thread.new { EM.run } unless EM.reactor_running?
+    Thread.pass until EM.reactor_running?
+  end
+end
+
 class Message < ActiveRecord::Base
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
@@ -10,7 +23,7 @@ class Message < ActiveRecord::Base
     @event = Event.create(event_params)
     channel = '/faye/events'
     msg = ApplicationController.new.render_to_string @event
-    client = Faye::Client.new("http://#{ENV['host']}/faye")
-    client.publish(channel, {message: msg })
+    FayeWrapper.publish(channel, { message: msg })
   end
 end
+
