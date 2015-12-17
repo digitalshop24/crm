@@ -1,6 +1,6 @@
 window.client = new Faye.Client('/faye')
 
-sub_url = '/events'
+sub_url = '/faye/events'
 
 jQuery ->
   client.subscribe sub_url, (payload) ->

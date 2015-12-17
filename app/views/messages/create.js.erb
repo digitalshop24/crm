@@ -1,10 +1,10 @@
 <% if @message.approved? %>
-  publisher = client.publish('/order/<%= @message.order.id %>/messages/user/<%= @message.receiver_id %>', {
+  publisher = client.publish('/faye/order/<%= @message.order.id %>/messages/user/<%= @message.receiver_id %>', {
     message: '<%= j render partial: "messages/message", locals: {message: @message} %>'
   });
 <% end %>
 
-publisher2 = client.publish('/order/<%= @message.order.id %>/messages', {
+publisher2 = client.publish('/faye/order/<%= @message.order.id %>/messages', {
   message: '<%= j render partial: "messages/manage_message", locals: {message: @message} %>'
 });
 
