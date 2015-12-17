@@ -20,7 +20,6 @@ namespace :server do
       within current_path do
         execute "cd #{current_path}"
         execute :bundle, "exec unicorn_rails -c #{current_path}/config/unicorn.rb -E #{rails_env}"
-        # execute "rackup #{current_path}/faye.ru -s thin -E #{rails_env}"
       end
     end
   end
@@ -39,8 +38,6 @@ namespace :server do
     end
   end
 end
-
-
 
 namespace :deploy do
 
@@ -100,7 +97,7 @@ namespace :faye do
   task :start do
     on roles(:all) do
       execute "cd #{current_path}"
-      execute :bundle, "exec rackup #{deploy_to}/current/faye.ru -s thin -E production -D --pid #{deploy_to}/run/faye.pid"
+      execute "exec rackup #{current_path}/faye.ru -s thin -E production -D --pid #{deploy_to}/run/faye.pid"
     end
   end
   desc "Stop Faye"
@@ -111,5 +108,5 @@ namespace :faye do
   end
 end
 
-after :deploy, 'faye:stop'
-after :deploy, 'faye:start'
+# after :deploy, 'faye:stop'
+# after :deploy, 'faye:start'

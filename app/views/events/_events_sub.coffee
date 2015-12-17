@@ -1,4 +1,4 @@
-window.client = new Faye.Client('http://localhost:9292/faye')
+window.client = new Faye.Client('/faye')
 
 sub_url = '/events'
 
