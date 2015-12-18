@@ -85,7 +85,7 @@ namespace :git do
     run_locally do
       execute "git add -A"
       execute "git commit -m '#{fetch(:message)}'"
-      execute "git push"
+      execute "git push -u origin master"
     end
   end
 end
@@ -96,8 +96,10 @@ namespace :faye do
   desc "Start Faye"
   task :start do
     on roles(:all) do
-      execute "cd #{current_path}"
-      execute "exec rackup #{current_path}/faye.ru -s thin -E production -D --pid #{deploy_to}/run/faye.pid"
+      within current_path do
+        execute "cd #{current_path}"
+        execute :bundle, "exec rackup #{current_path}/faye.ru -s thin -E production -D --pid #{deploy_to}/run/faye.pid"
+      end
     end
   end
   desc "Stop Faye"
@@ -107,6 +109,3 @@ namespace :faye do
     end
   end
 end
-
-# after :deploy, 'faye:stop'
-# after :deploy, 'faye:start'

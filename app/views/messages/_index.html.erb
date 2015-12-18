@@ -1,5 +1,5 @@
 <% if can? :manage, Message %>
-  <% messages = @order.messages.preload(:sender, :receiver) %>
+  <% messages = @order.messages.order(:updated_at).preload(:sender, :receiver) %>
   <% partial = 'messages/manage_message' %>
 <% else %>
   <% messages = (@order.messages.where(receiver_id: current_user.id).approved.to_a + 

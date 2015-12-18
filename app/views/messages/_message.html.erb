@@ -11,7 +11,7 @@
         | <span class="text-muted"><%= message.created_at.strftime("%d.%m.%Y %H:%M") %> </span>
       </h4>
       <% css_class = "text-muted" unless message.approved? %>
-      <p class=<%= css_class %> id="message_content_print"><%= message.content %></p>
+      <p class=<%= css_class %> id="message_content_print"><%= message.content.html_safe %></p>
     </div>
   </div>
 </div>

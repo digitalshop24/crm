@@ -22,10 +22,10 @@
         <span class="<%= message.sender.text_style %>"><%= message.sender.name %></span>
         <span class="text-muted glyphicon glyphicon-hand-right" aria-hidden="true"></span>
         <span class="<%= message.receiver.text_style %>"><%= message.receiver.name %> </span>
-        | <span class="text-muted"><%= message.created_at.strftime("%d.%m.%Y %H:%M") %> </span>
+        | <span class="text-muted"><%= message.updated_at.strftime("%d.%m.%Y %H:%M") %> </span>
       </h4>
       <% css_class = "text-muted" unless message.approved? %>
-      <p class=<%= css_class %> id="message_content_print"><%= message.content %></p>
+      <p class=<%= css_class %> id="message_content_print"><%= message.content.html_safe %></p>
     </div>
     <div class="media-right">
       <% unless message.approved? %>
@@ -34,7 +34,7 @@
       <% end %>
       <% if (( message.sender.role == 'Client' && message.order.employee && message.receiver.role == 'Manager') || ( message.sender.role == 'Employee' && message.order.client && message.receiver.role == 'Manager'))  %>
         <%= link_to '', resend_order_message_path(message.order, message), 
-              class: 'glyphicon glyphicon-share-alt', title: 'Переслать' %>
+              class: 'glyphicon glyphicon-share-alt', title: 'Переслать', remote: true %>
       <% end %>
       <%= link_to '', message, class: 'glyphicon glyphicon-remove', 
             title: 'Удалить', method: :delete, remote: true, data: { confirm: 'Вы уверены?' } %>
