@@ -25,7 +25,7 @@ end
 roles[1,3].each do |role|
   rand(15..30).times do
     params = { name: Faker::Name.name,
-               email: Faker::Internet.email,
+               email: ('a'..'z').to_a.sample(10).join('') + '@' + ['gmail.com', 'mail.ru'].sample,
                password: Faker::Internet.password(8),
                phone: Faker::PhoneNumber.cell_phone
                }
@@ -37,6 +37,6 @@ roles[1,3].each do |role|
     if (role == 'Client')
       params[:city] = Faker::Lorem.word
     end
-    Object.const_get(role).create(params)
+    Object.const_get(role).create!(params)
   end
 end

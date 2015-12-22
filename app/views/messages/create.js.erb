@@ -1,15 +1,17 @@
 <% if @message.approved? %>
-  publisher = client.publish('/order/<%= @message.order.id %>/messages/user/<%= @message.receiver_id %>', {
+  publisher = client.publish('/faye/order/<%= @message.order.id %>/messages/user/<%= @message.receiver_id %>', {
     message: '<%= j render partial: "messages/message", locals: {message: @message} %>'
   });
 <% end %>
 
-publisher2 = client.publish('/order/<%= @message.order.id %>/messages', {
+publisher2 = client.publish('/faye/order/<%= @message.order.id %>/messages', {
   message: '<%= j render partial: "messages/manage_message", locals: {message: @message} %>'
 });
 
-$('#message_content').val('');
-<% unless can?(:manage, Message) %> 
- $('#messages.panel-scroll').append('<%= j render partial: 'messages/message', locals: {message: @message} %>');
- $('#messages.panel-scroll').stop().animate({scrollTop: $('#messages.panel-scroll')[0].scrollHeight}, 1000);
-<% end %>
+publisher2.callback(function() {
+	$('#message_content').val('');
+	<% unless can?(:manage, Message) %> 
+	 $('#messages.panel-scroll').append('<%= j render partial: "messages/message", locals: {message: @message} %>');
+	 $('#messages.panel-scroll').stop().animate({scrollTop: $('#messages.panel-scroll')[0].scrollHeight}, 1000);
+	<% end %>
+});

@@ -1,22 +1,17 @@
 class UsersController < ApplicationController
+  helper_method :sort_column, :sort_direction
   load_and_authorize_resource
 
   def index
-    # @users = User.where.not(id: current_user.id)
-    @users = User.paginate(page: params[:page], per_page: 15)
-    # @user_lists = {
-    #   clients: Client.paginate(page: params[:page], per_page: 10),
-    #   employees: Employee.paginate(page: params[:page], per_page: 10)
-    # }
+    @users = User.all
+    @users = User.where(role: show_role) if show_role
+    @users = @users.search(params[:search]) if params[:search]
+    @users = @users.order(sort_column + " " + sort_direction) if sort_column
+    @users = @users.paginate(page: params[:page], per_page: 15)
   end
 
   def manage
-    # @users = User.where.not(id: current_user.id)
     @users = User.paginate(page: params[:page], per_page: 15)
-    # @user_lists = {
-    #   clients: Client.paginate(page: params[:page], per_page: 10),
-    #   employees: Employee.paginate(page: params[:page], per_page: 10)
-    # }
   end
 
   def new
@@ -67,5 +62,17 @@ class UsersController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def user_params
     params.require(:user).permit(:role, :email, :password, :name, :phone, :skype, :city, :speciality_id)
+  end
+
+  def sort_column
+    params[:sort] if User.column_names.include?(params[:sort])
+  end
+
+  def show_role
+    params[:role] if ( params[:role] and User::ROLES.include? params[:role].downcase )
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

@@ -1,6 +1,6 @@
 window.client = new Faye.Client('/faye')
 
-sub_url = '<%= can?(:manage, Message) ? "/order/#{@order.id}/messages" : "/order/#{@order.id}/messages/user/#{current_user.id}" %>'
+sub_url = '<%= can?(:manage, Message) ? "/faye/order/#{@order.id}/messages" : "/faye/order/#{@order.id}/messages/user/#{current_user.id}" %>'
 
 jQuery ->
   client.subscribe sub_url, (payload) ->

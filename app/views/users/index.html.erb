@@ -20,20 +20,43 @@
   </div>
 </div>
 <br>
-<div>
-  <% active_role = params[:role] || 'client' %>
-  <ul class="nav nav-tabs" role="tablist">
-    <% ['client', 'employee'].each do |role| %>
-    <% klass = 'active' if role == active_role %>
-      <li role="presentation" class="<%= klass %> clickable">
-        <%= link_to "#{role}", "##{role}", {"aria-controls": role, "role": "tab", "data-toggle": "tab" } %>
-      </li>
-    <% end %>
+<div id="users">
+  <ul class="nav nav-tabs tabs-up" id="users_tabs">
+    <li class="active">
+      <%= link_to 'Все пользователи', params.merge(role: nil), remote: true %>
+    </li>
+    <li role='Client'>
+      <%= link_to 'Клиенты', params.merge(role: 'Client'), remote: true %>
+    </li>
+    <li role='Employee'>
+      <%= link_to 'Исполнители', params.merge(role: 'Employee'), remote: true %>
+    </li>
+    <li role='Manager'>
+      <%= link_to 'Менеджеры', params.merge(role: 'Manager'), remote: true %>
+    </li>
   </ul>
-  <div class="tab-content">
-    <% User::ROLES.each do |role| %>
-      <% klass = 'active' if role == active_role %>
-      <%= render partial: 'index', locals: { users: @users.where(role: role.capitalize), role: role, klass: klass } %>
-    <% end %>
-  </div>
+  <%= form_tag users_path, method: :get, id: "users_search" do %>
+    <%= hidden_field_tag :role, nil %>
+    <div id='hidden_fields'>
+      <%= render 'users/hidden_fields' %>
+    </div>
+    <table class="table table-hover pretty">
+      <thead>
+        <tr class="info" id ="sortables">
+          <%= render 'users/sortables' %>
+        </tr>
+        <tr class="warning">
+          <td><%= text_field_tag 'search[name]', (params[:search][:name] if params[:search]) %></td>
+          <td><%= text_field_tag 'search[email]', (params[:search][:email] if params[:search]) %></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render 'users/users' %>
+      </tbody>
+    </table>
+  <% end %>
+  <nav id='users_pagination'>
+    <%= render 'users/pagination' %>
+  </nav>
 </div>

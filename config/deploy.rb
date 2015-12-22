@@ -7,19 +7,10 @@ set :rvm_type, :user
 set :rvm_ruby_version, '2.2.1'
 set :deploy_to, "/var/www/apps/#{app_name}"
 
-lock '3.4.0'
+set :faye_pid, "#{deploy_to}/run/faye.pid"
+set :faye_config, "#{deploy_to}/current/faye.ru"
 
-namespace :git do
-  desc 'Deploy'
-  task :deploy do
-    ask(:message, "Commit message?")
-    run_locally do
-      execute "git add -A"
-      execute "git commit -m '#{fetch(:message)}'"
-      execute "git push"
-    end
-  end
-end
+lock '3.4.0'
 
 namespace :server do
   rails_env = 'production'
@@ -29,7 +20,7 @@ namespace :server do
       within current_path do
         execute "cd #{current_path}"
         execute :bundle, "exec unicorn_rails -c #{current_path}/config/unicorn.rb -E #{rails_env}"
-      end      
+      end
     end
   end
 
@@ -42,7 +33,7 @@ namespace :server do
 
   desc "Stop the application by killing the Unicorn process"
   task :stop do
-    on roles(:all) do      
+    on roles(:all) do
       execute "kill $(cat #{deploy_to}/run/unicorn.pid)"
     end
   end
@@ -85,4 +76,36 @@ namespace :deploy do
   before :setup, 'deploy:starting'
   before :setup, 'deploy:updating'
   before :setup, 'bundler:install'
+end
+
+namespace :git do
+  desc 'Deploy'
+  task :deploy do
+    ask(:message, "Commit message?")
+    run_locally do
+      execute "git add -A"
+      execute "git commit -m '#{fetch(:message)}'"
+      execute "git push -u origin master"
+    end
+  end
+end
+after 'git:deploy', 'deploy'
+after :deploy, 'server:restart'
+
+namespace :faye do
+  desc "Start Faye"
+  task :start do
+    on roles(:all) do
+      within current_path do
+        execute "cd #{current_path}"
+        execute :bundle, "exec rackup #{current_path}/faye.ru -s thin -E production -D --pid #{deploy_to}/run/faye.pid"
+      end
+    end
+  end
+  desc "Stop Faye"
+  task :stop do
+    on roles(:all) do
+      execute "kill `cat #{faye_pid}` || true"
+    end
+  end
 end

@@ -1,0 +1,12 @@
+$('#messages').find('#<%= @message.id %>').fadeOut('quick', function(){ 
+	this.remove();
+});
+
+  publisher = client.publish('/faye/order/<%= @message.order.id %>/messages/user/<%= @message.receiver_id %>', {
+    message: '<%= j render partial: "messages/message", locals: {message: @message} %>'
+  });
+
+publisher.callback(function() {
+ $('#messages.panel-scroll').append('<%= j render partial: "messages/manage_message", locals: {message: @message} %>');
+ $('#messages.panel-scroll').stop().animate({scrollTop: $('#messages.panel-scroll')[0].scrollHeight}, 1000);
+});

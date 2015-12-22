@@ -8,6 +8,14 @@ class User < ActiveRecord::Base
   has_one :account
   has_many :events
 
+  def self.search(search)
+    if search
+      where(["name LIKE ? and email LIKE ?", "%#{search[:name]}%", "%#{search[:email]}%"])
+    else
+      all
+    end
+  end
+
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
@@ -25,10 +33,10 @@ class User < ActiveRecord::Base
   end
   def text_style
     text_styles = { 'Admin' => 'text-primary',
-               'Manager'=> 'text-primary',
-               'Employee' => 'text-warning',
-               'Client' => 'text-success'
-               }
+                    'Manager'=> 'text-primary',
+                    'Employee' => 'text-warning',
+                    'Client' => 'text-success'
+                    }
     text_styles[self.role]
   end
 
