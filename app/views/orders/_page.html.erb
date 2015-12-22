@@ -61,40 +61,6 @@
             </div>
           <% end %>
           <%= form_tag("/notes", method: "post" ) do %>
-<<<<<<< HEAD
-              <%= hidden_field_tag :current_order , @order.id %>
-              <%= hidden_field_tag :current_user , @order.id %>
-              <% if current_user.role == 'Manager' %>
-                <h3>Примечания (по всему заказу)</h3>
-                  <div class="form-group">
-                    <%= label_tag(:note, "Заметки") %>
-                    <% if @order.note.nil? %>
-                        <%= text_area_tag(:note, "",  class: "form-control", rows: "3") %>
-                    <% else %>
-                        <%= text_area_tag(:note, @order.note, class: "form-control", rows: "3") %>
-                    <% end %>
-                    <div class="form-group">
-                      <%= label_tag(:note_author, "Заметки для автора") %>
-                      <% if @order.commentary.nil? %>
-                          <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
-                      <% else %>
-                          <%= text_area_tag(:commentary, @order.commentary, id: "note_author", class: "form-control", rows: "3") %>
-                      <% end %>
-                    </div>
-                    <%= submit_tag("Сохранить", class: "btn btn-default") %>
-                  </div>
-              <% end %>
-              <% if current_user.role == "Employee"%>
-                  <div class="form-group">
-                    <h3>Заметки для автора</h3>
-                    <% if @order.commentary.nil? %>
-                        <%= text_area_tag(:commentary, "", id: "note_author", class: "form-control", rows: "3") %>
-                    <% else %>
-                        <div id = "note_author"><%= @order.commentary %></div>
-                    <% end %>
-                  </div>
-              <% end %>
-=======
             <%= hidden_field_tag :current_order , @order.id %>
             <% if current_user.role == 'Manager' %>
               <h3>Примечания (по всему заказу)</h3>
@@ -126,7 +92,6 @@
                 <% end %>
               </div>
             <% end %>
->>>>>>> bf821a0f9f3565d670b9f63787d24a364add0d33
           <% end %>
           <br>
           <br>
@@ -151,45 +116,34 @@
           <div class="clearfix"></div>
           <!--<br/>-->
           <!-- ================================================== -->
-          <!--<div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Доработки</h3>
+          <% if can? :read, Revision %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Доработки</h3>
+              </div>
+              <div class="panel-body">
+                <%= render partial: 'revisions/index', locals: { revisions: Revision.all.order(:created_at) } %>
+                <% if can? :create, Revision %>
+                  <%= render partial: 'revisions/new', locals: { revision: Revision.new } %>
+                <% end %>
+              </div>
             </div>
-            <div class="panel-body">
-              <form>
-                <div class="well">
-                  <p class="text-primary"><a href="#">file_name.doc</a></p>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-xs-5">
-                        <label for="moderation" class="control-label">Модерация</label>
-                      </div>
-                      <div class="col-xs-7">
-                        <select class="form-control" id="moderation">
-                          <option>Одобрено</option>
-                          <option>В топку</option>
-                          <option>Сойдет</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-lg btn-block">Новая доработка</button>
-                <br/>
-                <div class="well">
-                  <div class="form-group">
-                    <label for="" class="control-label">Прикрепить файл</label>
-                    <input type="file" id="">
-                  </div>
-                  <div class="form-group">
-                    <label for="" class=" control-label">Комментарий</label>
-                    <textarea class="form-control" rows="3" id=""></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-lg btn-block">Добавить доработку</button>
-                </div>
-              </form>
+          <% end %>
+
+
+           <% if can? :read, Material %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Файлы</h3>
+              </div>
+              <div class="panel-body">
+                <%= render partial: 'materials/index', locals: { materials: Material.all.order(:created_at) } %>
+                <% if can? :create, Material %>
+                  <%= render partial: 'materials/new', locals: { material: Material.new } %>
+                <% end %>
+              </div>
             </div>
-          </div>-->
+          <% end %>
           <!-- ================================================== -->
           <!--<div class="panel panel-default">
             <div class="panel-body">

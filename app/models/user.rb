@@ -38,4 +38,11 @@ class User < ActiveRecord::Base
   def add_account
     Account.create(user_id: self.id, amount: 0, currency: 'RUB')
   end
+
+  def self.current
+    Thread.current[:user]
+  end
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
 end

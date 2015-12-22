@@ -1,0 +1,49 @@
+<% if revision.errors.any? %>
+  <div class="alert alert-danger">
+    <h2><%= pluralize(revision.errors.count, "error") %> prohibited this revision from being saved:</h2>
+    <ul>
+      <% revision.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for revision do |f| %>
+  <div class="well">
+    <div class="form-group">
+      <%= render partial: 'revisions/attachment', locals: { revision: revision } %>
+      <%= f.label 'Выберите файл', class: 'control-label' %>
+      <%= f.file_field :document %>
+    </div>
+    <div class="form-group">
+      <%= f.label 'Комментарий', class: 'control-label' %>
+      <%= f.text_area :comment, class: 'form-control', rows: '3' %>
+    </div>
+    <% if revision.id %>
+      <div class="form-group">
+        <% if can? :manage, revision %>
+          <div class="row">
+            <div class="col-xs-5">
+              <%= f.label 'Статус', class: 'control-label' %>
+            </div>
+            <div class="col-xs-7">
+              <%= f.select :status, [[t(:moderation), :moderation], [t(:approved), :approved], [t(:denied), :denied]], { selected: revision.status }, { class: 'form-control' } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% if can? :delete, revision %>
+        <%= link_to 'Удалить доработку', revision, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-primary btn-block' %>
+      <% end %>
+      <div style="margin-top:5px;">
+        <%= button_to 'Обновить доработку', '/revisions', method: :patch, class: 'btn btn-primary btn-block' %>
+      </div>
+    <% else %>
+      <%= f.hidden_field :order_id, value: @order.id %>
+      <%= f.submit 'Создать доработку', class: 'btn btn-primary btn-block' %>
+    <% end %>
+
+  </div>
+<% end %>
+

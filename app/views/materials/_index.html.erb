@@ -1,0 +1,21 @@
+<% if materials.length != 0 %>
+  <% i = 1 %>
+  <ul class="list-group">
+    <% materials.each do |material| %>
+      <% if can? :read, material %>
+        <li class="list-group-item">
+          <p><strong>Файл №<%= i %></strong></p>
+          <% i += 1 %>
+          <% if can? :update, material %>
+            <%= render partial: 'materials/form', locals: { material: material } %>
+          <% else %>
+            <%= render partial: 'materials/show', locals: { material: material } %>
+          <% end %>
+          <% if current_user.role == 'Client' %>
+            <p><strong>Статус:</strong> <%= t material.status %></p>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
