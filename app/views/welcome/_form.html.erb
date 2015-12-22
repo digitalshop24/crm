@@ -1,5 +1,5 @@
 <% if notice %><p id="notice" class="text-center"><%= notice %></p><% end %>
-<%= form_for(@order, url: welcome_orders_path, method: :post, html: { onsubmit: "return validate_form()" }) do |f| %>
+<%= form_for(@order, url: welcome_orders_path, method: :post, html: { onsubmit: "return validate_form()", multipart: true}) do |f| %>
   <div class="col-md-12">
     <%= f.collection_select :worktype_id, Worktype.all, :id, :name, { prompt: 'Выберите тип работы' }, 
                   class: "oneItem", onchange: "win_close()" %>
@@ -20,7 +20,7 @@
       <div class="imgPort">
         <%= image_tag 'download.png', class: "text-right img-resonsive" %>
       </div>
-      <%= f.file_field :document, onchange: "document.getElementById('fileInputText').value = this.value;" %>
+      <%= f.file_field :materials, onchange: "document.getElementById('fileInputText').value = this.value;", :multiple => true %>
     </div>
   </div>
   <div class="col-md-6">

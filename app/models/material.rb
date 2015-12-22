@@ -1,5 +1,5 @@
 class Material < ActiveRecord::Base
- has_attached_file :document, default_url: false
+  has_attached_file :document, default_url: false
   do_not_validate_attachment_file_type :document
   validates :order_id, presence: true
   belongs_to :order

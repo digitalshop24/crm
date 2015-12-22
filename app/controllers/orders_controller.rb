@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
 
   def order_params
     permitted_arr = [:worktype_id, :worktype_other, :speciality_id, :speciality_other,
-                     :institution, :theme, :uniqueness, :document, :comment, :deadline, :page_number, :status]
+                     :institution, :theme, :uniqueness, :document, :comment, :deadline, :page_number, :status, :materials]
     if ["Admin", "Manager"].include?(current_user.role)
       permitted_arr << [:client_id, :employee_id, :employee_deadline, :inform_date, :status, :price, :employee_price]
     end

@@ -38,6 +38,11 @@ class Order < ActiveRecord::Base
       self[:employee_deadline] = Time.now + (Time.new(deadline.year, deadline.month, deadline.day) - Time.now)/2
     end
   end
+  def materials=(array)
+    array.each do |file|
+      materials.create(material: file)
+    end
+  end
   after_update :add_event
   def add_event
     if note_changed?
