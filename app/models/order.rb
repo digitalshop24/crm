@@ -40,7 +40,6 @@ class Order < ActiveRecord::Base
   end
   after_update :add_event
   def add_event
-    binding.pry
     if note_changed?
       event_params = { :user_id => User.current.id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
       event = Event.new(event_params)

@@ -1,7 +1,6 @@
 namespace :diplom do
   desc "Rake task to get events data"
   task :deadline => :environment do
-    binding.pry
     date =  Time.zone.now.to_s.slice(0..9)
     Order.connection
     Order.all.each do |order|
