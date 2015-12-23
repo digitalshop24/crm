@@ -1,11 +1,13 @@
-Баланс: <%= @account.amount %>
-<%= form_for Payment.new do |f| %>
+<h4>Баланс: <%= @account.amount %></h4>
+<%= form_for Payment.new, html: { class: 'form-inline' } do |f| %>
   <%= f.hidden_field :client_id, value: current_user.id %>
-  <%= f.text_field :amount %>
-  <%= f.submit 'Пополнить' %>
+  <div class="form-group">
+    <%= f.text_field :amount, class: "form-control" %>
+  </div>
+  <%= f.button 'Пополнить', class: "btn btn-default" %>
 <% end %>
 <br>
 <% if current_user.role == 'Client' %>
-  <% @payments = @account.user.payments %>
+  <% @payments = @account.user.payments.paginate(page: params[:page]) %>
   <%= render 'payments/table' %>
 <% end %>

@@ -1,7 +1,8 @@
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
 <div class="page-header">
-  <h2 class="text-center">Новый заказ</h2>
+  <h2 class="text-center">Платежи</h2>
 </div>
-<%= render 'form' %>
+<br>
+<%= render 'payments/manage_table' %>
 <br>
 <%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>

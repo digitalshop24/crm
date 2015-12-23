@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
+    puts '1'*20, exception.message
     redirect_to new_user_session_path, notice: exception.message
   end
 

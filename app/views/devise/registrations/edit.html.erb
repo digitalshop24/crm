@@ -1,10 +1,6 @@
 <% role = resource.role.downcase %>
 <%= render "dashboard/#{role}/header" %>
 <div class="container">
-    <% if ["client", "employee"].include?(role) %>
-      <%= render partial: "dashboard/#{role}/nav_tabs_links", locals: { active: 'profile' } %>
-    <% end %>
-  <br>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
     <%= render partial: role, locals: { f: f } %>

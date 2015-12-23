@@ -1,37 +1,9 @@
 <%= render 'dashboard/admin/header' %>
 <p id="notice"><%= notice %></p>
-<br>
-<div class="container">
-  <div class="btn-group btn-group-justified" role="group" aria-label="...">
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-info">
-        <%= link_to 'Новый', new_user_path %>
-      </button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-info">
-        <%= link_to 'Управление пользователями', manage_users_path %>
-      </button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-info"><a href="#">Настройка полей</a></button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-info">
-        <%= link_to 'Список пользователей', users_path %>
-      </button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-info"><a href="#">Права пользователей</a></button>
-    </div>
-  </div>
-</div>
-<br/>
-<!-- ================================================== -->
-<div class="container">
   <div class="page-header">
-    <h1 class="text-center">Управление пользователями</h1>
+    <h2 class="text-center">Управление пользователями</h2>
   </div>
+  
   <!-- ================================================== -->
   <p class="text-right"><%= page_entries_info(@users) %></p>
   <table class="table table-hover">
@@ -42,7 +14,7 @@
       <th>Электронная почта</th>
       <th>Дата регистрации</th>
       <th>Последний визит</th>
-      <th>Супер пользователь</th>
+      <th>Роль</th>
       <th>Статус</th>
       <th></th>
     </tr>
@@ -75,10 +47,9 @@
       <td><%= user.email %></td>
       <td><%= user.created_at.strftime("%d.%m.%Y %H:%M") %></td>
       <td><%= user.last_sign_in_at.strftime("%d.%m.%Y %H:%M") if user.last_sign_in_at %></td>
-      <td><%= user.role == 'Admin' ? 'Да' : 'Нет' %></td>
+      <td><%= user.role %></td>
       <td><%= user.activated ? 'Активирован' : 'Не активирован' %></td>
       <td>
-        <a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
         <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-edit', title: 'Редактровать' %>
         <%= link_to '', user_path(user), method: :delete, class: 'glyphicon glyphicon-remove', title: 'Удалить', data: { confirm: "Вы уверены?"} %>
       </td>
@@ -87,5 +58,4 @@
 </table>
 <%= will_paginate @users, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
 <!-- ================================================== -->
-</div>
 <!-- container -->

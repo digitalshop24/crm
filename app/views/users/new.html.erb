@@ -1,10 +1,10 @@
 <%= render 'dashboard/admin/header' %>
 <p id="notice"><%= notice %></p>
-<br>
-<h1 class="text-center">Новый пользователь</h1>
+<div class="page-header">
+  <h2 class="text-center">Новый пользователь</h2>
+</div>
 <%= form_for @user, as: :user, url: users_path do |f| %>
   <%= render partial: 'form', :locals => { :f => f } %>
   <%= f.button "Создать", class: 'btn btn-primary' %>
   <%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>
 <% end %>
-

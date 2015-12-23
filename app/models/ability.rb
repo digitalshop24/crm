@@ -8,7 +8,8 @@ class Ability
     if user.role == 'Admin'
       can :manage, :all
     elsif user.role == 'Manager'
-      can :manage, [Order, Part, Message, Payment, Event]
+      can :manage, [Order, Part, Message, Event]
+      can :create, Payment
       can :read, [Client, Employee]
     elsif user.role == 'Client'
       can :create, [Order, Message]
@@ -16,9 +17,8 @@ class Ability
         part.order.client_id == user.id && part.status == 'approved'
       end
       can :create, Payment
-      can :upload_check, Payment, client_id: user.id
+      can [:show, :upload_check, :pay], Payment, client_id: user.id
       can :read, Account, user_id: user.id
-      can :read, Payment, client_id: user.id
       can [:read, :update], Order, client_id: user.id
       can :read, Message, receiver_id: user.id, status: :approved
       can :read, Message, sender_id: user.id
