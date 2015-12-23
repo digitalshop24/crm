@@ -129,9 +129,7 @@
               </div>
             </div>
           <% end %>
-
-
-           <% if can? :read, Material %>
+          <% if can? :read, Material %>
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Файлы</h3>
@@ -215,38 +213,33 @@
                 </tr>
                 <tr>
                   <td colspan=4>
-                    <%= f.button "Сохранить", class: 'btn btn-primary pull-right' %>
+                    <p>
+                      <%= f.button "Сохранить", class: 'btn btn-primary pull-right' %>
+                    </p>
                   </td>
                 </tr>
               <% end %>
               <tr>
                 <td>Получено от клиента</td>
                 <td><strong><%= @order.received_cash %></strong></td>
-                <td>Оплачено работы</td>
-                <td></td>
+                <td>Стоит на оплате</td>
+                <td><%= @order.waiting_cash %></td>
               </tr>
               <%= form_for(Payment.new) do |f| %>
                 <%= f.hidden_field :order_id, value: @order.id %>
                 <%= f.hidden_field :client_id, value: @order.client.id  if @order.client != nil%>
                 <tr>
+                  <td></td>
+                  <td></td>
                   <td>Выписать счет</td>
                   <td><%= f.number_field :amount %></td>
-                  <td>Оптравить на оплату</td>
-                  <td><input type="number"></td>
                 </tr>
                 <tr>
-                  <td colspan=2>
+                  <td colspan=4>
                     <%= f.button "Выписать", class: 'btn btn-primary pull-right' %>
                   </td>
-                  <td colspan=2></td>
                 </tr>
               <% end %>
-              <tr>
-                <td>Стоит на оплате</td>
-                <td><%= @order.waiting_cash %></td>
-                <td>Суммарно на оплату</td>
-                <td>0</td>
-              </tr>
             </table>
             <!--
             <div class="row">

@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   self.inheritance_column = 'role'
   has_many :sended_messages, foreign_key: "sender_id", class_name: "Message"
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"
-  has_one :account
-  has_many :events
+  has_one :account, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   def self.search(search)
     if search

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "Пользователь успешно создан."
+      flash[:notice] = "Пользователь успешно создан"
       redirect_to users_path
     else
       render action: 'new'
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     parms.delete(:password) if parms[:password].blank?
     parms.delete(:password_confirmation) if parms[:password].blank? and parms[:password_confirmation].blank?
     if @user.update_attributes(parms)
-      flash[:notice] = "Successfully updated User."
+      flash[:notice] = "Пользователь обновлен"
       redirect_to action: :index
     else
       render action: 'edit'
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      flash[:notice] = "Successfully deleted User."
+      flash[:notice] = "Пользователь удален"
       redirect_to :back
     end
   end

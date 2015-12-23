@@ -1,6 +1,6 @@
 class WorktypesController < ApplicationController
   before_action :set_worktype, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /worktypes
   def index
     @worktypes = Worktype.all

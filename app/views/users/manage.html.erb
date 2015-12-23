@@ -1,24 +1,22 @@
 <%= render 'dashboard/admin/header' %>
-<p id="notice"><%= notice %></p>
-  <div class="page-header">
-    <h2 class="text-center">Управление пользователями</h2>
-  </div>
-  
-  <!-- ================================================== -->
-  <p class="text-right"><%= page_entries_info(@users) %></p>
-  <table class="table table-hover">
-    <tr class="info">
-      <th>id</th>
-      <!--<th>Логин</th>-->
-      <th>Имя</th>
-      <th>Электронная почта</th>
-      <th>Дата регистрации</th>
-      <th>Последний визит</th>
-      <th>Роль</th>
-      <th>Статус</th>
-      <th></th>
-    </tr>
-    <!--
+<div class="page-header">
+  <h2 class="text-center">Управление пользователями</h2>
+</div>
+<!-- ================================================== -->
+<p class="text-right"><%= page_entries_info(@users) %></p>
+<table class="table table-hover">
+  <tr class="info">
+    <th>id</th>
+    <!--<th>Логин</th>-->
+    <th>Имя</th>
+    <th>Электронная почта</th>
+    <th>Дата регистрации</th>
+    <th>Последний визит</th>
+    <th>Роль</th>
+    <th>Статус</th>
+    <th></th>
+  </tr>
+  <!--
     <tr class="warning">
       <td><input type="text" id=""></td>
       <td><input type="text" id=""></td>
@@ -39,22 +37,22 @@
       </td>
       <td></td>
     -->
+</tr>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+    <td><%= user.last_sign_in_at.strftime("%d.%m.%Y %H:%M") if user.last_sign_in_at %></td>
+    <td><%= user.role %></td>
+    <td><%= user.activated ? 'Активирован' : 'Не активирован' %></td>
+    <td>
+      <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-edit', title: 'Редактровать' %>
+      <%= link_to '', user_path(user), method: :delete, class: 'glyphicon glyphicon-remove', title: 'Удалить', data: { confirm: "Вы уверены?"} %>
+    </td>
   </tr>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.id %></td>
-      <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.created_at.strftime("%d.%m.%Y %H:%M") %></td>
-      <td><%= user.last_sign_in_at.strftime("%d.%m.%Y %H:%M") if user.last_sign_in_at %></td>
-      <td><%= user.role %></td>
-      <td><%= user.activated ? 'Активирован' : 'Не активирован' %></td>
-      <td>
-        <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-edit', title: 'Редактровать' %>
-        <%= link_to '', user_path(user), method: :delete, class: 'glyphicon glyphicon-remove', title: 'Удалить', data: { confirm: "Вы уверены?"} %>
-      </td>
-    </tr>
-  <% end %>
+<% end %>
 </table>
 <%= will_paginate @users, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
 <!-- ================================================== -->

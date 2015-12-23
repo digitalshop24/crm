@@ -26,7 +26,7 @@ class PaymentsController < ApplicationController
       end
       redirect_to :back, notice: 'Счет успешно создан'
     else
-      redirect_to :back, notice: 'Ошибка'
+      redirect_to :back, alert: 'Ошибка'
     end
   end
 
@@ -35,7 +35,7 @@ class PaymentsController < ApplicationController
       @payment.update(status: :moderation)
       redirect_to :back, notice: 'Чек загружен'
     else
-      redirect_to :back, notice: 'Ошибка'
+      redirect_to :back, alert: 'Ошибка'
     end
   end
 
@@ -43,7 +43,7 @@ class PaymentsController < ApplicationController
     if @payment.update(payment_params)
       redirect_to :back, notice: 'Счет успешно обновлен'
     else
-      redirect_to :back, notice: 'Ошибка'
+      redirect_to :back, alert: 'Ошибка'
     end
   end
 
@@ -64,10 +64,10 @@ class PaymentsController < ApplicationController
         @payment.update(sys_date: Time.now)
         redirect_to :back, notice: 'Оплата подтверждена'
       else
-        redirect_to :back, notice: 'Ошибка'
+        redirect_to :back, alert: 'Ошибка'
       end
     else
-      redirect_to :back, notice: 'Оплата уже была подтверждена/отклонена ранее'
+      redirect_to :back, alert: 'Оплата уже была подтверждена/отклонена ранее'
     end
   end
 
@@ -78,7 +78,7 @@ class PaymentsController < ApplicationController
       @payment.update(status: :approved, sys_date: Time.now)
       redirect_to :back, notice: 'Оплачено'
     else
-      redirect_to :back, notice: 'Недостаточно денег'
+      redirect_to :back, alert: 'Недостаточно денег'
     end
   end
 

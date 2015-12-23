@@ -2,20 +2,17 @@
   <% if @worktype.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@worktype.errors.count, "error") %> prohibited this worktype from being saved:</h2>
-
       <ul>
-      <% @worktype.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @worktype.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, autofocus: true, required: true, class: 'form-control', placeholder: 'Название специальности' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button "Сохранить", class: 'btn btn-primary' %>
+  <%= link_to 'В каталог', worktypes_path, class: 'btn btn-default' %>
 <% end %>

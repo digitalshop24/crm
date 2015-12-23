@@ -1,3 +1,5 @@
 <%= render 'dashboard/employee/header' %>
-<%= render partial: "dashboard/employee/nav_tabs_links", locals: { active: 'my_orders' } %><br>
+<div class="page-header">
+  <h2 class="text-center">Мои заказы</h2>
+</div>
 <%= render partial: 'orders/table' %>
