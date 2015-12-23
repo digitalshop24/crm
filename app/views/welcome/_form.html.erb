@@ -20,7 +20,7 @@
       <div class="imgPort">
         <%= image_tag 'download.png', class: "text-right img-resonsive" %>
       </div>
-      <%= f.file_field :materials, onchange: "document.getElementById('fileInputText').value = this.value;", :multiple => true %>
+      <%= file_field_tag "materials[]", onchange: "document.getElementById('fileInputText').value = this.value;", multiple: true %>
     </div>
   </div>
   <div class="col-md-6">

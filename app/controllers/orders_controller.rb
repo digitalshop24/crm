@@ -31,6 +31,7 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
+      binding.pry
       redirect_to @order, notice: 'Заказ успешно создан.'
     else
       render :new

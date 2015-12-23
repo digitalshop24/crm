@@ -25,7 +25,7 @@
             <td><p class = "text-muted"><%= event.created_at.to_s(:db) %></p></td>
           <% else %>
             <td><p class = "text-muted"><%= event.id %></p></td>
-            <td><p class = "text-muted"><%= "Пользователь #{event.user.name} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
+            <td><p class = "text-muted"><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
             <td><p class = "text-muted"><%= event.created_at.to_s(:db) %></p></td>
           <% end %>
         <% else %>
@@ -35,7 +35,7 @@
             <td><p><%= event.created_at.to_s(:db) %></p></td>
           <% else %>
             <td><p><%= event.id %></p></td>
-            <td><p><%= "Пользователь #{event.user.name} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
+            <td><p><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
             <td><p><%= event.created_at.to_s(:db) %></p></td>
           <% end %>
         <% end %>
