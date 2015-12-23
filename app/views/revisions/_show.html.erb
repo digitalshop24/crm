@@ -1,0 +1,5 @@
+<div class="form-group">
+  <%= render partial: 'revisions/attachment', locals: { revision: revision } %>
+  <p>Комментарий:</p>
+  <p class="multiline"><%= revision.comment %></p>
+</div>

@@ -1,0 +1,4 @@
+<% if revision.document_file_name %>
+  <p><strong>Прикреплённый файл:</strong></p>
+  <p class="text-primary multiline"><%= link_to revision.document_file_name, revision.document.url(:original, false) %></p>
+<% end %>

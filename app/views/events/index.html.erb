@@ -18,11 +18,29 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.id %></td>
-        <td><%= "Пользователь #{event.user.name} оставил #{event.event_type} \"#{event.content}\" " %></td>
-        <td><%= event.created_at.to_s(:db) %></td>
+        <% if event.status %>
+          <% if event.event_type == "оповещение" %>
+            <td><p class = "text-muted"><%= event.id %></p></td>
+            <td><p class = "text-muted"><%= "Сегодня дедлайн у данного заказа" %></p></td>
+            <td><p class = "text-muted"><%= event.created_at.to_s(:db) %></p></td>
+          <% else %>
+            <td><p class = "text-muted"><%= event.id %></p></td>
+            <td><p class = "text-muted"><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
+            <td><p class = "text-muted"><%= event.created_at.to_s(:db) %></p></td>
+          <% end %>
+        <% else %>
+          <% if event.event_type == "оповещение" %>
+            <td><p><%= event.id %></p></td>
+            <td><p><%= "Сегодня дедлайн у данного заказа" %></p></td>
+            <td><p><%= event.created_at.to_s(:db) %></p></td>
+          <% else %>
+            <td><p><%= event.id %></p></td>
+            <td><p><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
+            <td><p><%= event.created_at.to_s(:db) %></p></td>
+          <% end %>
+        <% end %>
         <td>
-          <%= link_to("Посмотреть", "#{event.link}") %><br/>
+          <%= link_to "Посмотреть", event %><br/>
           <span aria-hidden="true">
             <%= link_to "", event, method: :delete, data: { confirm: 'Вы уверены' }, class: "glyphicon glyphicon-remove"  %>
           </span>

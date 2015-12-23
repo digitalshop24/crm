@@ -5,9 +5,12 @@ class EventsController < ApplicationController
   def index
     @events = Event.order(created_at: :desc).preload(:user).paginate(page: params[:page])
   end
+  
 
   # GET /events/1
   def show
+    @event.update_attributes(:status => 'visited')
+    redirect_to "/#{@event.link}"
   end
 
   # GET /events/new

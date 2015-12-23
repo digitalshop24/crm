@@ -116,45 +116,34 @@
           <div class="clearfix"></div>
           <!--<br/>-->
           <!-- ================================================== -->
-          <!--<div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Доработки</h3>
+          <% if can? :read, Revision %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Доработки</h3>
+              </div>
+              <div class="panel-body">
+                <%= render partial: 'revisions/index', locals: { revisions: @order.revisions.order(:created_at)} %>
+                <% if can? :create, Revision %>
+                  <%= render partial: 'revisions/new', locals: { revision: Revision.new } %>
+                <% end %>
+              </div>
             </div>
-            <div class="panel-body">
-              <form>
-                <div class="well">
-                  <p class="text-primary"><a href="#">file_name.doc</a></p>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-xs-5">
-                        <label for="moderation" class="control-label">Модерация</label>
-                      </div>
-                      <div class="col-xs-7">
-                        <select class="form-control" id="moderation">
-                          <option>Одобрено</option>
-                          <option>В топку</option>
-                          <option>Сойдет</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-lg btn-block">Новая доработка</button>
-                <br/>
-                <div class="well">
-                  <div class="form-group">
-                    <label for="" class="control-label">Прикрепить файл</label>
-                    <input type="file" id="">
-                  </div>
-                  <div class="form-group">
-                    <label for="" class=" control-label">Комментарий</label>
-                    <textarea class="form-control" rows="3" id=""></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-lg btn-block">Добавить доработку</button>
-                </div>
-              </form>
+          <% end %>
+
+
+           <% if can? :read, Material %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Файлы</h3>
+              </div>
+              <div class="panel-body">
+                <%= render partial: 'materials/index', locals: { materials: @order.materials.order(:created_at) } %>
+                <% if can? :create, Material %>
+                  <%= render partial: 'materials/new', locals: { material: Material.new } %>
+                <% end %>
+              </div>
             </div>
-          </div>-->
+          <% end %>
           <!-- ================================================== -->
           <!--<div class="panel panel-default">
             <div class="panel-body">

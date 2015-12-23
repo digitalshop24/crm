@@ -1,0 +1,21 @@
+<% if revisions.length != 0 %>
+  <% i = 1 %>
+  <ul class="list-group">
+    <% revisions.each do |revision| %>
+      <% if can? :read, revision %>
+        <li class="list-group-item">
+          <p><strong>Доработка №<%= i %></strong></p>
+          <% i += 1 %>
+          <% if can? :update, revision %>
+            <%= render partial: 'revisions/form', locals: { revision: revision } %>
+          <% else %>
+            <%= render partial: 'revisions/show', locals: { revision: revision } %>
+          <% end %>
+          <% if current_user.role == 'Client' %>
+            <p><strong>Статус:</strong> <%= t revision.status %></p>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

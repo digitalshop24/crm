@@ -7,6 +7,8 @@ class Order < ActiveRecord::Base
   has_many :parts
   has_many :messages
   has_many :payments
+  has_many :revisions, dependent: :destroy
+  has_many :materials, dependent: :destroy
   has_attached_file :document
   validates_attachment_file_name :document, :matches => [/docx?\Z/, /pdf\Z/, /xlsx?\Z/]
 
@@ -39,12 +41,12 @@ class Order < ActiveRecord::Base
   after_update :add_event
   def add_event
     if note_changed?
-      event_params = { :user_id => self.manager_id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
+      event_params = { :user_id => User.current.id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
       event = Event.new(event_params)
       event.save
     end
     if commentary_changed?
-      event_params = { :user_id => self.manager_id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
+      event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
       event = Event.new(event_params)
       event.save
     end
