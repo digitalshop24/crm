@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_current_user
+  layout :layout_by_resource
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to_back(dashboard_index_path, exception.message)
@@ -12,7 +13,7 @@ class ApplicationController < ActionController::Base
     dashboard_index_path
   end
 
-  def redirect_to_back(default = root_url, alert)    
+  def redirect_to_back(default = root_url, alert)
     if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
       redirect_to :back, alert: alert
     else
@@ -33,6 +34,18 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:email, :password, :password_confirmation, :current_password,
                :name, :phone, :city, :speciality_id, :skype)
+    end
+  end
+
+  def layout_by_resource
+    if devise_controller?
+      unless action_name == 'edit'
+        "welcome"
+      else
+        "application"
+      end
+    else
+      "application"
     end
   end
 

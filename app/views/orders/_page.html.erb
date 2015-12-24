@@ -225,20 +225,39 @@
                 <td>Стоит на оплате</td>
                 <td><%= @order.waiting_cash %></td>
               </tr>
-              <%= form_for(Payment.new) do |f| %>
-                <%= f.hidden_field :order_id, value: @order.id %>
-                <%= f.hidden_field :client_id, value: @order.client.id  if @order.client != nil%>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>Выписать счет</td>
-                  <td><%= f.number_field :amount %></td>
-                </tr>
-                <tr>
-                  <td colspan=4>
-                    <%= f.button "Выписать", class: 'btn btn-primary pull-right' %>
-                  </td>
-                </tr>
+              <% if @order.client %>
+                <%= form_for(Payment.new) do |f| %>
+                  <%= f.hidden_field :order_id, value: @order.id %>
+                  <%= f.hidden_field :client_id, value: @order.client.id %>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Выписать счет</td>
+                    <td><%= f.number_field :amount %></td>
+                  </tr>
+                  <tr>
+                    <td colspan=4>
+                      <%= f.button "Выписать", class: 'btn btn-primary pull-right' %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+              <% if @order.employee %>
+                <%= form_for(Payout.new, url: pay_payouts_path) do |f| %>
+                  <%= f.hidden_field :order_id, value: @order.id %>
+                  <%= f.hidden_field :employee_id, value: @order.employee.id %>
+                  <tr>
+                    <td>Оплачено исполнителю</td>
+                    <td><strong><%= @order.payed_cash %></strong></td>
+                    <td>Выплатить исполнителю</td>
+                    <td><%= f.number_field :amount %></td>
+                  </tr>
+                  <tr>
+                    <td colspan=4>
+                      <%= f.button "Выплатить", class: 'btn btn-primary pull-right' %>
+                    </td>
+                  </tr>
+                <% end %>
               <% end %>
             </table>
             <!--

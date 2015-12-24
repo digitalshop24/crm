@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Сумма</th>
+      <th>Дата</th>
+      <th>Заказ</th>
+      <th>Статус</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payouts.each do |payout| %>
+      <tr>
+        <td><%= payout.amount %></td>
+        <td><%= payout.created_at %></td>
+        <td>
+          <% if payout.order %>
+            <%= link_to payout.order.id, payout.order %>
+          <% else %>
+            Вывод с сайта
+          <% end %>
+        </td>
+        <td><%= payout.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @payouts, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
