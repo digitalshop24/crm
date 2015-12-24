@@ -1,10 +1,14 @@
 class QuestionsController < ApplicationController
-    load_and_authorize_resource
+  layout 'welcome'
+  load_and_authorize_resource
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /questions
   def index
     @questions = Question.all
+    @news = News.last
+    @question = Question.last
+    @feedback = Feedback.last
   end
 
   # GET /questions/1
