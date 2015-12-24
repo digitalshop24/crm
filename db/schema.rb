@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20151224113908) do
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
+  create_table "feedbacks", force: :cascade do |t|
+    t.text     "name"
+    t.text     "feedback"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string   "document_file_name"
     t.string   "document_content_type"
@@ -63,6 +70,13 @@ ActiveRecord::Schema.define(version: 20151224113908) do
   end
 
   add_index "messages", ["order_id"], name: "index_messages_on_order_id", using: :btree
+
+  create_table "news", force: :cascade do |t|
+    t.text     "title"
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "orders", force: :cascade do |t|
     t.integer  "client_id"
@@ -143,6 +157,13 @@ ActiveRecord::Schema.define(version: 20151224113908) do
   end
 
   add_index "payouts", ["order_id"], name: "index_payouts_on_order_id", using: :btree
+
+  create_table "questions", force: :cascade do |t|
+    t.text     "question"
+    t.text     "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "revisions", force: :cascade do |t|
     t.text     "comment"

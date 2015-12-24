@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     end
   end
   post '/orders/welcome', to: 'welcome#create_order', as: :welcome_orders
-
+  resources :feedbacks
+  resources :questions
+  resources :news
   resources :revisions
   resources :materials
   resources :notes
