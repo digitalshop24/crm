@@ -12,6 +12,7 @@ class Ability
       can :manage, [Order, Part, Message, Event, Revision, Material]
       can :create, Payment
       can :read, [Client, Employee]
+      can :read, [News, Question, Feedback]
     elsif user.role == 'Client'
       can :create, [Order, Message, Revision, Material]
       can :read, Part do |part|
@@ -25,6 +26,7 @@ class Ability
       can [:read, :update], Order, client_id: user.id
       can :read, Message, receiver_id: user.id, status: :approved
       can :read, Message, sender_id: user.id
+      can :read, [News, Question, Feedback]
     elsif user.role == 'Employee'
       can :create, Payout 
       can :read, Material, order: {employee_id: user.id}, status: 'approved'
@@ -40,6 +42,7 @@ class Ability
       can :create, Message
       can :read, Message, receiver_id: user.id, status: :approved
       can :read, Message, sender_id: user.id
+      can :read, [News, Question, Feedback]
     else 
       can :confirm_invoice, Payment
       can :read, [News, Question, Feedback]
