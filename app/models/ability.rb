@@ -8,6 +8,7 @@ class Ability
     if user.role == 'Admin'
       can :manage, :all
     elsif user.role == 'Manager'
+      can :pay, Payout
       can :manage, [Order, Part, Message, Event, Revision, Material]
       can :create, Payment
       can :read, [Client, Employee]
@@ -25,6 +26,7 @@ class Ability
       can :read, Message, receiver_id: user.id, status: :approved
       can :read, Message, sender_id: user.id
     elsif user.role == 'Employee'
+      can :create, Payout 
       can :read, Material, order: {employee_id: user.id}, status: 'approved'
       can :read, Revision, order: {employee_id: user.id}, status: 'approved'
       can :read, Order, employee_id: user.id

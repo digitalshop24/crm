@@ -1,27 +1,44 @@
 <%= render 'welcome/header' %>
-<section class="HeroSection">
+<section class="HeroSection SmallPageSection">
   <div class="container">
-    <p id="notice"><%= notice %></p>
-    <h1 class="text-center">Вход</h1>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'E-mail' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Пароль' %>
-      </div>
-      <% if devise_mapping.rememberable? -%>
-        <div class="checkbox">
-          <%= f.label :remember_me %>
-          <%= f.check_box :remember_me, style: "margin-left:-550px;" %>
+    <div class="my-block">
+      <p id="notice"><%= notice %></p>
+      <h1 class="text-center">Вход</h1>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row">
+          <div class="form-group col-md-4">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'E-mail' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-4">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Пароль' %>
+          </div>
+        </div>
+        <% if devise_mapping.rememberable? -%>
+          <div class="row">
+            <div class="checkbox col-md-4">
+              <%= f.check_box :remember_me, style: "margin-top:-11px; margin-left: 1px" %>
+              <%= f.label :remember_me %>
+            </div>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.button "Вход", class: 'btn btn-primary' %>
+          </div>
         </div>
       <% end %>
-      <%= f.button "Вход", class: 'btn btn-primary' %>
-    <% end %>
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+          <%= link_to('Зарегистрироваться как клиент', new_user_registration_path('client'), title: 'Зарегистрироваться как клиент')  %><br>
+          <%= link_to('Зарегистрироваться как исполнитель', new_user_registration_path('employee'), title: 'Зарегистрироваться как исполнитель') %>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-<br>
-<%= link_to('Зарегистрироваться как клиент', new_user_registration_path('client'), title: 'Зарегистрироваться как клиент')  %><br>
-<%= link_to('Зарегистрироваться как исполнитель', new_user_registration_path('employee'), title: 'Зарегистрироваться как исполнитель') %>
+<%= render 'welcome/footer' %>

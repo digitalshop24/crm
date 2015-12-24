@@ -1,7 +1,7 @@
 class Part < ActiveRecord::Base
   belongs_to :order
   has_attached_file :file
-  do_not_validate_attachment_file_type :document
+  do_not_validate_attachment_file_type :file
   enum status: %i[waiting moderation approved rework denied]
 
   def self.status_names_for_select

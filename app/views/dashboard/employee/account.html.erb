@@ -1,2 +1,9 @@
-<%= render partial: 'dashboard/client/header' %>
+<%= render partial: 'dashboard/employee/header' %>
 <h4>Баланс: <%= @account.amount %></h4>
+<br>
+<%= form_for Payout.new, html: { class: 'form-inline' } do |f| %>
+  <div class="form-group">
+    <%= f.text_field :amount, class: "form-control" %>
+  </div>
+  <%= f.button 'Заказать выплату', class: "btn btn-default" %>
+<% end %>
