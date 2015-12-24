@@ -1,0 +1,33 @@
+<%= render "dashboard/#{current_user.role.downcase}/header" %>
+<div class="page-header">
+  <h2 class="text-center">Подспециальности</h2>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @specialities.each do |speciality| %>
+      <tr>
+        <td>
+        <%= speciality.name %>
+        </td>
+        <td><%= link_to 'Добавить подспециальность', new_speciality_subspeciality_path(speciality) %></td>
+        <td><%= link_to 'Удалить', speciality, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+      <% speciality.subspecialities.each do |subspeciality| %>
+      <tr>
+        <td><%= subspeciality.subspeciality %></td>
+        <td><%= link_to 'Редактировать', edit_speciality_subspeciality(subspeciality) %></td>
+        <td><%= link_to 'Удалить', subspeciality, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>  
+      <%end%>
+      
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Добавить подспециальность', new_subspeciality_path, class: 'btn btn-primary' %>

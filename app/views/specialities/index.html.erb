@@ -15,7 +15,16 @@
         <td><%= speciality.name %></td>
         <td><%= link_to 'Редактировать', edit_speciality_path(speciality) %></td>
         <td><%= link_to 'Удалить', speciality, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <td><%= link_to 'Добавить подспециальность', new_speciality_subspeciality_path(speciality) %></td>
       </tr>
+       <% speciality.subspecialities.each do |subspeciality| %>
+      <tr>
+        <td style="padding-left:50px;"><%= subspeciality.subspeciality %></td>
+        <td><%= link_to 'Редактировать', edit_speciality_subspeciality_path(id: subspeciality.id, speciality_id: speciality.id) %></td>
+        <td><%= link_to 'Удалить', speciality_subspeciality_path(id: subspeciality.id, speciality_id: speciality.id), method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <td></td>
+      </tr>  
+      <%end%>
     <% end %>
   </tbody>
 </table>
