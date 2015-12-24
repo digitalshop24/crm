@@ -1,3 +1,6 @@
+<%= render 'header' %>
+<section class="nonHero">
+  <div class = "container">
 <p id="notice"><%= notice %></p>
 
 <h1>Новости</h1>
@@ -10,17 +13,23 @@
   </thead>
 
   <tbody>
-    <% @news.each do |news| %>
-      <tr>
-        <td><%=news.title%></td>
-        <td><%=news.text%></td>
-        <td><%=news.created_at.to_s(:db)%></td>
-        <% if current_user %>
-          <% if "Admin".include? current_user.role %>
-            <td><%= link_to 'Изменить', edit_news_path(news) %></td>
-            <td><%= link_to 'Удалить', news, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+    <% @newss.each do |news| %>
+      <tr class ="NewsFaq">
+      <td>
+      <div class="col-md-4">
+        <div class="subtitle"><%=news.title%></div>
+        <div class="NewsFaqExcerpt"><%=news.text%></div>
+        <div class="TheDate"><%=news.created_at.to_s(:db)%></div>
+        <div>  
+          <% if current_user %>
+            <% if "Admin".include? current_user.role %>
+              <%= link_to 'Изменить', edit_news_path(news) %>
+              <%= link_to 'Удалить', news, method: :delete, data: { confirm: 'Вы уверены?' } %>
+            <%end%>
           <%end%>
-        <%end%>  
+         </div>
+      </div>
+      </td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +41,100 @@
   <%= link_to 'Добавить', new_news_path %>
  <%end%>
 <%end%>
-
+</div>
+  </div>
+</section>
+<section class="NewsFaq">
+  <div class="row">
+    <div class="container">
+      <div class="col-md-4">
+        <div class="NewsFaqTitle">Новости</div>
+        <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
+        <div class="subtitle"><%=@news.title%></div>
+        <div class="NewsFaqExcerpt"><%=@news.text%></div>
+        <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
+        <div class="ttt">
+          <a href="/news" class="details">
+            <p class="detailsBtn">Все новости</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="NewsFaqTitle">Чаво</div>
+        <div class="subtitle">Вопрос</div>
+        <div class="NewsFaqExcerpt"><%=@question.question%></div>
+        <div class="subColor">Ответ</div>
+        <div class="NewsFaqExcerpt"><%=@question.answer%></div>
+        <div class="ttt">
+          <a href="/questions" class="details">
+            <p class="detailsBtn">Все вопросы и ответы</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="NewsFaqTitle">Отзывы</div>
+        <div class="subtitle"><%=@feedback.name%></div>
+        <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
+        <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
+        <div class="ttt">
+          <a href="/feedbacks" class="details">
+            <p class="detailsBtn">Все отзывы</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="footTitle">Услуги</div>
+        <ul class="footNav">
+          <li><a href="#">Контрольные работы</a></li>
+          <li><a href="#">Дипломные работы</a></li>
+          <li><a href="#">Курсовые работы</a></li>
+          <li><a href="#">Рефераты</a></li>
+          <li><a href="#">Другие работы</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="footTitle">Клиентам</div>
+        <ul class="footNav">
+          <li><a href="#">Способы оплаты</a></li>
+          <li><a href="#">Гарантии</a></li>
+          <li><a href="#">Как оформить заказ</a></li>
+          <li><a href="#">Наши преимущества</a></li>
+          <li><a href="#">Публичная оферта</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="footTitle">О компании</div>
+        <ul class="footNav">
+          <li><a href="#">Контакты</a></li>
+          <li><a href="#">Авторам</a></li>
+          <li><a href="#">Отзывы</a></li>
+          <li><a href="#">Новости</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="footTitle">Мы принимаем</div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="VabhceNiz">
+  <div class="container">
+    <div class="row">
+      <div class="hidden-xs col-sm-3 col-md-3"></div>
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <h4 class="text-center">© 2008, RedStudent. Все права защищены</h4>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 LogoDShop">
+        <a href="http://dshop24.by/" target="_blank">
+          <%= image_tag 'LogoDShop.png' %>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

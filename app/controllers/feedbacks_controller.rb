@@ -1,10 +1,14 @@
 class FeedbacksController < ApplicationController
+  layout 'welcome'
   load_and_authorize_resource
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
 
   # GET /feedbacks
   def index
     @feedbacks = Feedback.all
+    @news = News.last
+    @question = Question.last
+    @feedback = Feedback.last
   end
 
   # GET /feedbacks/1

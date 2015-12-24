@@ -160,7 +160,7 @@
         <div class="NewsFaqExcerpt"><%=@news.text%></div>
         <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
         <div class="ttt">
-          <a href="#" class="details">
+          <a href="/news" class="details">
             <p class="detailsBtn">Все новости</p>
           </a>
         </div>
@@ -172,7 +172,7 @@
         <div class="subColor">Ответ</div>
         <div class="NewsFaqExcerpt"><%=@question.answer%></div>
         <div class="ttt">
-          <a href="#" class="details">
+          <a href="/questions" class="details">
             <p class="detailsBtn">Все вопросы и ответы</p>
           </a>
         </div>
@@ -183,7 +183,7 @@
         <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
         <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
         <div class="ttt">
-          <a href="#" class="details">
+          <a href="/feedbacks" class="details">
             <p class="detailsBtn">Все отзывы</p>
           </a>
         </div>

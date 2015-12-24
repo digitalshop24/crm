@@ -1,9 +1,13 @@
 class NewsController < ApplicationController
+  layout 'welcome'
   before_action :set_news, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
   # GET /news
   def index
-    @news = News.all
+    @newss = News.all
+    @news = News.last
+    @question = Question.last
+    @feedback = Feedback.last
   end
 
   # GET /news/1
