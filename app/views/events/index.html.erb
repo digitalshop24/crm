@@ -4,15 +4,16 @@
   </script>
 <% end %>
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
-<p id="notice"><%= notice %></p>
-<h1 style ="text-align: center">События</h1>
+<div class="page-header">
+  <h2 style ="text-align: center">События</h2>
+</div>
 <table class="table table-hover" id="events">
   <thead>
     <tr class="info">
-      <th>id</th>
-      <th>Описание</th>
-      <th>Дата и время</th>
-      <th colspan="2">Ссылка</th>
+      <th class="col-md-1">id</th>
+      <th class="col-md-8">Описание</th>
+      <th class="col-md-2">Дата и время</th>
+      <th class="col-md-1">Ссылка</th>
     </tr>
   </thead>
   <tbody>
@@ -20,27 +21,51 @@
       <tr>
         <% if event.status %>
           <% if event.event_type == "оповещение" %>
-            <td><p class = "text-muted"><%= event.id %></p></td>
-            <td><p class = "text-muted"><%= "Сегодня дедлайн у данного заказа" %></p></td>
-            <td><p class = "text-muted"><%= event.created_at.to_s(:db) %></p></td>
+            <td>
+              <p class = "text-muted"><%= event.id %></p>
+            </td>
+            <td>
+              <p class = "text-muted"><%= "Сегодня дедлайн у данного заказа" %></p>
+            </td>
+            <td>
+              <p class = "text-muted"><%= event.created_at.to_s(:db) %></p>
+            </td>
           <% else %>
-            <td><p class = "text-muted"><%= event.id %></p></td>
-            <td><p class = "text-muted"><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
-            <td><p class = "text-muted"><%= event.created_at.to_s(:db) %></p></td>
+            <td>
+              <p class = "text-muted"><%= event.id %></p>
+            </td>
+            <td>
+              <p class = "text-muted"><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p>
+            </td>
+            <td>
+              <p class = "text-muted"><%= event.created_at.to_s(:db) %></p>
+            </td>
           <% end %>
         <% else %>
           <% if event.event_type == "оповещение" %>
-            <td><p><%= event.id %></p></td>
-            <td><p><%= "Сегодня дедлайн у данного заказа" %></p></td>
-            <td><p><%= event.created_at.to_s(:db) %></p></td>
+            <td>
+              <p><%= event.id %></p>
+            </td>
+            <td>
+              <p><%= "Сегодня дедлайн у данного заказа" %></p>
+            </td>
+            <td>
+              <p><%= event.created_at.to_s(:db) %></p>
+            </td>
           <% else %>
-            <td><p><%= event.id %></p></td>
-            <td><p><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p></td>
-            <td><p><%= event.created_at.to_s(:db) %></p></td>
+            <td>
+              <p><%= event.id %></p>
+            </td>
+            <td>
+              <p><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p>
+            </td>
+            <td>
+              <p><%= event.created_at.to_s(:db) %></p>
+            </td>
           <% end %>
         <% end %>
         <td>
-          <%= link_to "Посмотреть", event %><br/>
+          <%= link_to "Посмотреть", event %> 
           <span aria-hidden="true">
             <%= link_to "", event, method: :delete, data: { confirm: 'Вы уверены' }, class: "glyphicon glyphicon-remove"  %>
           </span>
@@ -49,4 +74,7 @@
     <% end %>
   </tbody>
 </table>
+  <nav id='events_pagination'>
+    <%= will_paginate @events, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
+  </nav>
 <br>

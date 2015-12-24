@@ -11,7 +11,7 @@
     <% end %>
   </tr>
   <% @orders.each do |order| %>
-    <tr>
+    <tr <%= 'class=new-item' if order.moderation? %>>
       <td><%= order.id %></td>
       <td><%= link_to order.theme, order %></td>
       <% if can? :manage, Order %>

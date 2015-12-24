@@ -40,6 +40,12 @@ namespace :server do
 end
 
 namespace :deploy do
+  desc 'Upload config files'
+  task :upload do
+    on roles(:all) do
+      upload!('config/application.yml', "#{shared_path}/config/application.yml")
+    end
+  end
 
   desc 'Setup'
   task :setup do
@@ -50,7 +56,7 @@ namespace :deploy do
       execute "mkdir  /var/www/apps/#{application}/socket/"
       execute "mkdir #{shared_path}/system"
 
-      upload!('shared/application.yml', "#{shared_path}/config/application.yml")
+      upload!('config/application.yml', "#{shared_path}/config/application.yml")
 
       within release_path do
         with rails_env: fetch(:rails_env) do
@@ -116,7 +122,7 @@ namespace :sidekiq do
     on roles(:all) do
       within current_path do
         execute "cd #{current_path}"
-        execute :bundle, "exec sidekiq -e production -d --P #{deploy_to}/run/sidekiq.pid"
+        execute :bundle, "exec sidekiq -c 10 -e production -d -L /var/www/apps/crm/log/sidekiq.log -P /var/www/apps/crm/run/sidekiq.pid"
       end
     end
   end

@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   load_and_authorize_resource
   # GET /orders
   def index
-    @orders = Order.paginate(:page => params[:page])
+    @orders = Order.order(created_at: :desc).paginate(:page => params[:page])
   end
 
   # GET /orders/1

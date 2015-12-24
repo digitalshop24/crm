@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_id: 
+  employee_id: 
+  amount: 9.99
+  currency: MyString
+  status: 1
+  sys_date: 2015-12-24 14:39:08
+
+two:
+  order_id: 
+  employee_id: 
+  amount: 9.99
+  currency: MyString
+  status: 1
+  sys_date: 2015-12-24 14:39:08

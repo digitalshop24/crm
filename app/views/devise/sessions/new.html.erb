@@ -1,23 +1,27 @@
-<div class="container">
-  <p id="notice"><%= notice %></p>
-  <h1 class="text-center">Вход</h1>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'E-mail' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Пароль' %>
-    </div>
-    <% if devise_mapping.rememberable? -%>
-      <div class="checkbox">
-        <%= f.check_box :remember_me, style: "margin-left:-440px;" %>
-        <%= f.label :remember_me %>
+<%= render 'welcome/header' %>
+<section class="HeroSection">
+  <div class="container">
+    <p id="notice"><%= notice %></p>
+    <h1 class="text-center">Вход</h1>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'E-mail' %>
       </div>
+      <div class="form-group">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Пароль' %>
+      </div>
+      <% if devise_mapping.rememberable? -%>
+        <div class="checkbox">
+          <%= f.label :remember_me %>
+          <%= f.check_box :remember_me, style: "margin-left:-550px;" %>
+        </div>
+      <% end %>
+      <%= f.button "Вход", class: 'btn btn-primary' %>
     <% end %>
-    <%= f.button "Вход", class: 'btn btn-primary' %>
-  <% end %>
-</div>
+  </div>
+</section>
+<br>
 <%= link_to('Зарегистрироваться как клиент', new_user_registration_path('client'), title: 'Зарегистрироваться как клиент')  %><br>
-<%= link_to('Зарегистрироваться как исполнитель', new_user_registration_path('employee'), title: 'Зарегистрироваться как исполнитель')  %>
+<%= link_to('Зарегистрироваться как исполнитель', new_user_registration_path('employee'), title: 'Зарегистрироваться как исполнитель') %>

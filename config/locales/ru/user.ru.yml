@@ -9,5 +9,7 @@ ru:
         name: ФИО
         phone: Телефон
         city: Город
+        created_at: 'Дата регистрации'
         password_confirmation: 'Подтверждение пароля'
         current_password: 'Текущий пароль'
+        remember_me: 'Запомнить меня'

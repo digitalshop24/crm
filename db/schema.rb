@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217123626) do
+ActiveRecord::Schema.define(version: 20151224113908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,19 @@ ActiveRecord::Schema.define(version: 20151217123626) do
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
+  create_table "payouts", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "employee_id",                                                    null: false
+    t.decimal  "amount",                precision: 12, scale: 2,                 null: false
+    t.string   "currency",    limit: 3,                          default: "RUB", null: false
+    t.integer  "status",                                         default: 0,     null: false
+    t.datetime "sys_date"
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+  end
+
+  add_index "payouts", ["order_id"], name: "index_payouts_on_order_id", using: :btree
+
   create_table "revisions", force: :cascade do |t|
     t.text     "comment"
     t.string   "document_file_name"
@@ -196,6 +209,7 @@ ActiveRecord::Schema.define(version: 20151217123626) do
   add_foreign_key "orders", "worktypes"
   add_foreign_key "parts", "orders"
   add_foreign_key "payments", "orders"
+  add_foreign_key "payouts", "orders"
   add_foreign_key "revisions", "orders"
   add_foreign_key "users", "specialities"
 end
