@@ -1,13 +1,13 @@
 class PayoutsController < ApplicationController
-  before_action :set_payout, only: [:update, :destroy, :upload_check, :show, :approve, :deny]
+  # before_action :set_payout, only: [:update, :destroy, :upload_check, :show, :approve, :deny]
   load_and_authorize_resource
 
   def pay
     payout = Payout.new(payout_params)
     if payout_params[:order_id]
       return redirect_to root_path, notice: 'Ошибка' unless payout.order.employee_id == payout.employee_id
-      account = payout.emploee.account
-      account.update(amount: account.amount + payment.amount)
+      account = payout.employee.account
+      account.update(amount: account.amount + payout.amount)
       payout.status = :finished
     else
       redirect_to :back, alert: 'Ошибка'
@@ -21,11 +21,15 @@ class PayoutsController < ApplicationController
 
   def create
     payout = Payout.new(create_params)
-    payout.employee_id = current_user.id
-    if payout.save
-      redirect_to :back, notice: 'Заявка на выплату создана'
+    if (current_user.account.amount > payout.amount)
+      payout.employee_id = current_user.id
+      if payout.save
+        redirect_to :back, notice: 'Заявка на выплату создана'
+      else
+        redirect_to :back, alert: 'Ошибка'
+      end
     else
-      redirect_to :back, alert: 'Ошибка'
+      redirect_to :back, alert: 'Недостаточно денег'
     end
   end
 

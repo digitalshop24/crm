@@ -7,6 +7,7 @@ class Order < ActiveRecord::Base
   has_many :parts
   has_many :messages
   has_many :payments
+  has_many :payouts
   has_many :revisions, dependent: :destroy
   has_many :materials, dependent: :destroy
   has_attached_file :document
@@ -31,6 +32,9 @@ class Order < ActiveRecord::Base
   end
   def waiting_cash
     self.payments.waiting.sum(:amount)
+  end
+  def payed_cash
+    self.payouts.sum(:amount)
   end
   def set_employee_deadline
     deadline = self[:deadline]

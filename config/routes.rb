@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     get '/deny', to: 'payments#deny', as: :deny, on: :member
     get '/pay', to: 'payments#pay', as: :pay, on: :member
   end
-  resources :payouts
+  resources :payouts do
+    post '/pay', to: 'payouts#pay', as: :pay, on: :collection
+  end
   post '/paymaster/confirm_invoice', to: 'payments#confirm_invoice', as: :paymaster_confirm_invoice
   post '/paymaster/notify', to: 'payments#notify', as: :paymaster_notify
   resources :messages

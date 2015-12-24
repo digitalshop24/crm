@@ -2,10 +2,9 @@
   <thead>
     <tr>
       <th>Сумма</th>
-      <th>Дата выставления</th>
+      <th>Дата</th>
       <th>Заказ</th>
       <th>Статус</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,14 +13,13 @@
         <td><%= payout.amount %></td>
         <td><%= payout.created_at %></td>
         <td>
-          <% if payment.order %>
-            <%= link_to payment.order.id, payment.order %>
+          <% if payout.order %>
+            <%= link_to payout.order.id, payout.order %>
           <% else %>
             Вывод с сайта
           <% end %>
         </td>
         <td><%= payout.status %></td>
-        <td><%= link_to link, payment %></td>
       </tr>
     <% end %>
   </tbody>

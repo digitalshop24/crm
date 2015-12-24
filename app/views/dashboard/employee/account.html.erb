@@ -7,3 +7,6 @@
   </div>
   <%= f.button 'Заказать выплату', class: "btn btn-default" %>
 <% end %>
+<br>
+<% @payouts = current_user.payouts.paginate(page: params[:page]) %>
+<%= render 'payouts/table' %>
