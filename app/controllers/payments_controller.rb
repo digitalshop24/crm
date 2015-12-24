@@ -1,10 +1,14 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: [:update, :destroy, :upload, :show]
+  before_action :set_payment, only: [:update, :destroy, :upload_check, :show, :approve, :deny]
   skip_before_action :verify_authenticity_token, :if => :allowed_ip?, only: [:confirm_invoice, :notify]
   load_and_authorize_resource
 
   def allowed_ip?
     request.remote_ip == '127.0.0.1'
+  end
+
+  def index
+    @payments = Payment.preload(:order, client: [:account]).paginate(page: params[:page])
   end
 
   def show
@@ -13,7 +17,7 @@ class PaymentsController < ApplicationController
   def create
     payment = Payment.new(payment_params)
     if payment_params[:order_id]
-      return redirect_to root_path, notice: 'Ошибка' unless payment.order.client_id == payment.client_id 
+      return redirect_to root_path, notice: 'Ошибка' unless payment.order.client_id == payment.client_id
     end
     payment.expires = Time.now + 10.days
     if payment.save
@@ -22,15 +26,16 @@ class PaymentsController < ApplicationController
       end
       redirect_to :back, notice: 'Счет успешно создан'
     else
-      redirect_to :back, notice: 'Ошибка'
+      redirect_to :back, alert: 'Ошибка'
     end
   end
 
-  def upload
+  def upload_check
     if @payment.update(upload_params)
+      @payment.update(status: :moderation)
       redirect_to :back, notice: 'Чек загружен'
     else
-      redirect_to :back, notice: 'Ошибка'
+      redirect_to :back, alert: 'Ошибка'
     end
   end
 
@@ -38,13 +43,53 @@ class PaymentsController < ApplicationController
     if @payment.update(payment_params)
       redirect_to :back, notice: 'Счет успешно обновлен'
     else
-      redirect_to :back, notice: 'Ошибка'
+      redirect_to :back, alert: 'Ошибка'
     end
   end
 
   def destroy
     @payment.destroy
     redirect_to :back, notice: 'Счет усешно удален'
+  end
+
+  def approve
+    if @payment.moderation?
+      if @payment.approved!
+        unless @payment.order_id
+          account = @payment.client.account
+          if account.currency == @payment.currency
+            account.update(amount: account.amount + @payment.amount)
+          end
+        end
+        @payment.update(sys_date: Time.now)
+        redirect_to :back, notice: 'Оплата подтверждена'
+      else
+        redirect_to :back, alert: 'Ошибка'
+      end
+    else
+      redirect_to :back, alert: 'Оплата уже была подтверждена/отклонена ранее'
+    end
+  end
+
+  def pay
+    if (current_user.account.amount > @payment.amount)
+      account = current_user.account
+      account.update(amount: account.amount - @payment.amount)
+      @payment.update(status: :approved, sys_date: Time.now)
+      redirect_to :back, notice: 'Оплачено'
+    else
+      redirect_to :back, alert: 'Недостаточно денег'
+    end
+  end
+
+  def deny
+    if @payment.moderation?
+      if @payment.denied!
+        redirect_to :back, notice: 'Оплата отклонена'
+      else
+        redirect_to :back, notice: 'Ошибка'
+      end
+    end
   end
 
   def confirm_invoice

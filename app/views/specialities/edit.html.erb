@@ -1,6 +1,5 @@
-<h1>Editing Speciality</h1>
-
+<%= render "dashboard/#{current_user.role.downcase}/header" %>
+<div class="page-header">
+  <h2 class="text-center">Редактиование специальности</h2>
+</div>
 <%= render 'form' %>
-
-<%= link_to 'Show', @speciality %> |
-<%= link_to 'Back', specialities_path %>

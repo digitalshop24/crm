@@ -1,22 +1,30 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Пользователь</th>
       <th>Сумма</th>
       <th>Дата выставления</th>
       <th>Заказ</th>
       <th>Статус</th>
+      <th>Чек</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @payments.each do |payment| %>
       <tr>
+        <td><%= payment.client.name %></td>
         <td><%= payment.amount %></td>
         <td><%= payment.created_at %></td>
         <td><%= link_to payment.order.id, payment.order if payment.order %></td>
         <td><%= payment.status %></td>
-        <% link = payment.waiting? ? 'Оплатить' : 'Посмотреть' %>
-        <td><%= link_to link, payment %></td>
+        <td><%= link_to 'Чек', payment.check.url, target: '_blank' if payment.check_file_name %></td>
+        <td>
+          <% if payment.moderation? and payment.check_file_name %>
+            <%= link_to 'Одобрить', approve_payment_path(payment) %>
+            <%= link_to 'Отклонить', deny_payment_path(payment) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

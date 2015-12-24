@@ -1,6 +1,7 @@
 class SpecialitiesController < ApplicationController
   before_action :set_speciality, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /specialities
   def index
     @specialities = Speciality.all

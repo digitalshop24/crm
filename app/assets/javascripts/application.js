@@ -18,14 +18,20 @@ $(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
   });
-  $('body').on("click", '#users_tabs li', function(e) {
-    $(this).tab('show');
-    var role = $(this).attr('role');
-    $('#users_search #role').val(role);
-    $('#users_search .warning input').val('');
-  });
+
 });
 
+var ready;
+ready = function() {
+  $('body').on("click", '#users_tabs li', function(e) {
+      $(this).tab('show');
+      var role = $(this).attr('role');
+      $('#users_search #role').val(role);
+      $('#users_search .warning input').val('');
+    });  
+  };
+$(document).ready(ready);
+$(document).on('page:load', ready)
 
 
 

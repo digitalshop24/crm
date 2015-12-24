@@ -5,11 +5,19 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_user
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to new_user_session_path, notice: exception.message
+    redirect_to_back(dashboard_index_path, exception.message)
   end
 
   def after_sign_in_path_for(resource)
     dashboard_index_path
+  end
+
+  def redirect_to_back(default = root_url, alert)    
+    if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+      redirect_to :back, alert: alert
+    else
+      redirect_to default, alert: alert
+    end
   end
 
   def after_sending_reset_password_instructions_path_for(resource_name)
@@ -29,6 +37,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-      User.current = current_user
-  end     
+    User.current = current_user
+  end
 end
