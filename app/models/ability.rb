@@ -40,6 +40,7 @@ class Ability
       can :read, Message, sender_id: user.id
     else 
       can :confirm_invoice, Payment
+      can :read, [News, Question, Feedback]
     end
   end
 end

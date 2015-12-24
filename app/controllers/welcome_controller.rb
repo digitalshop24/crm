@@ -4,6 +4,9 @@ class WelcomeController < ApplicationController
   def index
     @order = Order.new
     @client = Client.new
+    @news = News.last
+    @question = Question.last
+    @feedback = Feedback.last
   end
 
   def create_order

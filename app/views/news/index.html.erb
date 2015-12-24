@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Новости</h1>
+
+<table class = "table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @news.each do |news| %>
+      <tr>
+        <td><%=news.title%></td>
+        <td><%=news.text%></td>
+        <td><%=news.created_at.to_s(:db)%></td>
+        <% if current_user %>
+          <% if "Admin".include? current_user.role %>
+            <td><%= link_to 'Изменить', edit_news_path(news) %></td>
+            <td><%= link_to 'Удалить', news, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+          <%end%>
+        <%end%>  
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user %>
+ <% if "Admin".include? current_user.role %>
+  <%= link_to 'Добавить', new_news_path %>
+ <%end%>
+<%end%>
+

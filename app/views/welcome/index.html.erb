@@ -214,9 +214,9 @@
       <div class="col-md-4">
         <div class="NewsFaqTitle">Новости</div>
         <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
-        <div class="subtitle">Розыгрыш бесплатных работ завершен</div>
-        <div class="NewsFaqExcerpt">Сегодня начался розыгрыш бесплатных работ.</div>
-        <div class="TheDate">22.10.2015</div>
+        <div class="subtitle"><%=@news.title%></div>
+        <div class="NewsFaqExcerpt"><%=@news.text%></div>
+        <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
         <div class="ttt">
           <a href="#" class="details">
             <p class="detailsBtn">Все новости</p>
@@ -226,9 +226,9 @@
       <div class="col-md-4">
         <div class="NewsFaqTitle">Чаво</div>
         <div class="subtitle">Вопрос</div>
-        <div class="NewsFaqExcerpt">Как узнать, делаете ли вы работы по моему предмету?</div>
+        <div class="NewsFaqExcerpt"><%=@question.question%></div>
         <div class="subColor">Ответ</div>
-        <div class="NewsFaqExcerpt">Вы можете посмотреть список предметов. Если вы не нашли в списке нужный предмет, позвоните по телефону горячей линии и уточните у менеджера.</div>
+        <div class="NewsFaqExcerpt"><%=@question.answer%></div>
         <div class="ttt">
           <a href="#" class="details">
             <p class="detailsBtn">Все вопросы и ответы</p>
@@ -237,9 +237,9 @@
       </div>
       <div class="col-md-4">
         <div class="NewsFaqTitle">Отзывы</div>
-        <div class="subtitle">Егоров Роман</div>
-        <div class="NewsFaqExcerpt">Отлично сделанная работа! 700 руб. полностью оправдались, качество высший класс.</div>
-        <div class="TheDate">22.10.2015</div>
+        <div class="subtitle"><%=@feedback.name%></div>
+        <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
+        <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
         <div class="ttt">
           <a href="#" class="details">
             <p class="detailsBtn">Все отзывы</p>

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1>ЧаВо</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+      <td>
+      Вопрос
+      </td>
+      </tr>
+      <tr>
+      <td><%=question.question%></td>
+      </tr>
+      <tr>
+      <td>
+      Ответ</td>
+      </tr>
+      <tr>
+      <td><%=question.answer%></td>
+      </tr>
+      <tr>
+        
+        
+        
+        <% if current_user %>
+          <% if "Admin".include? current_user.role %>
+            <td><%= link_to 'Изменить', edit_question_path(question) %></td>
+            <td><%= link_to 'Удалить', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%end%>
+        <%end%>  
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user %>
+ <% if "Admin".include? current_user.role %>
+  <%= link_to 'Добавить', new_question_path %>
+ <%end%>
+<%end%>
