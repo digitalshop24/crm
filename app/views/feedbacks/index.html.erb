@@ -39,7 +39,7 @@
     <% end %>
      </tbody>
 </table>
-  
+ <%= will_paginate @feedbacks, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %> 
 <br>
  <% if current_user %>
   <% if "Admin".include? current_user.role %>

@@ -4,7 +4,7 @@ class NewsController < ApplicationController
   load_and_authorize_resource
   # GET /news
   def index
-    @newss = News.all
+    @newss = News.all.paginate(:page => params[:page], :per_page => 10)
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
