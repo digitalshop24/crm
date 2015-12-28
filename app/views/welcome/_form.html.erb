@@ -22,9 +22,11 @@
       </div>
       <%= file_field_tag "materials[]", onchange: "document.getElementById('f1').value = this.value;" %>
     </div>
-    <div id='file_tools'>
-        <img src='images/file_add.png' id='add_file' title='Add new input'/>
-        <img src='images/file_del.png' id='del_file' title='Delete'/>
+    <div id='file_tools' style="margin-bottom:10px;">
+        <img src='assets/add.png' id='add_file' title='Добавить файл' height="35" width="35"/>
+        Добавить файл
+        <img src='assets/delete.png' id='del_file' title='Удалить' height="40" width="40"/>
+       
     </div>
     </div>
 
