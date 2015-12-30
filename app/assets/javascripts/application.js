@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require moment
 //= require moment/ru.js
 //= require bootstrap-sprockets

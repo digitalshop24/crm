@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:edit, :update, :destroy, :approve]
   load_and_authorize_resource
+  require 'pry'
   # GET /orders
   def index
     @orders = Order.order(created_at: :desc).paginate(:page => params[:page])
@@ -31,6 +32,11 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
+      binding.pry
+       if params[:materials]
+            params[:materials].each {|file| 
+              @order.materials.create(document: file)}
+          end
       redirect_to @order, notice: 'Заказ успешно создан.'
     else
       render :new
