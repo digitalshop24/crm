@@ -55,7 +55,15 @@
       <% f.object.materials.each do |file| %>
        <%= link_to file.document_file_name, file.document.url(:original, false) %>
       <%end%>
-     
+     <div class="file_upload oneItem">
+    <input type="text" class="form-control" placeholder="Прикрепить файлы" id="f1"/>
+    <div>
+      <%= file_field_tag "materials[]", onchange: "document.getElementById('f1').value = this.value;" %>
+    </div>
+    <div id='file_tools' style="margin-bottom:10px; margin-top:10px;">
+     <%= image_tag 'add.png', id: "add_file", title: 'Добавить файл', height: "35", width:"35" %>
+        Добавить файл  
+    </div>
     <% else %>
    <div class="file_upload oneItem">
     <input type="text" class="form-control" placeholder="Прикрепить файлы" id="f1"/>

@@ -46,6 +46,11 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   def update
     if @order.update(order_params)
+      if params[:materials]
+            params[:materials].each {|file| 
+              @order.materials.create(document: file)}
+          end
+          binding.pry
       redirect_to @order, notice: 'Заказ успешно обновлен.'
     else
       render :edit
