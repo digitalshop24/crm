@@ -15,8 +15,10 @@ class Part < ActiveRecord::Base
 
   after_save :add_event
   def add_event
+    if User.current.role!="Manager"
       event_params = { :user_id => User.current.id, :content => self.description, :event_type => "часть", :link => "orders/#{self.order.id}" }
       event = Event.new(event_params)
       event.save
+    end
   end
 end

@@ -9,7 +9,7 @@ class Ability
       can :manage, :all
     elsif user.role == 'Manager'
       can :pay, Payout
-      can :manage, [Order, Part, Message, Event, Revision, Material]
+      can :manage, [Order, Part, Message, Event, Revision, Material, User]
       can :create, Payment
       can :read, [Client, Employee]
       can :read, [News, Question, Feedback]

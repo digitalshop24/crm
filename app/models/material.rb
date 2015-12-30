@@ -8,13 +8,15 @@ class Material < ActiveRecord::Base
 
   after_save :add_event
   def add_event
-    if User.current
-      event_params = { :user_id => User.current.id, :content => self.document_file_name, :event_type => "файл", :link => "orders/#{self.order.id}" }
-    else
-      event_params = { :content => self.document_file_name, :event_type => "файл", :link => "orders/#{self.order.id}" }
-    end  
-      event = Event.new(event_params)
-      event.save
+    if User.current.role!="Manager"
+      if User.current
+        event_params = { :user_id => User.current.id, :content => self.document_file_name, :event_type => "файл", :link => "orders/#{self.order.id}" }
+      else
+        event_params = { :content => self.document_file_name, :event_type => "файл", :link => "orders/#{self.order.id}" }
+      end  
+        event = Event.new(event_params)
+        event.save
+    end
   end
   
 end

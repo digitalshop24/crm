@@ -19,11 +19,13 @@ class Message < ActiveRecord::Base
   after_create :add_event
 
   def add_event
-    event_params = { user_id: self.sender.id, event_type: "сообщение", content: self.content, link: "orders/#{self.order_id}##{self.id}" }
-    @event = Event.create(event_params)
-    channel = '/faye/events'
-    msg = ApplicationController.new.render_to_string @event
-    FayeWrapper.publish(channel, { message: msg })
+    if User.current.role!="Manager"
+      event_params = { user_id: self.sender.id, event_type: "сообщение", content: self.content, link: "orders/#{self.order_id}##{self.id}" }
+      @event = Event.create(event_params)
+      channel = '/faye/events'
+      msg = ApplicationController.new.render_to_string @event
+      FayeWrapper.publish(channel, { message: msg })
+    end
   end
 end
 
