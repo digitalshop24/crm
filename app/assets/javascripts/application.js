@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require moment
 //= require moment/ru.js
 //= require bootstrap-sprockets
@@ -14,11 +13,18 @@ $(function() {
     $.getScript(this.href);
     return false;
   });
-  $("#users_search input").keyup(function() {
-    $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
+  // $("#users_search input").keyup(function() {
+  //   $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
+  //   return false;
+  // });
+
+});
+
+$(function() {
+  $(".filter_search input").on('keyup datechange', function() {
+    $.get($(".filter_search").attr("action"), $(".filter_search").serialize(), null, "script");
     return false;
   });
-
 });
 
 var ready;

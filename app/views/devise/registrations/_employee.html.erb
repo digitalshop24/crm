@@ -1,32 +1,24 @@
 <div class="row">
-  <div class="form-group col-md-4">
-    <div class="form-group required">
-      <%= f.label :name %><br />
-      <%= f.text_field :name, required: true, class: 'form-control', placeholder: 'ФИО' %>
-    </div>
+  <div class="form-group col-md-4 required">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, required: true, class: 'form-control', placeholder: 'ФИО' %>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-4 required">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, required: true, class: 'form-control mobile-phone', placeholder: 'Контактный телефон' %>
   </div>
 </div>
 <div class="row">
   <div class="form-group col-md-4">
-    <div class="form-group required">
-      <%= f.label :phone %><br />
-      <%= f.text_field :phone, required: true, class: 'form-control mobile-phone', placeholder: 'Контактный телефон' %>
-    </div>
+    <%= f.label :skype %><br />
+    <%= f.text_field :skype, class: 'form-control', placeholder: 'Skype' %>
   </div>
 </div>
 <div class="row">
-  <div class="form-group col-md-4">
-    <div class="form-group">
-      <%= f.label :skype %><br />
-      <%= f.text_field :skype, class: 'form-control', placeholder: 'Skype' %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group col-md-4">
-    <div class="form-group required">
-      <%= f.label :speciality_id %><br />
-      <%= f.collection_select :speciality_id, Speciality.all, :id, :name, { prompt: 'Выберите специализацию'}, { required: true, class: 'form-control' } %>
-    </div>
+  <div class="form-group col-md-4 required">
+    <%= f.label :speciality_id %><br />
+    <%= f.collection_select :speciality_id, Speciality.all, :id, :name, { prompt: 'Выберите специализацию'}, { required: true, class: 'form-control' } %>
   </div>
 </div>

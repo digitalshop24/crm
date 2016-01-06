@@ -13,6 +13,8 @@ class Order < ActiveRecord::Base
   has_attached_file :document
   validates_attachment_file_name :document, :matches => [/docx?\Z/, /pdf\Z/, /xlsx?\Z/]
 
+  after_update :add_event
+
   enum status: %i[moderation approved employee_searching prepayment_waiting in_work solved finished]
 
   def display_status
@@ -33,6 +35,9 @@ class Order < ActiveRecord::Base
   def waiting_cash
     self.payments.waiting.sum(:amount)
   end
+  def waiting_cash? 
+    waiting_cash > 0
+  end
   def payed_cash
     self.payouts.sum(:amount)
   end
@@ -42,7 +47,6 @@ class Order < ActiveRecord::Base
       self[:employee_deadline] = Time.now + (Time.new(deadline.year, deadline.month, deadline.day) - Time.now)/2
     end
   end
-  after_update :add_event
   def add_event
     if note_changed?
       event_params = { :user_id => User.current.id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
@@ -53,6 +57,32 @@ class Order < ActiveRecord::Base
       event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
       event = Event.new(event_params)
       event.save
+    end
+  end
+  def self.search(search)
+    unless search.empty_values?
+      statements = []
+      query = [""]
+      unless search[:theme].empty?
+        statements << "lower(theme) LIKE lower(?)"
+        query << "%#{search[:theme]}%"
+      end
+      unless search[:id].empty?
+        statements << "id = ?"
+        query << search[:id].to_i
+      end
+      unless search[:created_at].empty?
+        created_at = Date.parse(search[:created_at])
+        statements << "created_at BETWEEN '#{created_at.beginning_of_day}' and '#{created_at.end_of_day}'"
+      end
+      unless search[:inform_date].empty?
+        inform_date = Date.parse(search[:inform_date])
+        statements << "inform_date BETWEEN '#{inform_date.beginning_of_day}' and '#{inform_date.end_of_day}'"
+      end
+      query[0] = statements.join ' AND '
+      where(query)
+    else
+      all
     end
   end
 end

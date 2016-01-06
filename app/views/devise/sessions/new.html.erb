@@ -34,8 +34,7 @@
       <br>
       <div class="row">
         <div class="col-md-4">
-          <%= link_to('Зарегистрироваться как клиент', new_user_registration_path('client'), title: 'Зарегистрироваться как клиент')  %><br>
-          <%= link_to('Зарегистрироваться как исполнитель', new_user_registration_path('employee'), title: 'Зарегистрироваться как исполнитель') %>
+          <%= render "devise/shared/links" %>
         </div>
       </div>
     </div>

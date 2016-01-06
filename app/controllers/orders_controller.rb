@@ -1,9 +1,15 @@
 class OrdersController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_order, only: [:edit, :update, :destroy, :approve]
   load_and_authorize_resource
   # GET /orders
   def index
-    @orders = Order.order(created_at: :desc).paginate(:page => params[:page])
+    if params[:search]
+      @orders = Order.search(search_params)
+    else
+      @orders = Order.all
+    end
+    @orders = @orders.order(sort_column + " " + sort_direction).paginate(page: params[:page]).decorate
   end
 
   # GET /orders/1
@@ -25,7 +31,11 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     @order = Order.new(order_params)
-    @order.client_id = current_user.id if current_user.role == "Client"
+    if current_user.role == "Client"
+      @order.client_id = current_user.id
+    elsif current_user.role == "Manager"
+      @order.manager_id = current_user.id
+    end      
     unless @order[:employee_deadline]
       @order.set_employee_deadline
     end
@@ -90,6 +100,18 @@ class OrdersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_order
     @order = Order.find(params[:id])
+  end
+
+  def search_params
+    params.require(:search).permit(:id, :theme, :created_at, :inform_date)
+  end
+
+  def sort_column
+    Order.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def order_params

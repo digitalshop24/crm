@@ -3,7 +3,31 @@
   <h2 class="text-center">Все заказы</h2>
 </div>
 <br>
-<%= render 'orders/table' %>
-<%= will_paginate @orders, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
+<div id="orders">
+  <%= form_tag orders_path, method: :get, class: "filter_search" do %>
+    <%= hidden_field_tag :direction, params[:direction] || '' %>
+    <%= hidden_field_tag :sort, params[:sort] || '' %>
+    <table class="table table-hover pretty">
+      <thead>
+        <tr class="info" id="sortables">
+          <%= render 'orders/sortables' %>
+        </tr>
+        <tr class="warning">
+          <td><%= text_field_tag 'search[id]', (params[:search][:id] if params[:search]), class: 'form-control' %></td>
+          <td><%= text_field_tag 'search[theme]', (params[:search][:theme] if params[:search]), class: 'form-control' %></td>
+          <td><%= date_select_tag 'search[created_at]', (params[:search][:created_at] if params[:search]) %></td>
+          <td><%= date_select_tag 'search[inform_date]', (params[:search][:inform_date] if params[:search]) %></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody class="table-content">
+        <%= render 'orders/orders' %>
+      </tbody>
+    </table>
+    <nav id='orders_pagination'>
+      <%= render 'orders/pagination' %>
+    </nav>
+  <% end %>
+</div>
 <br>
 <%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>

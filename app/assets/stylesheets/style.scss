@@ -64,8 +64,24 @@ a.glyphicon:link {
   background-image: url('down_arrow.gif');
 }
 
+.pretty thead th {
+  text-align: center;
+}
+
 .HeroSection {margin-top: 50px;}
 
 .new-item {
 	background-color: #F4FFF3;
+}
+
+.new-item:hover {
+    background-color:#E9FFE7 !important;
+}
+
+.warning-item {
+	background-color: #FFE9E9;
+}
+
+.warning-item:hover {
+    background-color:#FFDDDD !important;
 }

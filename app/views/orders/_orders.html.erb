@@ -1,0 +1,26 @@
+<% if can? :manage, Order %>
+  <% @orders.each do |order| %>
+    <tr <%= order.row_style %>>
+      <td><%= order.id %></td>
+      <td><%= link_to order.theme, order %></td>
+      <td><%= order.created_at %></td>
+      <td><%= order.inform_date %></td>
+      <td>
+        <%= order.edit_icon %>
+        <%= order.delete_icon %>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <% @orders.each do |order| %>
+    <tr <%= order.row_style %>>
+      <td><%= order.id %></td>
+      <td><%= link_to order.theme, order %></td>
+      <td>
+        <% if can? :update, order %>
+          <%= order.edit_icon %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>

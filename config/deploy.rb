@@ -122,7 +122,7 @@ namespace :sidekiq do
     on roles(:all) do
       within current_path do
         execute "cd #{current_path}"
-        execute :bundle, "exec sidekiq -c 10 -e production -d -L /var/www/apps/crm/log/sidekiq.log -P /var/www/apps/crm/run/sidekiq.pid"
+        execute :bundle, "exec sidekiq -q mailer -c 10 -e production -d -L /var/www/apps/crm/log/sidekiq.log -P /var/www/apps/crm/run/sidekiq.pid"
       end
     end
   end

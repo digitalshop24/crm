@@ -54,6 +54,27 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <!-- ================================================== -->
+          <% if current_user.role == 'Employee' %>
+            <div>
+              <h4>
+                <% if @order.employee_price %>
+                  Стоимость заказа: <%= @order.employee_price %> рублей
+                <% else %>
+                  Стоимость заказа не установлена
+              <% end %>
+              </h4>
+            </div>
+          <% elsif current_user.role == 'Client' %>
+            <div>
+              <p>
+                <% if @order.price %>
+                  Стоимость заказа: <%= @order.price %> рублей
+                <% else %>
+                  Стоимость заказа не установлена
+              <% end %>
+              </p>
+            </div>
+          <% end %>
           <% if can? :manage, @order %>
             <div>
               <span class="label label-success"><%= @order.display_status %></span>

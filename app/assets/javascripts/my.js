@@ -14,10 +14,19 @@ ready = function() {
         stepping: 10,
         sideBySide: true
     });
-    $('.datepicker').datetimepicker({
+    $('.new_order').find('.datepicker').datetimepicker({
         minDate: "01/01/2015",
         maxDate: "01/01/2020",
         widgetPositioning: { vertical: 'top'}
+    });
+    $('.filter_search').find('.datepicker').datetimepicker({
+        minDate: "01/01/2015",
+        maxDate: "01/01/2020",
+        useCurrent: false,
+        showClear: true
+    });
+    $('.datepicker, .datetimepicker').on('dp.change', function(e) {
+        $(this).find('input').trigger('datechange');
     });
     $('select.oneItem').niceSelect();   
     $('#messages.panel-scroll').scrollTop(999999);

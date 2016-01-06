@@ -18,8 +18,7 @@
       <%= link_to 'Менеджеры', params.merge(role: 'Manager'), remote: true %>
     </li>
   </ul>
-  <%= form_tag users_path, method: :get, id: "users_search" do %>
-    <%= hidden_field_tag :role, nil %>
+  <%= form_tag users_path, method: :get, class: "filter_search" do %>
     <div id='hidden_fields'>
       <%= render 'users/hidden_fields' %>
     </div>
@@ -29,19 +28,19 @@
           <%= render 'users/sortables' %>
         </tr>
         <tr class="warning">
-          <td><%= text_field_tag 'search[name]', (params[:search][:name] if params[:search]) %></td>
-          <td><%= text_field_tag 'search[email]', (params[:search][:email] if params[:search]) %></td>
+          <td><%= text_field_tag 'search[name]', (params[:search][:name] if params[:search]), class: 'form-control' %></td>
+          <td><%= text_field_tag 'search[email]', (params[:search][:email] if params[:search]), class: 'form-control' %></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
       </thead>
       <tbody>
-        <%= render 'users/users' %>
+        <%= render 'users' %>
       </tbody>
     </table>
   <% end %>
   <nav id='users_pagination'>
-    <%= render 'users/pagination' %>
+    <%= will_paginate_bootstrap(@users) %>
   </nav>
 </div>
