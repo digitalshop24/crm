@@ -41,6 +41,10 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
+       if params[:materials]
+            params[:materials].each {|file| 
+              @order.materials.create(document: file)}
+          end
       redirect_to @order, notice: 'Заказ успешно создан.'
     else
       render :new
@@ -50,6 +54,10 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   def update
     if @order.update(order_params)
+      if params[:materials]
+            params[:materials].each {|file| 
+              @order.materials.create(document: file)}
+          end
       redirect_to @order, notice: 'Заказ успешно обновлен.'
     else
       render :edit

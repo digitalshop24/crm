@@ -1,0 +1,5 @@
+<%= render "dashboard/#{current_user.role.downcase}/header" %>
+<div class="page-header">
+  <h2 class="text-center">Создание подспециальности</h2>
+</div>
+<%= render partial: 'form', locals: {action: 'new'} %>

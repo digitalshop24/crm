@@ -1,0 +1,19 @@
+<% url = action == 'new' ? speciality_subspecialities_path(params[:speciality_id]) : speciality_subspeciality_path %>
+<%= form_for @subspeciality, url: url do |f| %>
+  <% if @subspeciality.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subscpeciality.errors.count, "error") %> prohibited this subscpeciality from being saved:</h2>
+      <ul>
+        <% @subspeciality.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label "Подспециальность" %><br>
+    <%= f.text_field :subspeciality, autofocus: true, required: true, class: 'form-control', placeholder: 'Название подспециальности' %>
+  </div>
+  <%= f.button "Сохранить", class: 'btn btn-primary' %>
+  <%= link_to 'В каталог', specialities_path, class: 'btn btn-default' %> 
+<% end %>

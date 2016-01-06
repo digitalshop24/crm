@@ -38,7 +38,8 @@
     <% end %>
      </tbody>
 </table>
-      
+<%= will_paginate @questions, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
+<br>  
  
 
 <br>

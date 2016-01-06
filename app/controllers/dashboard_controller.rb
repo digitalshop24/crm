@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
   def index
+    @events = Event.where(:status => nil)
     case current_user.role
     when 'Admin'
       redirect_to users_path

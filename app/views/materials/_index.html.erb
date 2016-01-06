@@ -11,9 +11,6 @@
           <% else %>
             <%= render partial: 'materials/show', locals: { material: material } %>
           <% end %>
-          <% if current_user.role == 'Client' %>
-            <p><strong>Статус:</strong> <%= t material.status %></p>
-          <% end %>
         </li>
       <% end %>
     <% end %>

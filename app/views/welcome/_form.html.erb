@@ -15,14 +15,20 @@
     <div id="txt3"></div>
   </div>
   <div class="col-md-12">
-    <div class="file_upload oneItem">
-      <input type="text" class="form-control" placeholder="Прикрепить файлы" id="fileInputText" />
-      <div class="imgPort">
+     <div class="file_upload oneItem">
+    <input type="text" class="form-control" placeholder="Прикрепить файлы" id="f1"/>
+    <div class="imgPort">
         <%= image_tag 'download.png', class: "text-right img-resonsive" %>
       </div>
-      <%= file_field_tag "materials[]", onchange: "document.getElementById('fileInputText').value = this.value;", multiple: true %>
+      <%= file_field_tag "materials[]", onchange: "document.getElementById('f1').value = this.value;" %>
     </div>
-  </div>
+    <div id='file_tools' style="margin-bottom:10px;">
+     <%= image_tag 'add.png', id: "add_file", title: 'Добавить файл', height: "35", width:"35" %>
+        Добавить файл
+       
+    </div>
+    </div>
+
   <div class="col-md-6">
     <div class="form-group oneItem">
         <%= f.date_select :deadline %>

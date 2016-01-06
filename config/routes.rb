@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end
   post '/orders/welcome', to: 'welcome#create_order', as: :welcome_orders
   resources :feedbacks
+
   resources :questions
   resources :news
   resources :revisions
@@ -39,7 +40,9 @@ Rails.application.routes.draw do
     patch '/upload', to: 'parts#upload', as: :upload, on: :member
   end
 
-  resources :specialities
+  resources :specialities do 
+     resources :subspecialities
+  end
   devise_for :users, path_names: { sign_up: '/sign_up/:role' }
 
   scope '/admin' do

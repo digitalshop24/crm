@@ -48,15 +48,17 @@ class Order < ActiveRecord::Base
     end
   end
   def add_event
-    if note_changed?
-      event_params = { :user_id => User.current.id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
-      event = Event.new(event_params)
-      event.save
-    end
-    if commentary_changed?
-      event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
-      event = Event.new(event_params)
-      event.save
+    if User.current.role!="Manager"
+      if note_changed?
+        event_params = { :user_id => User.current.id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
+        event = Event.new(event_params)
+        event.save
+      end
+      if commentary_changed?
+        event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
+        event = Event.new(event_params)
+        event.save
+      end
     end
   end
   def self.search(search)
