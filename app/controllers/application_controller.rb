@@ -25,15 +25,27 @@ class ApplicationController < ActionController::Base
     edit_user_registration_path
   end
 
+  def update_specialities
+    @specialitiy_number = params[:speciality_number]
+    unless params[:speciality_id].empty?
+      @subspecialities = Subspeciality.where("speciality_id = ?", params[:speciality_id])
+    else
+      @subspecialities = Subspeciality.where(id: nil)
+    end
+    respond_to do |format|
+      format.js { render :update_specialities }
+    end
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email, :password, :password_confirmation,
-               :name, :phone, :city, :speciality_id, :role, :skype)
+               :name, :phone, :city, :role, :skype, speciality_ids: [], subspeciality_ids: [])
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:email, :password, :password_confirmation, :current_password,
-               :name, :phone, :city, :speciality_id, :skype)
+               :name, :phone, :city, :skype, speciality_ids: [], subspeciality_ids: [])
     end
   end
 
@@ -51,5 +63,10 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current = current_user
+  end
+
+  def set_specialities
+    @specialities = Speciality.all
+    @subspecialities = Subspeciality.where(id: nil)
   end
 end

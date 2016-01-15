@@ -1,0 +1,3 @@
+sel = $("#specialities").find('#<%= params[:speciality_number] %>').find('.subspeciality_select');
+sel.children().not('#subspeciality_prompt').remove();
+sel.append("<%= j render partial: @subspecialities %>")

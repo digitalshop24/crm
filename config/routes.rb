@@ -40,13 +40,18 @@ Rails.application.routes.draw do
     patch '/upload', to: 'parts#upload', as: :upload, on: :member
   end
 
-  resources :specialities do 
-     resources :subspecialities
+  resources :specialities do
+    resources :subspecialities
   end
-  devise_for :users, path_names: { sign_up: '/sign_up/:role' }
+  devise_for :users, path_names: { sign_up: '/sign_up/:role' },
+  :controllers => {
+    :registrations => "registrations"
+  }
 
   scope '/admin' do
     resources :users do
+      get 'update_specialities', as: 'update_specialities', on: :collection
+      get 'add_speciality', as: 'add_speciality', on: :collection
       get '/manage', to: 'users#manage', as: :manage, on: :collection
     end
   end

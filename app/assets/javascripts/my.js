@@ -1,9 +1,19 @@
 var ready;
 ready = function() {
+    role = $("#user_role");
 
-    $("#user_role").change(function() {
-        $(".hiddenable").addClass("hidden");
-        $("." + $(this).val()).removeClass("hidden");
+    role.change(function() {
+      $(".hiddenable").addClass("hidden");
+      $("." + $(this).val()).removeClass("hidden");
+    });
+
+    if(role.val() != '') {
+       $(".hiddenable").addClass("hidden");
+       $("." + role.val()).removeClass("hidden");
+    }
+
+    $('body').on('click', '.delete_speciality', function(){
+        $(this).parents('.row').remove();
     });
 
     $(".mobile-phone").mask("+99999999999?9");

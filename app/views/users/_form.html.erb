@@ -36,12 +36,10 @@
   <%= f.label :skype %><br />
   <%= f.text_field :skype, class: 'form-control', placeholder: 'Skype' %>
 </div>
-<div class="form-group hiddenable Employee hidden">
-  <%= f.label :speciality_id %><br />
-  <%= f.collection_select :speciality_id, Speciality.all, :id, :name, { prompt: 'Специализация'}, { class: 'form-control' } %>
+<div class="hiddenable hidden Employee">
+  <%= render partial: 'users/specialities_fields', locals: {f: f} %>
 </div>
 <div class="checkbox">
   <%= f.label :activated %>
   <%= f.check_box :activated, style: "margin-left:-555px;" %>
 </div>
-

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
   load_and_authorize_resource
+  before_action :set_specialities, only: [:new, :edit, :add_speciality, :update, :create]
 
   def index
     @users = User.all
@@ -19,7 +20,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    parms = user_params
+    if parms[:speciality_ids]
+      parms[:speciality_ids].uniq!
+      parms[:subspeciality_ids].uniq!
+    end
+    @user = User.new(parms)
     if @user.save
       flash[:notice] = "Пользователь успешно создан"
       redirect_to users_path
@@ -37,6 +43,10 @@ class UsersController < ApplicationController
     parms = user_params
     parms.delete(:password) if parms[:password].blank?
     parms.delete(:password_confirmation) if parms[:password].blank? and parms[:password_confirmation].blank?
+    if parms[:speciality_ids]
+      parms[:speciality_ids].uniq!
+      parms[:subspeciality_ids].uniq!
+    end
     if @user.update_attributes(parms)
       flash[:notice] = "Пользователь обновлен"
       redirect_to action: :index
@@ -53,15 +63,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_speciality
+    @speciality_number = rand(0..10000)
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end
 
+
+
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.require(:user).permit(:role, :email, :password, :name, :phone, :skype, :city, :speciality_id)
+    permitted_arr = [:role, :email, :password, :name, :phone, :city]
+    if params[:user][:role] == 'Employee'
+      permitted_arr << [:skype, speciality_ids: [], subspeciality_ids: []]
+    end
+    params.require(:user).permit(permitted_arr)
   end
 
   def sort_column

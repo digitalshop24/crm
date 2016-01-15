@@ -16,9 +16,6 @@
     <%= f.text_field :skype, class: 'form-control', placeholder: 'Skype' %>
   </div>
 </div>
-<div class="row">
-  <div class="form-group col-md-4 required">
-    <%= f.label :speciality_id %><br />
-    <%= f.collection_select :speciality_id, Speciality.all, :id, :name, { prompt: 'Выберите специализацию'}, { required: true, class: 'form-control' } %>
-  </div>
+<div class="form-group">
+  <%= render partial: 'users/specialities_fields', locals: { f: f } %>
 </div>

@@ -1,3 +1,4 @@
 class Subspeciality < ActiveRecord::Base
-belongs_to :speciality
+  has_and_belongs_to_many :employees
+  belongs_to :speciality
 end
