@@ -5,15 +5,15 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
-    if user.role == 'Admin'
+    if user.role == 'Admin' && user.activated
       can :manage, :all
-    elsif user.role == 'Manager'
+    elsif user.role == 'Manager' && user.activated
       can :pay, Payout
       can :manage, [Order, Part, Message, Event, Revision, Material, User]
       can :create, Payment
       can :read, [Client, Employee]
       can :read, [News, Question, Feedback]
-    elsif user.role == 'Client'
+    elsif user.role == 'Client' && user.activated
       can :create, [Order, Message, Revision, Material]
       can :read, Part do |part|
         part.order.client_id == user.id && part.status == 'approved'
@@ -27,7 +27,7 @@ class Ability
       can :read, Message, receiver_id: user.id, status: :approved
       can :read, Message, sender_id: user.id
       can :read, [News, Question, Feedback]
-    elsif user.role == 'Employee'
+    elsif user.role == 'Employee' && user.activated
       can :read, Part
 			can :create, Payout 
       can :read, Material, order: {employee_id: user.id}, status: 'approved'

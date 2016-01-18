@@ -29,13 +29,24 @@ class Order < ActiveRecord::Base
     end
     names
   end
+
+  def self.statuses_names_for_filter_select
+    names = []
+    statuses_sel = statuses.keys - ['finished']
+    statuses_sel.each do |status|
+      display_name = I18n.t("activerecord.attributes.#{self.name.downcase}.statuses.#{status}", default: status.titleize)
+      names << [statuses[status], display_name]
+    end
+    names
+  end
+
   def received_cash
     self.payments.approved.sum(:amount)
   end
   def waiting_cash
     self.payments.waiting.sum(:amount)
   end
-  def waiting_cash? 
+  def waiting_cash?
     waiting_cash > 0
   end
   def payed_cash
@@ -51,40 +62,44 @@ class Order < ActiveRecord::Base
     if User.current.role!="Manager"
       if note_changed?
         event_params = { :user_id => User.current.id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
-        event = Event.new(event_params)
-        event.save
-      end
-      if commentary_changed?
-        event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
-        event = Event.new(event_params)
-        event.save
-      end
+      event = Event.new(event_params)
+      event.save
+    end
+    if commentary_changed?
+      event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
+      event = Event.new(event_params)
+      event.save
     end
   end
-  def self.search(search)
-    unless search.empty_values?
-      statements = []
-      query = [""]
-      unless search[:theme].empty?
-        statements << "lower(theme) LIKE lower(?)"
-        query << "%#{search[:theme]}%"
-      end
-      unless search[:id].empty?
-        statements << "id = ?"
-        query << search[:id].to_i
-      end
-      unless search[:created_at].empty?
-        created_at = Date.parse(search[:created_at])
-        statements << "created_at BETWEEN '#{created_at.beginning_of_day}' and '#{created_at.end_of_day}'"
-      end
-      unless search[:inform_date].empty?
-        inform_date = Date.parse(search[:inform_date])
-        statements << "inform_date BETWEEN '#{inform_date.beginning_of_day}' and '#{inform_date.end_of_day}'"
-      end
-      query[0] = statements.join ' AND '
-      where(query)
-    else
-      all
+end
+def self.search(search)
+  unless search.empty_values?
+    statements = []
+    query = [""]
+    unless search[:theme].empty?
+      statements << "lower(theme) LIKE lower(?)"
+      query << "%#{search[:theme]}%"
     end
+    unless search[:id].empty?
+      statements << "id = ?"
+      query << search[:id].to_i
+    end
+    unless search[:status].empty?
+      statements << "status = ?"
+      query << search[:status].to_i
+    end
+    unless search[:created_at].empty?
+      created_at = Date.parse(search[:created_at])
+      statements << "created_at BETWEEN '#{created_at.beginning_of_day}' and '#{created_at.end_of_day}'"
+    end
+    unless search[:inform_date].empty?
+      inform_date = Date.parse(search[:inform_date])
+      statements << "inform_date BETWEEN '#{inform_date.beginning_of_day}' and '#{inform_date.end_of_day}'"
+    end
+    query[0] = statements.join ' AND '
+    where(query)
+  else
+    all
   end
+end
 end

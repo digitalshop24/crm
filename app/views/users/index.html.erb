@@ -2,7 +2,6 @@
 <div class="page-header">
   <h2 class="text-center">Пользователи</h2>
 </div>
-<br>
 <div id="users">
   <ul class="nav nav-tabs tabs-up" id="users_tabs">
     <li class="active">
@@ -16,6 +15,9 @@
     </li>
     <li role='Manager'>
       <%= link_to 'Менеджеры', params.merge(role: 'Manager'), remote: true %>
+    </li>
+    <li role='Admin'>
+      <%= link_to 'Администраторы', params.merge(role: 'Admin'), remote: true %>
     </li>
   </ul>
   <%= form_tag users_path, method: :get, class: "filter_search" do %>
@@ -33,10 +35,11 @@
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
         </tr>
       </thead>
       <tbody>
-        <%= render 'users' %>
+        <%= render 'users/users' %>
       </tbody>
     </table>
   <% end %>

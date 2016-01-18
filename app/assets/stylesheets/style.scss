@@ -71,11 +71,11 @@ a.glyphicon:link {
 .HeroSection {margin-top: 50px;}
 
 .new-item {
-	background-color: #F4FFF3;
+	background-color: #EBFFEA;
 }
 
 .new-item:hover {
-    background-color:#E9FFE7 !important;
+    background-color:#DEF3D7 !important;
 }
 
 .warning-item {
@@ -84,4 +84,12 @@ a.glyphicon:link {
 
 .warning-item:hover {
     background-color:#FFDDDD !important;
+}
+
+.alert {
+	margin-top: 20px;
+}
+
+.page-message {
+	padding: 20px; 
 }

@@ -1,1 +1,2 @@
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
+<%= render @partial if @partial %>

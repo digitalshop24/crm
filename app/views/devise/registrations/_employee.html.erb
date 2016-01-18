@@ -1,21 +1,19 @@
 <div class="row">
-  <div class="form-group col-md-4 required">
+  <div class="form-group col-md-5 required">
     <%= f.label :name %><br />
     <%= f.text_field :name, required: true, class: 'form-control', placeholder: 'ФИО' %>
   </div>
 </div>
 <div class="row">
-  <div class="form-group col-md-4 required">
+  <div class="form-group col-md-5 required">
     <%= f.label :phone %><br />
     <%= f.text_field :phone, required: true, class: 'form-control mobile-phone', placeholder: 'Контактный телефон' %>
   </div>
 </div>
 <div class="row">
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-5">
     <%= f.label :skype %><br />
     <%= f.text_field :skype, class: 'form-control', placeholder: 'Skype' %>
   </div>
 </div>
-<div class="form-group">
-  <%= render partial: 'users/specialities_fields', locals: { f: f } %>
-</div>
+<%= render partial: 'users/specialities_fields', locals: { f: f } %>

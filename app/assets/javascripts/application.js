@@ -21,11 +21,20 @@ $(function() {
 });
 
 $(function() {
-  $(".filter_search input").on('keyup datechange', function() {
+  $(".filter_search").find('input,select').on('keyup datechange change', function() {
     $.get($(".filter_search").attr("action"), $(".filter_search").serialize(), null, "script");
     return false;
   });
 });
+
+
+// $(function() {
+//   $(".filter_select select").on('change', function() {
+//     $.get($(".filter_search").attr("action"), $(".filter_search").serialize(), null, "script");
+//     return false;
+//   });
+// });
+
 
 var ready;
 ready = function() {

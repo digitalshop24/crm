@@ -16,16 +16,11 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = User.new(activated: true)
   end
 
   def create
-    parms = user_params
-    if parms[:speciality_ids]
-      parms[:speciality_ids].uniq!
-      parms[:subspeciality_ids].uniq!
-    end
-    @user = User.new(parms)
+    @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Пользователь успешно создан"
       redirect_to users_path
@@ -43,10 +38,6 @@ class UsersController < ApplicationController
     parms = user_params
     parms.delete(:password) if parms[:password].blank?
     parms.delete(:password_confirmation) if parms[:password].blank? and parms[:password_confirmation].blank?
-    if parms[:speciality_ids]
-      parms[:speciality_ids].uniq!
-      parms[:subspeciality_ids].uniq!
-    end
     if @user.update_attributes(parms)
       flash[:notice] = "Пользователь обновлен"
       redirect_to action: :index
@@ -63,21 +54,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def add_speciality
-    @speciality_number = rand(0..10000)
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.js
-    end
-  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end
-
-
 
   # Only allow a trusted parameter "white list" through.
   def user_params
@@ -89,14 +72,14 @@ class UsersController < ApplicationController
   end
 
   def sort_column
-    params[:sort] if User.column_names.include?(params[:sort])
+    params[:sort] if User.column_names.include?(params[:sort]) || 'created_at'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   def show_role
     params[:role] if ( params[:role] and User::ROLES.include? params[:role].downcase )
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

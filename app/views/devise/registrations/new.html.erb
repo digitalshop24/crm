@@ -8,13 +8,13 @@
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= devise_error_messages! %>
           <div class="row">
-            <div class="form-group col-md-4 required">
+            <div class="form-group col-md-5 required">
               <%= f.label :email %><br />
               <%= f.email_field :email, autofocus: true, required: true, class: 'form-control', placeholder: 'Контактный email' %>
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-4 required">
+            <div class="form-group col-md-5 required">
               <%= f.label :password %>
               <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> символов минимум)</em>
@@ -23,15 +23,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-4 required">
+            <div class="form-group col-md-5 required">
               <%= f.label :password_confirmation %><br />
               <%= f.password_field :password_confirmation, autocomplete: "off", required: true, class: 'form-control', placeholder: 'Подтверждение пароля' %>
             </div>
           </div>
           <%= render partial: role, locals: { f: f } %>
+          <br>
           <%= f.hidden_field :role, value: role.capitalize %>
           <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-5">
               <%= f.button "Зарегистрироваться", class: 'btn btn-primary' %>
             </div>
           </div>

@@ -1,10 +1,13 @@
 <% @users.each do |user| %>
   <tr>
-    <td class="col-md-4"><%= user.name %></td>
-    <td class="col-md-3"><%= user.email %></td>
-    <td class="col-md-2"><%= user.phone %></td>
-    <td class="col-md-2"><%= user.created_at.strftime("%d.%m.%Y %H:%M") %></td>
-    <td class="col-md-1">
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.phone %></td>
+    <td><%= user.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+    <td>
+      <%= user.activated ? 'Да' : 'Нет' %>
+    </td>
+    <td>
       <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-edit', title: 'Редактровать' %>
       <%= link_to '', user_path(user), method: :delete, class: 'glyphicon glyphicon-remove', title: 'Удалить', data: { confirm: "Вы уверены?"} %>
     </td>

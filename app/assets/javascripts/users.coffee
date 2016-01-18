@@ -1,6 +1,6 @@
 $ ->
   $(document).on 'change', '.speciality_select', (evt) ->
-    $.ajax '/admin/users/update_specialities',
+    $.ajax '/users/update_specialities',
       type: 'GET'
       dataType: 'script'
       data: {

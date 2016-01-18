@@ -11,7 +11,7 @@
           <div class="col-sm-12 col-md-6">
             <div class="col-md-12 leftSlide">
               <h3>С 1 декабря по 1 февраля:<br class="hidden-xs" />
-               скидки 15% всем новым клиентам в честь 10 –ти летия
+                скидки 15% всем новым клиентам в честь 10 –ти летия
 
 компании.</h3>
               <p>Также командой Редстудент разработана уникальная для России система скидок : при заказе 
@@ -25,11 +25,14 @@
             </div>
           </div>
           <div class="col-md-6 rightside">
-            <%= render 'welcome/form' %>
+            <% if !current_user || current_user.role == 'Client'  %>
+              <%= render 'welcome/form' %>
+            <% else %>
+              <p class="text-center">Чтобы создать заказ, вы должны быть залогинены как клиент.</p>
+            <% end %>
           </div>
         </div>
         <!-- owl item -->
-       
       </div>
     </div>
   </div>
@@ -226,7 +229,5 @@
           </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<%= render 'footer' %>
+    </section>
+    <%= render 'footer' %>
