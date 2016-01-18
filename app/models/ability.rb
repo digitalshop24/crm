@@ -28,7 +28,8 @@ class Ability
       can :read, Message, sender_id: user.id
       can :read, [News, Question, Feedback]
     elsif user.role == 'Employee'
-      can :create, Payout 
+      can :read, Part
+			can :create, Payout 
       can :read, Material, order: {employee_id: user.id}, status: 'approved'
       can :read, Revision, order: {employee_id: user.id}, status: 'approved'
       can :read, Order, employee_id: user.id

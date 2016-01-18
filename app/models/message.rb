@@ -20,7 +20,7 @@ class Message < ActiveRecord::Base
 
   def add_event
     if User.current.role!="Manager"
-      event_params = { user_id: self.sender.id, event_type: "сообщение", content: self.content, link: "orders/#{self.order_id}##{self.id}" }
+      event_params = { user_id: self.sender.id, event_type: "сообщение", content: self.content.strip_tags, link: "orders/#{self.order_id}##{self.id}" }
       @event = Event.create(event_params)
       channel = '/faye/events'
       msg = ApplicationController.new.render_to_string @event

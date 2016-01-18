@@ -187,11 +187,13 @@
     <div class="container">
       <div class="col-md-4">
         <div class="NewsFaqTitle">Новости</div>
-        <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
-        <div class="subtitle"><%=@news.title%></div>
-        <div class="NewsFaqExcerpt"><%=@news.text%></div>
-        <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
-        <div class="ttt">
+        <% if @news %>
+          <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
+          <div class="subtitle"><%=@news.title%></div>
+          <div class="NewsFaqExcerpt"><%=@news.text%></div>
+          <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
+        <%end%>
+	<div class="ttt">
           <a href="/news" class="details">
             <p class="detailsBtn">Все новости</p>
           </a>
@@ -199,11 +201,13 @@
       </div>
       <div class="col-md-4">
         <div class="NewsFaqTitle">Чаво</div>
-        <div class="subtitle">Вопрос</div>
-        <div class="NewsFaqExcerpt"><%=@question.question%></div>
-        <div class="subColor">Ответ</div>
-        <div class="NewsFaqExcerpt"><%=@question.answer%></div>
-        <div class="ttt">
+        <% if @question %>  
+          <div class="subtitle">Вопрос</div>
+          <div class="NewsFaqExcerpt"><%=@question.question%></div>
+          <div class="subColor">Ответ</div>
+          <div class="NewsFaqExcerpt"><%=@question.answer%></div>
+        <% end %>
+	<div class="ttt">
           <a href="/questions" class="details">
             <p class="detailsBtn">Все вопросы и ответы</p>
           </a>
@@ -211,10 +215,12 @@
       </div>
       <div class="col-md-4">
         <div class="NewsFaqTitle">Отзывы</div>
-        <div class="subtitle"><%=@feedback.name%></div>
-        <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
-        <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
-        <div class="ttt">
+        <% if @feedback %>  
+	  <div class="subtitle"><%=@feedback.name%></div>
+          <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
+          <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
+        <%end%>
+	<div class="ttt">
           <a href="/feedbacks" class="details">
             <p class="detailsBtn">Все отзывы</p>
           </a>
