@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   def create
     respond_to do |format|
       @message = Message.new(message_params)
-      unless params[:price].empty?
+      unless params[:price].to_s.empty?
         @message.content = "Стоимость: #{params[:price]} рублей <br>#{@message.content}"
       end
       @message.sender_id = current_user.id

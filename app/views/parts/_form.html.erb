@@ -21,7 +21,7 @@
             <% if can? :manage, part %>
               <%= f.datetime_select :deadline %>
             <% else  %>
-              <%= part.deadline.strftime("%d.%m.%Y %H:%M") %>
+              <%= part.deadline.strftime("%d.%m.%Y %H:%M") if part.deadline %>
             <% end %>
           </div>
         </div>

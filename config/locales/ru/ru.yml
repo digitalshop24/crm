@@ -255,3 +255,10 @@ ru:
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
     pm: вечера
+  activerecord:
+    errors:
+      template:
+        header:
+          one:   "1 erqwdqwdqwdqwdqdohibited this %{model} from being saved"
+          other: "%{count} errors pasdasdadadsasdrohibited this %{model} from being saved"
+        body:    "There were problems with the following fields:"
