@@ -1,4 +1,5 @@
 class Payment < ActiveRecord::Base
+  # Платежи от клиентов
   LMI_MERCHANT_ID = '12345'
   belongs_to :order
   belongs_to :client

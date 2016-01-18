@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get '/approve', to: 'orders#approve', as: :approve, on: :member
     get '/set_employee/:employee_id', to: 'orders#set_employee', as: :set_employee, on: :member
     get '/unset_employee/:employee_id', to: 'orders#unset_employee', as: :unset_employee, on: :member
+    get '/archive', to: :archive, on: :collection, as: :archive
 
     resources :messages do
       get '/approve', to: 'messages#approve', as: :approve, on: :member
@@ -50,10 +51,13 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :users do
-      get 'update_specialities', as: 'update_specialities', on: :collection
-      get 'add_speciality', as: 'add_speciality', on: :collection
+      
       get '/manage', to: 'users#manage', as: :manage, on: :collection
     end
+  end
+  devise_scope :user do
+    get 'users/add_speciality', to: "registrations#add_speciality"
+    get 'users/update_specialities', to: "registrations#update_specialities"
   end
 
   scope '/dashboard' do

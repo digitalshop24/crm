@@ -11,7 +11,7 @@
           <div class="col-sm-12 col-md-6">
             <div class="col-md-12 leftSlide">
               <h3>С 1 декабря по 1 февраля:<br class="hidden-xs" />
-               скидки 15% всем новым клиентам в честь 10 –ти летия
+                скидки 15% всем новым клиентам в честь 10 –ти летия
 
 компании.</h3>
               <p>Также командой Редстудент разработана уникальная для России система скидок : при заказе 
@@ -25,11 +25,14 @@
             </div>
           </div>
           <div class="col-md-6 rightside">
-            <%= render 'welcome/form' %>
+            <% if !current_user || current_user.role == 'Client'  %>
+              <%= render 'welcome/form' %>
+            <% else %>
+              <p class="text-center">Чтобы создать заказ, вы должны быть залогинены как клиент.</p>
+            <% end %>
           </div>
         </div>
         <!-- owl item -->
-       
       </div>
     </div>
   </div>
@@ -121,106 +124,106 @@
           <figcaption>
             <h3 class="figTitle ">Отличные цены</h3>
             <p class="figExcerpt">цена < качество! мы предлагаем Вам оплату по частям после Вашего знакомства с работой.</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Высокое качество</h3>
-            <p class="figExcerpt">Все работы пишут преподаватели Вузов</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Антиплагиат</h3>
-            <p class="figExcerpt">Каждая работа проходит строгий  контроль на уникальность.</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Бесплатная доработка</h3>
-            <p class="figExcerpt">На каждую работу предоставляется гарантия</p>
-          </figcaption>
-        </figure>
-      </div>
-      <form method="post" action="index.html" name="insertForm2" enctype="multipart/form-data">
-        <div class="formParth">
-          <div id="txt6" ></div>
-          <select class="oneItem" id="tipRaboty2" name="tipRaboty2" onChange="win_close2()" >
-            <option data-display="Выберите тип работы"></option>
-            <option value="1">Дипломная работа</option>
-            <option value="2">Диссертация кандидатская</option>
-            <option value="3">Диссертация магистерская</option>
-            <option value="4">Курсовая работа</option>
-            <option value="5">Контрольная работа</option>
-            <option value="6">Реферат</option>
-            <option value="7">Научная работа</option>
-            <option value="8">Отчет по практике</option>
-            <option value="9">Презентация</option>
-            <option value="10">Чертежи </option>
-            <option value="11">Эссе</option>
-            <option value="12">Семестровая работа</option>
-            <option value="13">Доклад</option>
-            <option value="14">Отчет по практике</option>
-            <option value="15">Экзаменационные вопросы</option>
-            <option value="16">Перевод текста</option>
-            <option value="17">Проверка качества</option>
-            <option value="18">Доработка</option>
-          </select>
-          <input type="text" class="form-control oneItem mobile-phone" placeholder="Телефон">
-          <input type="button" class="RedBTN MySend" onClick=validate_form2() value="Отправить заявку" />
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-<section class="NewsFaq">
-  <div class="row">
-    <div class="container">
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Новости</div>
-        <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
-        <div class="subtitle"><%=@news.title%></div>
-        <div class="NewsFaqExcerpt"><%=@news.text%></div>
-        <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
-        <div class="ttt">
-          <a href="/news" class="details">
-            <p class="detailsBtn">Все новости</p>
-          </a>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4 text-center">
+            <figure>
+              <%= image_tag "forma.png" %>
+              <figcaption>
+                <h3 class="figTitle ">Высокое качество</h3>
+                <p class="figExcerpt">Все работы пишут преподаватели Вузов</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4 text-center">
+            <figure>
+              <%= image_tag "forma.png" %>
+              <figcaption>
+                <h3 class="figTitle ">Антиплагиат</h3>
+                <p class="figExcerpt">Каждая работа проходит строгий  контроль на уникальность.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4 text-center">
+            <figure>
+              <%= image_tag "forma.png" %>
+              <figcaption>
+                <h3 class="figTitle ">Бесплатная доработка</h3>
+                <p class="figExcerpt">На каждую работу предоставляется гарантия</p>
+              </figcaption>
+            </figure>
+          </div>
+          <form method="post" action="index.html" name="insertForm2" enctype="multipart/form-data">
+            <div class="formParth">
+              <div id="txt6" ></div>
+              <select class="oneItem" id="tipRaboty2" name="tipRaboty2" onChange="win_close2()" >
+                <option data-display="Выберите тип работы"></option>
+                <option value="1">Дипломная работа</option>
+                <option value="2">Диссертация кандидатская</option>
+                <option value="3">Диссертация магистерская</option>
+                <option value="4">Курсовая работа</option>
+                <option value="5">Контрольная работа</option>
+                <option value="6">Реферат</option>
+                <option value="7">Научная работа</option>
+                <option value="8">Отчет по практике</option>
+                <option value="9">Презентация</option>
+                <option value="10">Чертежи </option>
+                <option value="11">Эссе</option>
+                <option value="12">Семестровая работа</option>
+                <option value="13">Доклад</option>
+                <option value="14">Отчет по практике</option>
+                <option value="15">Экзаменационные вопросы</option>
+                <option value="16">Перевод текста</option>
+                <option value="17">Проверка качества</option>
+                <option value="18">Доработка</option>
+              </select>
+              <input type="text" class="form-control oneItem mobile-phone" placeholder="Телефон">
+              <input type="button" class="RedBTN MySend" onClick=validate_form2() value="Отправить заявку" />
+            </div>
+          </form>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Чаво</div>
-        <div class="subtitle">Вопрос</div>
-        <div class="NewsFaqExcerpt"><%=@question.question%></div>
-        <div class="subColor">Ответ</div>
-        <div class="NewsFaqExcerpt"><%=@question.answer%></div>
-        <div class="ttt">
-          <a href="/questions" class="details">
-            <p class="detailsBtn">Все вопросы и ответы</p>
-          </a>
+    </section>
+    <section class="NewsFaq">
+      <div class="row">
+        <div class="container">
+          <div class="col-md-4">
+            <div class="NewsFaqTitle">Новости</div>
+            <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
+            <div class="subtitle"><%=@news.title%></div>
+            <div class="NewsFaqExcerpt"><%=@news.text%></div>
+            <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
+            <div class="ttt">
+              <a href="/news" class="details">
+                <p class="detailsBtn">Все новости</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="NewsFaqTitle">Чаво</div>
+            <div class="subtitle">Вопрос</div>
+            <div class="NewsFaqExcerpt"><%=@question.question%></div>
+            <div class="subColor">Ответ</div>
+            <div class="NewsFaqExcerpt"><%=@question.answer%></div>
+            <div class="ttt">
+              <a href="/questions" class="details">
+                <p class="detailsBtn">Все вопросы и ответы</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="NewsFaqTitle">Отзывы</div>
+            <div class="subtitle"><%=@feedback.name%></div>
+            <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
+            <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
+            <div class="ttt">
+              <a href="/feedbacks" class="details">
+                <p class="detailsBtn">Все отзывы</p>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Отзывы</div>
-        <div class="subtitle"><%=@feedback.name%></div>
-        <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
-        <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
-        <div class="ttt">
-          <a href="/feedbacks" class="details">
-            <p class="detailsBtn">Все отзывы</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<%= render 'footer' %>
+    </section>
+    <%= render 'footer' %>

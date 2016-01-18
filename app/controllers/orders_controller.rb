@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
       @orders = Order.all
     end
     @orders = @orders.order(sort_column + " " + sort_direction).paginate(page: params[:page]).decorate
+    @page_title = 'Все заказы'
   end
 
   # GET /orders/1
@@ -35,16 +36,16 @@ class OrdersController < ApplicationController
       @order.client_id = current_user.id
     elsif current_user.role == "Manager"
       @order.manager_id = current_user.id
-    end      
+    end
     unless @order[:employee_deadline]
       @order.set_employee_deadline
     end
 
     if @order.save
-       if params[:materials]
-            params[:materials].each {|file| 
-              @order.materials.create(document: file)}
-          end
+      if params[:materials]
+        params[:materials].each {|file|
+        @order.materials.create(document: file)}
+      end
       redirect_to @order, notice: 'Заказ успешно создан.'
     else
       render :new
@@ -55,13 +56,19 @@ class OrdersController < ApplicationController
   def update
     if @order.update(order_params)
       if params[:materials]
-            params[:materials].each {|file| 
-              @order.materials.create(document: file)}
-          end
+        params[:materials].each {|file|
+        @order.materials.create(document: file)}
+      end
       redirect_to @order, notice: 'Заказ успешно обновлен.'
     else
       render :edit
     end
+  end
+
+  def archive
+    @orders = Order.finished.paginate(page: params[:page]).decorate
+    @page_title = 'Архив заказов'
+    render 'index'
   end
 
   # DELETE /orders/1
@@ -71,7 +78,7 @@ class OrdersController < ApplicationController
   end
 
   def approve
-    parms = {status: :approved}    
+    parms = {status: :approved}
     unless @order.manager_id
       parms.merge!({ manager_id: current_user.id }) if current_user.role == "Manager"
     end
@@ -111,7 +118,7 @@ class OrdersController < ApplicationController
   end
 
   def search_params
-    params.require(:search).permit(:id, :theme, :created_at, :inform_date)
+    params.require(:search).permit(:id, :theme, :created_at, :inform_date, :status)
   end
 
   def sort_column

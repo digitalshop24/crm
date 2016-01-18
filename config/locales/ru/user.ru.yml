@@ -15,3 +15,10 @@ ru:
         remember_me: 'Запомнить меня'
         speciality: 'Специальность'
         subspeciality: 'Подспециальность'
+        activated: 'Активирован'
+        role: Роль
+        roles:
+          admin: Администратор
+          client: Заказчик
+          employee: Исполнитель
+          manager: Менеджер

@@ -6,14 +6,20 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to_back(dashboard_index_path, exception.message)
+    if current_user && current_user.activated
+      redirect_to_back(dashboard_index_path, exception.message)
+    elsif current_user
+      redirect_to dashboard_index_path
+    else
+      redirect_to_back(dashboard_index_path, exception.message)
+    end
   end
 
   def after_sign_in_path_for(resource)
     stored_location_for(resource) || dashboard_index_path
   end
 
-  def redirect_to_back(default = root_url, alert)
+  def redirect_to_back(default = root_path, alert)
     if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
       redirect_to :back, alert: alert
     else
@@ -23,18 +29,6 @@ class ApplicationController < ActionController::Base
 
   def after_sending_reset_password_instructions_path_for(resource_name)
     edit_user_registration_path
-  end
-
-  def update_specialities
-    @specialitiy_number = params[:speciality_number]
-    unless params[:speciality_id].empty?
-      @subspecialities = Subspeciality.where("speciality_id = ?", params[:speciality_id])
-    else
-      @subspecialities = Subspeciality.where(id: nil)
-    end
-    respond_to do |format|
-      format.js { render :update_specialities }
-    end
   end
 
   protected

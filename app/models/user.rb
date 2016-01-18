@@ -16,11 +16,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  # def speciality_ids=(col)
-  #   puts '1'*100
-  #   puts col
-  # end
-  def subspeciality_ids
+  def self.roles_for_select
+    ROLES.map{ |r| [r.capitalize, I18n.t("activerecord.attributes.user.roles.#{r}")] }
   end
 
   def send_password_reset

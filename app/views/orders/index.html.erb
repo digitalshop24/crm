@@ -1,10 +1,14 @@
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
 <div class="page-header">
-  <h2 class="text-center">Все заказы</h2>
+  <h2 class="text-center"><%= @page_title %></h2>
 </div>
-<br>
-<div id="orders">
-  <%= form_tag orders_path, method: :get, class: "filter_search" do %>
+<%= form_tag orders_path, method: :get, class: "filter_search" do %>
+  <div class="form-group row">
+    <div class="col-md-4">
+      <%= collection_select :search, :status, Order.statuses_names_for_filter_select, :first, :second, { prompt: 'Все' }, class: 'form-control' %>
+    </div>
+  </div>
+  <div id="orders">
     <%= hidden_field_tag :direction, params[:direction] || '' %>
     <%= hidden_field_tag :sort, params[:sort] || '' %>
     <table class="table table-hover pretty">
@@ -27,7 +31,7 @@
     <nav id='orders_pagination'>
       <%= render 'orders/pagination' %>
     </nav>
-  <% end %>
-</div>
+  </div>
+<% end %>
 <br>
 <%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>

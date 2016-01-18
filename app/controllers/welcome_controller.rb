@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
         redirect_to root_path
       end
     else
-      @client = Client.new(order_params[:client])
+      @client = Client.new(order_params[:client].merge({ activated: true }))
       @client.password = SecureRandom.hex
       if @client.save
         @order.client_id = @client.id
@@ -31,7 +31,8 @@ class WelcomeController < ApplicationController
             params[:materials].each {|file| 
               @order.materials.create(document: file)}
           end
-          redirect_to root_path, notice: 'Заказ успешно создан. Вы получите на email инструкцию для входа в личный кабинет'
+          sign_in(:user, @client)
+          redirect_to dashboard_index_path, notice: 'Заказ создан. Вы получите на email инструкцию для задания пароля'
         else
           redirect_to root_path, notice: 'Ошибка'
         end
