@@ -1,146 +1,78 @@
-<%= render 'header' %>
-<section class="nonHero">
-  <div class = "container">
-<p id="notice"><%= notice %></p>
+<div class="outerwrapper">
+  <!-- =header -->
+  
+  <%= render 'header' %>
+  <!-- =/header -->
+  <!-- =floatcontacts -->
+  <div class="floatcontacts container">
+    <div>
+      <a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
+      <p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+    </div>    
+  </div>
 
-<h1>Новости</h1>
 
-<table class = "table">
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @newss.each do |news| %>
-      <tr class ="NewsFaq">
-      <td>
-      <div class="col-md-4">
-        <div class="subtitle"><%=news.title%></div>
-        <div class="NewsFaqExcerpt"><%=news.text%></div>
-        <div class="TheDate"><%=news.created_at.to_s(:db)%></div>
-        <div>  
-          <% if current_user %>
-            <% if "Admin".include? current_user.role %>
-              <%= link_to 'Изменить', edit_news_path(news) %>
-              <%= link_to 'Удалить', news, method: :delete, data: { confirm: 'Вы уверены?' } %>
-            <%end%>
-          <%end%>
-         </div>
-      </div>
-      </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate @newss, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
+  <!-- =/floatcontacts -->
+  <div class="main">
+    <div class="container">
+      <div class="news">
+        <h1>НОВОСТИ</h1>
+        <div class="intro">
+          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, ased diam nonumy eirmod tempor invidunt ut labore et adolore magna aliquyam erat, 
+sed diam voluptua. At avero eos et accusam et justo duo dolores et ea rebum. aStet clita kasd gubergren, no sea takimata sanctus est aLorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="list row">
+        <% @newss.each do |news| %>
+          <article>
+            <div class="col-md-4 col-sm-5 col-xs-12">
+             <%= image_tag news.image.url(:medium) %>
+            </div>
+            <div class="description col-md-8 col-sm-7 col-xs-12">
+              <h3><a href="#"><%=news.title%></a></h3>
+              <div class="text">
+                <p><%=news.text%></p>
+              </div>
+              <div class="meta">
+                <time datetime="22.10.2015"><%=news.date%></time>
+                <a href="#" class="readmore">Читать полностью</a>
+              </div>
+            </div>
+          </article>
+           <% if current_user %>
+        <% if "Admin".include? current_user.role %>
+          <%= link_to 'Изменить', edit_news_path(news) %>
+          <%= link_to 'Удалить',  news, method: :delete, data: { confirm: 'Вы уверены?' } %>
+        <%end%>
+      <%end%>
+        <%end%>
+        </div>
+     <%= will_paginate @newss, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails %>
 <br>
 <% if current_user %>
  <% if "Admin".include? current_user.role %>
   <%= link_to 'Добавить', new_news_path %>
  <%end%>
 <%end%>
+      </div>
+    </div>
+  </div>
+    <!-- InstanceEndEditable -->  
+
 </div>
-  </div>
-</section>
-<section class="NewsFaq">
-  <div class="row">
-    <div class="container">
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Новости</div>
-        <% if @news %>
-          <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
-          <div class="subtitle"><%=@news.title%></div>
-          <div class="NewsFaqExcerpt"><%=@news.text%></div>
-          <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
-        <%end%>
-	<div class="ttt">
-          <a href="/news" class="details">
-            <p class="detailsBtn">Все новости</p>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Чаво</div>
-        <% if @question %>  
-          <div class="subtitle">Вопрос</div>
-          <div class="NewsFaqExcerpt"><%=@question.question%></div>
-          <div class="subColor">Ответ</div>
-          <div class="NewsFaqExcerpt"><%=@question.answer%></div>
-        <% end %>
-	<div class="ttt">
-          <a href="/questions" class="details">
-            <p class="detailsBtn">Все вопросы и ответы</p>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Отзывы</div>
-        <% if @feedback %>  
-	  <div class="subtitle"><%=@feedback.name%></div>
-          <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
-          <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
-        <%end%>
-	<div class="ttt">
-          <a href="/feedbacks" class="details">
-            <p class="detailsBtn">Все отзывы</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="footTitle">Услуги</div>
-        <ul class="footNav">
-          <li><a href="#">Контрольные работы</a></li>
-          <li><a href="#">Дипломные работы</a></li>
-          <li><a href="#">Курсовые работы</a></li>
-          <li><a href="#">Рефераты</a></li>
-          <li><a href="#">Другие работы</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <div class="footTitle">Клиентам</div>
-        <ul class="footNav">
-          <li><a href="#">Способы оплаты</a></li>
-          <li><a href="#">Гарантии</a></li>
-          <li><a href="#">Как оформить заказ</a></li>
-          <li><a href="#">Наши преимущества</a></li>
-          <li><a href="#">Публичная оферта</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <div class="footTitle">О компании</div>
-        <ul class="footNav">
-          <li><a href="#">Контакты</a></li>
-          <li><a href="#">Авторам</a></li>
-          <li><a href="#">Отзывы</a></li>
-          <li><a href="#">Новости</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <div class="footTitle">Мы принимаем</div>
-      </div>
-    </div>
-  </div>
-</footer>
-<div class="VabhceNiz">
-  <div class="container">
-    <div class="row">
-      <div class="hidden-xs col-sm-3 col-md-3"></div>
-      <div class="col-xs-12 col-sm-6 col-md-6">
-        <h4 class="text-center">© 2008, RedStudent. Все права защищены</h4>
-      </div>
-      <div class="col-xs-12 col-sm-3 col-md-3 LogoDShop">
-        <a href="http://dshop24.by/" target="_blank">
-          <%= image_tag 'LogoDShop.png' %>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+ <%= render 'footer' %>
+
+
+
+
+ 
+
+
+
+    
+
+
+
+
+

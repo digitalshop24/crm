@@ -1,11 +1,8 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "home/nice-select";
-@import "home/owl.carousel";
-@import "home/owl.theme";
+@import "bootstrap.min";
 @import "home/style";
+@import "jquery.formstyler";
 @import 'bootstrap-datetimepicker';
 

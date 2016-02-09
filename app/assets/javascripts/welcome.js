@@ -1,17 +1,19 @@
-//= require jquery
+//= require jquery-1.11.2.min
 //= require jquery_ujs
-//= require moment
-//= require moment/ru.js
-//= require bootstrap-sprockets
-//= require_tree .
-//= require maskedinput
-//= require bootstrap-datetimepicker
+//= require bootstrap.min
+//= require owl.carousel.min
+//= require jquery.formstyler.min
+//= require moment-with-locales.min
+//= require bootstrap-datetimepicker.min
+//= require engine
+//= require placeholders.min
+//= require modernizr
 
 $(document).ready(function(){
     var counter = 2;
     $('#del_file').hide();
     $('img#add_file').click(function(){
-        $('#file_tools').before('<div class="file_upload oneItem"><input type="text" class="form-control" placeholder="Прикрепить файлы" id="f'+counter+'" /><input type="file" name="materials[]" id="materials_" onchange="document.getElementById(\'f'+counter+'\').value = this.value;" /></div>');
+        $('#file_tools').before('<div class="file_upload"><input type="text" class="form-control" placeholder="Прикрепить файлы" id="f'+counter+'" /><input type="file" name="materials[]" id="materials_" onchange="document.getElementById(\'f'+counter+'\').value = this.value;" /></div>');
         $('#del_file').fadeIn(0);
     counter++;
     });

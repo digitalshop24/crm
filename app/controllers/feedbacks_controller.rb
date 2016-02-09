@@ -5,7 +5,7 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks
   def index
-    @feedbacks = Feedback.all.paginate(:page => params[:page], :per_page => 10)
+    @feedbacks = Feedback.all.paginate(:page => params[:page], :per_page => 5)
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last

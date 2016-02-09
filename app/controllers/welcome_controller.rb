@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
       if @client.save
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
-        UserMailer.delay.set_password_instructions(@client, token)
+        #UserMailer.delay.set_password_instructions(@client, token)
         if @order.save
           if params[:materials]
             params[:materials].each {|file| 

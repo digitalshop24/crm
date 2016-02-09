@@ -4,7 +4,7 @@ class NewsController < ApplicationController
   load_and_authorize_resource
   # GET /news
   def index
-    @newss = News.all.paginate(:page => params[:page], :per_page => 10)
+    @newss = News.all.paginate(:page => params[:page], :per_page => 4)
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
@@ -57,7 +57,7 @@ class NewsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def news_params
-      permitted_arr = [:title, :text]
+      permitted_arr = [:title, :text, :image, :date]
     params.require(:news).permit(permitted_arr)
     end
 end

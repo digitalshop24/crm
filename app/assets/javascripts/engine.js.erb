@@ -1,0 +1,155 @@
+$(document).ready(function(){
+	$('.categories a img').hover(
+		function(){$(this).stop().animate({opacity: 0.7}, 150);},
+		function(){$(this).delay(50).animate({opacity: 1}, 50);}
+	);
+
+	// $("#foo1").owlCarousel({
+	// 	items : 1,
+	// 	pagination : true,
+	// 	navigation : true,
+	// 	singleItem : true,
+	// 	navigationText: ["", ""]
+	// });	
+
+	$('.service .more').click(function(e){
+		e.preventDefault();
+		$('.table_works .hide').removeClass('hide');
+		$(this).remove();
+	});
+
+	// news
+	$('.news .readmore').click(function(e){
+		e.preventDefault();
+		var $this = $(this),
+			moretext = $this.parent().prev('.text').find('.moretext')
+		
+		if (moretext.css("display")=="block"){
+				moretext.slideUp();
+				$this.text('Читать полностью')
+			}
+			else{
+				moretext.slideDown();
+				$this.text('Свернуть')
+			}
+	});
+	// показать еще
+	$('.news .more').click(function(e){ 
+		e.preventDefault();
+		var $this = $(this);	
+		$('.news .list .hide').removeClass('hide');
+		$(this).remove();
+	})
+
+	// faq
+	$('.faqList .more').click(function(e){
+		e.preventDefault();
+		$('.faqList .faqhide').slideDown();
+		$(this).remove();
+	});	
+	
+	// review
+	$('.reviewList .more').click(function(e){
+		e.preventDefault();
+		$('.reviewList .reviewhide').slideDown();
+		$(this).remove();
+	});	
+
+	// style for select
+	$('#type').styler({
+		selectPlaceholder : 'Выберите тип работы'
+	});
+	$('#subject').styler({
+		selectPlaceholder : 'Предмет'
+	});
+	$('#file').styler({
+		filePlaceholder : 'Прикрепить файлы',
+		fileBrowse : '<%= image_tag("attach.png")%>'
+	});	
+
+	// datetime picker
+    $('#term').datetimepicker({
+    	language: 'ru',
+    	pickTime: false,
+    	format: 'D MMMM YYYY'
+   		}
+    );
+
+    var thankmsg = '<p class="thank__title">Ваша заявка отправлена!</p><p class="thank__msg">Большое спасибо, скоро с Вами свяжется наш менеджер</p>';
+
+	// 	=MODAL WINDOWS
+    $('#modalorder .submit').click(function(e){
+		e.preventDefault();
+		modalbody = $('.modal-body');
+		modalbody.addClass('thank');
+		modalbody.find('.form').hide();
+		modalbody.append(thankmsg);
+	});
+
+	$('#modalorder').on('show.bs.modal', function (e) {
+		var modalorder = $('#modalorder');
+		modalorder.find('.thank').removeClass('thank');
+		modalorder.find('.thank__title, .thank__msg').remove();
+		modalorder.find('.form').show();
+	});
+
+
+	$('.quickorder .submit').click(function(e){
+		e.preventDefault();
+		$('body').append('<div class="thank-popup modal in"><div class="modal-dialog"><div class="modal-content"><button class="close" type="button"><img alt="" src="images/close.png"></button><div class="modal-body center-block thank">' + thankmsg + '</div></div></div></div>');
+		startClock('.thank-popup'); // автоматически скрываем форму с сообщением
+	});
+
+	$('body').on('click','.thank-popup .close', function(e){
+		$('.thank-popup').fadeOut('normal', function(){
+			this.remove();
+		});
+	})
+
+
+	// =заглушка для IE
+	var browser = navigator.userAgent.indexOf("MSIE");
+	var version = parseInt(navigator.userAgent.substr(browser + 5, 2));
+	if (version !== -1) var IE = true;
+	if (IE && version < 9) {
+		var IEhelp = document.createElement("div");
+		IEhelp.style.width = "100%";
+		IEhelp.style.padding = "11px";
+		IEhelp.style.backgroundColor = "#CC3333";
+		IEhelp.style.color = "#FFFFFF";
+		IEhelp.style.textAlign = "center";
+		IEhelp.style.font = "normal 14px/1.2 Helvetica Neue, Tahoma, Verdana, Arial, sans-serif";
+		IEhelp.innerHTML = 'Внимание! Вы используете устаревший браузер. <a href="/ie6/ie6.html" target="_blank" style="color: #FFFFFF; text-decoration: underline;">Подробнее &#187;</a>';
+		if (document.body.firstChild) {
+			document.body.insertBefore(IEhelp, document.body.firstChild);
+		}
+		else {
+			document.body.appendChild(IEhelp);
+		}
+	}
+	// =/заглушка для IE		
+})
+
+
+var timer;
+var sec = 3;
+
+function showTime(form){
+	sec = sec-1;
+	if (sec <=0) {
+		stopClock();
+		$(form).find('.close').trigger('click');
+	}
+}
+
+function stopClock(){
+	window.clearInterval(timer);
+	timer = null;
+	sec = 3;
+}
+
+function startClock(form){
+	if (!timer)
+	timer = window.setInterval("showTime('"+form+"')",1000);
+}
+

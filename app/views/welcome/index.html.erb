@@ -1,233 +1,228 @@
+<div class="outerwrapper">
 <%= render 'header' %>
-<section class="HeroSection">
-  <div class="container">
-    <div class="row">
-      <div id="owl-example" class="owl-carousel">
-        <div> <!-- owl item -->
-          <div class="col-md-12 text-center HeroTitle">
-            <p>Уникальные студенческие работы: <br class="hidden-xs hidden-sm"/>
-              Контрольные, Курсовые, дипломные и другое</p>
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <div class="col-md-12 leftSlide">
-              <h3>С 1 декабря по 1 февраля:<br class="hidden-xs" />
-                скидки 15% всем новым клиентам в честь 10 –ти летия
-
-компании.</h3>
-              <p>Также командой Редстудент разработана уникальная для России система скидок : при заказе 
-
-одновременно 2-х любых работ Вы получаете скидку 20%, при заказе 3-х работ – 25%, 5-ти работ – 
-
-30% на каждую работу.
-
-Редстудент, прояви инициативу – чем больше друзей, тем больше экономия!</p>
-              <button type="submit">Узнать подробрности об акции</button>
+<div class="floatcontacts container">
+    <div>
+      <a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
+      <p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+    </div>    
+  </div>
+  <!-- =/floatcontacts -->
+  
+  <!-- InstanceBeginEditable name="EditRegion3" -->
+  <!-- =neck -->
+  <div class="neck">
+    <div id="foo1">
+      <div class="slide">
+        <div class="container">
+          <div class="slide__title text-center">УНИКАЛЬНЫЕ СТУДЕНЧЕСКИЕ РАБОТЫ: КОНТРОЛЬНЫЕ, КУРСОВЫЕ, ДИПЛОМНЫЕ И ДРУГИХ</div>
+          <div class="slide__content row">
+            <div class="col-sm-6 col-xs-12">
+              <div class="box">
+                <div class="title">С 15 февраля по 15 марта скидки 15% всем новым клиентам в честь 10 –ти летия компании.</div>
+                <p>Также командой Редстудент разработана уникальная для России система скидок : при заказе
+одновременно 2-х любых работ Вы получаете скидку 20%, при заказе 3-х работ – 25%, 5-ти работ – 30% на каждую работу. Редстудент, прояви инициативу – чем больше друзей, тем больше экономия!</p>
+                <a href="#" class="more btn btn_white">Узнать подробнее об акции</a>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6 rightside">
-            <% if !current_user || current_user.role == 'Client'  %>
-              <%= render 'welcome/form' %>
-            <% else %>
-              <p class="text-center">Чтобы создать заказ, вы должны быть залогинены как клиент.</p>
-            <% end %>
-          </div>
+            <div class="col-sm-6 col-xs-12"> 
+               <% if !current_user || current_user.role == 'Client'  %>
+              <div class="form">
+                <%= render 'welcome/form' %>
+              </div>
+               <% else %>
+                <p class="text-center">Чтобы создать заказ, вы должны быть залогинены как клиент.</p>
+               <% end %> 
+            </div>
+          </div>          
         </div>
-        <!-- owl item -->
-      </div>
+      </div>    
     </div>
   </div>
-</section>
-<section class="CoastSection">
-  <div class="container">
-    <div class="col-md-12 text-center HeroTitle">
-      <p>Услуги и цены</p>
-    </div>
-    <table class=" MyTable table">
-      <div class="headTab">
-        <thead>
-          <tr>
-            <th class="LHEAD"><span class="oneTh">Типы работ</span></th>
-            <th class="MHEAD text-right">Сроки</th>
-            <th class="MHEAD text-right">Стоимость, руб.</th>
-            <th class="RHEAD text-right">Заказать</th>
-          </tr>
-        </thead>
-      </div>
-      <tbody>
-        <tr>
-          <th scope="row"><span class="oneTh">Дисертация</span></th>
-          <td class="text-center">от 10 дней </td>
-          <td class="text-center">от 9 000 руб.</td>
-          <td class="text-center"><%= image_tag "basket.png" %></td>
-        </tr>
-        <tr>
-          <th scope="row"><span class="oneTh">Дипломная работа</span></th>
-          <td class="text-center">от 5 дней</td>
-          <td class="text-center">от 6 000 руб.</td>
-          <td class="text-center"><%= image_tag "basket.png" %></td>
-        </tr>
-        <tr>
-          <th scope="row"><span class="oneTh">Курсовая работа</span></th>
-          <td class="text-center">от 2 дней</td>
-          <td class="text-center">от 1 200 руб.</td>
-          <td class="text-center"><%= image_tag "basket.png" %></td>
-        </tr>
-        <tr>
-          <th scope="row"><span class="oneTh">Контрольная работа</span></th>
-          <td class="text-center">от 1 дней</td>
-          <td class="text-center">от 100 руб.</td>
-          <td class="text-center"><%= image_tag "basket.png" %></td>
-        </tr>
-        <tr>
-          <th scope="row"><span class="oneTh">Реферат</span></th>
-          <td class="text-center">от 1 дней</td>
-          <td class="text-center">от 500 руб.</td>
-          <td class="text-center"><%= image_tag "basket.png" %></td>
-        </tr>
-        <tr>
-          <th scope="row"><span class="oneTh">Другие работы</span></th>
-          <td class="text-center">от 1 дней</td>
-          <td class="text-center">от 100 руб.</td>
-          <td class="text-center"><%= image_tag "basket.png" %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-<section class="WeAreTheBest">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center HeroTitle">
-        <p>Преимущества</p>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Личное общение с автором</h3>
-            <p class="figExcerpt">Общение с автором работы происходит в режиме online .</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Экспресс работа</h3>
-            <p class="figExcerpt">Возможность написания работ в сжатые сроки</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Отличные цены</h3>
-            <p class="figExcerpt">цена < качество! мы предлагаем Вам оплату по частям после Вашего знакомства с работой.</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Высокое качество</h3>
-            <p class="figExcerpt">Все работы пишут преподаватели Вузов</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Антиплагиат</h3>
-            <p class="figExcerpt">Каждая работа проходит строгий  контроль на уникальность.</p>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-4 text-center">
-        <figure>
-          <%= image_tag "forma.png" %>
-          <figcaption>
-            <h3 class="figTitle ">Бесплатная доработка</h3>
-            <p class="figExcerpt">На каждую работу предоставляется гарантия</p>
-          </figcaption>
-        </figure>
-      </div>
-      <form method="post" action="index.html" name="insertForm2" enctype="multipart/form-data">
-        <div class="formParth">
-          <div id="txt6" ></div>
-          <select class="oneItem" id="tipRaboty2" name="tipRaboty2" onChange="win_close2()" >
-            <option data-display="Выберите тип работы"></option>
-            <option value="1">Дипломная работа</option>
-            <option value="2">Диссертация кандидатская</option>
-            <option value="3">Диссертация магистерская</option>
-            <option value="4">Курсовая работа</option>
-            <option value="5">Контрольная работа</option>
-            <option value="6">Реферат</option>
-            <option value="7">Научная работа</option>
-            <option value="8">Отчет по практике</option>
-            <option value="9">Презентация</option>
-            <option value="10">Чертежи </option>
-            <option value="11">Эссе</option>
-            <option value="12">Семестровая работа</option>
-            <option value="13">Доклад</option>
-            <option value="14">Отчет по практике</option>
-            <option value="15">Экзаменационные вопросы</option>
-            <option value="16">Перевод текста</option>
-            <option value="17">Проверка качества</option>
-            <option value="18">Доработка</option>
-          </select>
-          <input type="text" class="form-control oneItem mobile-phone" placeholder="Телефон">
-          <input type="button" class="RedBTN MySend" onClick=validate_form2() value="Отправить заявку" />
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-<section class="NewsFaq">
-  <div class="row">
+  <!-- =/neck -->
+
+  <!-- =service -->
+  <section class="service">
     <div class="container">
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Новости</div>
-        <% if @news %>
-          <div class="NewsPic"><%= image_tag 'newsPost.png', class: "img-responsive" %></div>
-          <div class="subtitle"><%=@news.title%></div>
-          <div class="NewsFaqExcerpt"><%=@news.text%></div>
-          <div class="TheDate"><%=@news.created_at.to_s(:db)%></div>
+      <header class="text-center">
+        <h1>УСЛУГИ И ЦЕНЫ</h1>
+      </header>
+      <div class="table-responsive">
+        <table class="table table_works">
+          <tr>
+            <th>Типы работ</th>
+            <th>Сроки</th>
+            <th>Стоимость, руб.</th>
+            <th class="text-center">Заказать</th>
+          </tr>
+          <tr>
+            <td>Диссертация</td>
+            <td>от 12 дней</td>
+            <td>от 11 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>
+          <tr>
+            <td>Дипломная работа</td>
+            <td>от 9 дней</td>
+            <td>от 9 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>
+          <tr>
+            <td>Курсовая работа</td>
+            <td>от 3 дней</td>
+            <td>от 10 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>
+          <tr>
+            <td>Контрольная работа</td>
+            <td>от 7 дней</td>
+            <td>от 3 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>
+          <tr>
+            <td>Реферат</td>
+            <td>от 2 дней</td>
+            <td>от 15 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>
+          <tr>
+            <td>Другие работы</td>
+            <td>от 2 дней</td>
+            <td>от 15 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>
+          <tr class="hide">
+            <td>Реферат</td>
+            <td>от 2 дней</td>
+            <td>от 15 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>
+          <tr class="hide">
+            <td>Другие работы</td>
+            <td>от 2 дней</td>
+            <td>от 15 000 руб.</td>
+            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          </tr>         
+        </table>
+      </div>
+      <a href="#" class="more btn btn_green">Полный список</a>
+    </div>
+  </section>
+  <!-- =/service -->
+
+  <div class="line"></div>
+
+  <!-- =steps -->
+  <section class="steps steps_row container text-center">
+    <header>
+      <h1>ВСЕ ОЧЕНЬ ПРОСТО!</h1>
+    </header>
+    <div class="row">
+      <div class="col-sm-3 col-xs-12">
+        <div class="item">
+        <%= image_tag 'step1.gif' %>
+        </div>
+        <h4><span>1.</span> Закажите работу</h4>
+        <p>Сделать это можно с помощью формы заказа, по телефону или одном из наших офисов в Москве или Санкт-Петербурге</p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <div class="item">
+        <%= image_tag 'step2.gif' %>
+        </div>
+        <h4><span>2.</span> Внесите предоплату</h4>
+        <p>Чтобы ваш заказ был отправлен в работу, нужно внести предоплату. Реквизиты вы найдете в разделе «Способы оплаты»</p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <div class="item">
+        <%= image_tag 'step3.gif' %>
+        </div>
+        <h4><span>3.</span> Дождитесь выполнения </h4>
+        <p>Статус своего заказа вы можете узнать, зайдя в раздел «Личный кабинет» на нашем сайте либо связавшись с вашим менеджером</p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <div class="item">
+        <%= image_tag 'step4.gif' %>
+        </div>
+        <h4><span>4.</span> Скачайте заказ</h4>
+        <p>Как только менеджер уведомит вас о готовности работы, вам нужно будет внести оставшуюся часть оплаты. После этого вы сможете скачать готовую работу в личном кабинете</p>
+      </div>
+    </div>
+  </section>
+  <!-- =/steps -->
+
+  <!-- =advantages -->
+  <section class="advantages advantages_gray text-center">
+    <div class="container">
+      <header>
+        <h1>Преимущества</h1>
+      </header>
+      <div class="row">
+        <div class="col-sm-3 col-xs-12">
+          <%= image_tag 'aicon-1.png' %>
+          Сроки выполнения от 1 дня
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <%= image_tag 'aicon-2.png' %>
+          Персональный менеджер для каждого клиента
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <%= image_tag 'aicon-3.png' %>
+          Стоимость работы от 69 руб. за лист
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <%= image_tag 'aicon-4.png' %>
+          Более 70% уникального текста
+        </div>
+      </div>
+      <div class="block-center">
+        <a href="service" title="" class="btn btn_red">Узнать стоимость</a>
+      </div>
+    </div>    
+  </section>
+  <!-- =/advantages -->
+    
+  <!-- InstanceEndEditable -->  
+
+ <!-- =bottom -->
+  <div class="bottom container">
+    <div class="row">
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Новости</div>
+        <div class="box">
+          <%= image_tag 'new.jpg', class: "img-responsive" %>
+          <% if @news %>
+            <div class="title_red"><a href="#"><%=@news.title%></a></div>
+            <p><%=@news.text%></p>
+            <p class="date"><%=@news.created_at.to_s(:db)%></p>
+          <%end%>
+        </div>
+        <a href="news" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">вопрос / ответ</div>
+        <div class="box">
+         <% if @question %>  
+          <div class="title_red">Вопрос:</div>
+          <p><%=@question.question%></p>
+          <div class="title_green">Ответ: </div>
+          <p><%=@question.answer%></p>
         <%end%>
-	<div class="ttt">
-          <a href="/news" class="details">
-            <p class="detailsBtn">Все новости</p>
-          </a>
         </div>
+        <a href="questions" class="btn btn_green pull-right">Перейти к разделу</a>
       </div>
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Чаво</div>
-        <% if @question %>  
-          <div class="subtitle">Вопрос</div>
-          <div class="NewsFaqExcerpt"><%=@question.question%></div>
-          <div class="subColor">Ответ</div>
-          <div class="NewsFaqExcerpt"><%=@question.answer%></div>
-        <% end %>
-	<div class="ttt">
-          <a href="/questions" class="details">
-            <p class="detailsBtn">Все вопросы и ответы</p>
-          </a>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Отзывы</div>
+        <div class="box">
+         <% if @feedback %> 
+          <div class="title_red"><%=@feedback.name%></div>
+          <p><%=@feedback.feedback%></p>
+          <div class="date"><%=@feedback.created_at.to_s(:db)%></div>
+          <%end%>
         </div>
+        <a href="feedbacks" class="btn btn_green pull-right">Перейти к разделу</a>
       </div>
-      <div class="col-md-4">
-        <div class="NewsFaqTitle">Отзывы</div>
-        <% if @feedback %>  
-	  <div class="subtitle"><%=@feedback.name%></div>
-          <div class="NewsFaqExcerpt"><%=@feedback.feedback%></div>
-          <div class="TheDate"><%=@feedback.created_at.to_s(:db)%></div>
-        <%end%>
-	<div class="ttt">
-          <a href="/feedbacks" class="details">
-            <p class="detailsBtn">Все отзывы</p>
-          </a>
-        </div>
-      </div>
-    </section>
-    <%= render 'footer' %>
+    </div>
+  </div>
+  <!-- =/bottom -->
+</div>
+  </div>
+  <%= render 'footer' %>

@@ -1,0 +1,122 @@
+<div class="outerwrapper">
+	<!-- =header -->
+	
+  <%= render 'header' %>
+	<!-- =/header -->
+
+	<!-- =floatcontacts -->
+	<div class="floatcontacts container">
+		<div>
+			<a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
+			<p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+		</div>		
+	</div>
+	<!-- =/floatcontacts -->
+	
+	<!-- InstanceBeginEditable name="EditRegion3" -->
+    
+	<div class="main service_page">
+		<div class="container">
+			<h1>УСЛУГИ И ЦЕНЫ</h1>
+			<div class="intro">
+				<p>Уже более 15 лет наша компания предоставляет квалифицированную помощь в сфере образовательных услуг. У нас вы можете заказать практически все - от решения простых задач до тематических докладов и диссертаций любой степени сложности на нескольких основных языках. Мы смело можем сказать, что наш опыт позволяет выполнять работы оперативно, качественно и на высоком уровне.</p>
+			</div>
+			<div class="list">
+				<article>
+					<h2>Контрольная на заказ</h2>
+					<div class="text">
+						<p>Учебный процесс в вузах и ссузах предусматривает обязательное выполнение контрольных работ по различным дисциплинам. По желанию преподавателя контрольная может проводиться в любых формах, таких как тест, теоретическое исследование, решение задач, эссе и мн.др. К сожалению, часто студенты по разным причинам не могут справиться с этим заданием самостоятельно. К счастью, они всегда могут заказать контрольную работу у профессионалов из нашей компании. Наши авторы выполняют контрольные оперативно, качественно и по разумным ценам.</p>
+					</div>
+					<div class="meta row">
+						<div class="col-xs-4">
+							Сроки: от 1 дня <br>
+							Стоимость: от 100 р.
+						</div>
+						<div class="col-xs-8 text-right">
+							<a href="#" class="to-qorder btn btn_green" data-toggle="modal" data-target="#modalorder">Быстрый заказ</a>
+							<a href="#" class="buy btn btn_red"><%= image_tag 'buy-2.png' %>Заказать</a>
+						</div>
+					</div>
+				</article>
+				<article>
+					<h2>Курсовая на заказ</h2>
+					<div class="text">
+						<p>Учебный процесс в вузах и ссузах предусматривает обязательное выполнение контрольных работ по различным дисциплинам. По желанию преподавателя контрольная может проводиться в любых формах, таких как тест, теоретическое исследование, решение задач, эссе и мн.др. К сожалению, часто студенты по разным причинам не могут справиться с этим заданием самостоятельно. К счастью, они всегда могут заказать контрольную работу у профессионалов из нашей компании. Наши авторы выполняют контрольные оперативно, качественно и по разумным ценам.</p>
+					</div>
+					<div class="meta row">
+						<div class="col-xs-4">
+							Сроки: от 1 дня <br>
+							Стоимость: от 100 р.
+						</div>
+						<div class="col-xs-8 text-right">
+							<a href="#" class="to-qorder btn btn_green" data-toggle="modal" data-target="#modalorder">Быстрый заказ</a>
+							<a href="#" class="buy btn btn_red"><%= image_tag 'buy-2.png' %>Заказать</a>
+						</div>
+					</div>
+				</article>
+				<article>
+					<h2>Реферат на заказ</h2>
+					<div class="text">
+						<p>Учебный процесс в вузах и ссузах предусматривает обязательное выполнение контрольных работ по различным дисциплинам. По желанию преподавателя контрольная может проводиться в любых формах, таких как тест, теоретическое исследование, решение задач, эссе и мн.др. К сожалению, часто студенты по разным причинам не могут справиться с этим заданием самостоятельно. К счастью, они всегда могут заказать контрольную работу у профессионалов из нашей компании. Наши авторы выполняют контрольные оперативно, качественно и по разумным ценам.</p>
+					</div>
+					<div class="meta row">
+						<div class="col-xs-4">
+							Сроки: от 1 дня <br>
+							Стоимость: от 100 р.
+						</div>
+						<div class="col-xs-8 text-right">
+							<a href="#" class="to-qorder btn btn_green" data-toggle="modal" data-target="#modalorder">Быстрый заказ</a>
+							<a href="#" class="buy btn btn_red"><%= image_tag 'buy-2.png' %>Заказать</a>
+						</div>
+					</div>
+				</article>				
+			</div>
+		</div>
+	</div>
+
+	<div class="line"></div>
+    <!-- InstanceEndEditable -->	
+
+<!-- =bottom -->
+  <div class="bottom container">
+    <div class="row">
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Новости</div>
+        <div class="box">
+          <%= image_tag 'new.jpg', class: "img-responsive" %>
+          <% if @news %>
+            <div class="title_red"><a href="#"><%=@news.title%></a></div>
+            <p><%=@news.text%></p>
+            <p class="date"><%=@news.created_at.to_s(:db)%></p>
+          <%end%>
+        </div>
+        <a href="news" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">вопрос / ответ</div>
+        <div class="box">
+         <% if @question %>  
+          <div class="title_red">Вопрос:</div>
+          <p><%=@question.question%></p>
+          <div class="title_green">Ответ: </div>
+          <p><%=@question.answer%></p>
+        <%end%>
+        </div>
+        <a href="questions" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Отзывы</div>
+        <div class="box">
+         <% if @feedback %> 
+          <div class="title_red"><%=@feedback.name%></div>
+          <p><%=@feedback.feedback%></p>
+          <div class="date"><%=@feedback.created_at.to_s(:db)%></div>
+          <%end%>
+        </div>
+        <a href="feedbacks" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+    </div>
+  </div>
+  <!-- =/bottom -->
+</div>
+ <%= render 'footer' %>
