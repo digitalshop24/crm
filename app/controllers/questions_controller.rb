@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   def index
+    @worktypes = Worktype.all
     @questions = Question.all.paginate(:page => params[:page], :per_page => 5)
     @news = News.last
     @question = Question.last

@@ -13,6 +13,15 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, autofocus: true, required: true, class: 'form-control', placeholder: 'Название специальности' %>
   </div>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_field :description, autofocus: true, required: true, class: 'form-control', placeholder: 'Описание' %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Отображать" %><br>
+    <%= f.check_box :show%><br>
+   
+  </div>
   <%= f.button "Сохранить", class: 'btn btn-primary' %>
   <%= link_to 'В каталог', worktypes_path, class: 'btn btn-default' %>
 <% end %>

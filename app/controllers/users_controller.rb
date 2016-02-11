@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   end
 
   def sort_column
-    params[:sort] if User.column_names.include?(params[:sort]) || 'created_at'
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
 
   def sort_direction

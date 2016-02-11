@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current = current_user
+    @worktypes = Worktype.all
   end
 
   def set_specialities

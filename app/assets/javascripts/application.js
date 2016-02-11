@@ -1,6 +1,5 @@
 //= require moment
 //= require moment/ru.js
-//= require bootstrap-sprockets
 //= require maskedinput
 //= require jquery.nice-select.min
 //= require my

@@ -16,17 +16,13 @@
             <ul>
               <li>
                 <a href="service" title="">Услуги</a>
-                <ul>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li class="active"><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
-                </ul>
+		          <ul>
+		            <% @worktypes.each do |w| %>
+                  <% if w.show %>
+		                <li><a href="#" title=""><%= w.name%></a></li>
+	  	            <%end%>
+                <%end%>
+	  	        </ul>
               </li>
               <li>
                 <a href="#" title="">Клиентам</a>

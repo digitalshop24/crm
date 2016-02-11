@@ -1,6 +1,7 @@
 class WorktypesController < ApplicationController
+  layout "welcome", only: [:show]
   before_action :set_worktype, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:show]
   # GET /worktypes
   def index
     @worktypes = Worktype.all
@@ -8,6 +9,11 @@ class WorktypesController < ApplicationController
 
   # GET /worktypes/1
   def show
+    @client = Client.new
+    @order = Order.new
+    @news = News.last
+    @question = Question.last
+    @feedback = Feedback.last
   end
 
   # GET /worktypes/new
@@ -24,7 +30,7 @@ class WorktypesController < ApplicationController
     @worktype = Worktype.new(worktype_params)
 
     if @worktype.save
-      redirect_to @worktype, notice: 'Worktype was successfully created.'
+      redirect_to "/worktypes", notice: 'Worktype was successfully created.'
     else
       render :new
     end
@@ -33,7 +39,7 @@ class WorktypesController < ApplicationController
   # PATCH/PUT /worktypes/1
   def update
     if @worktype.update(worktype_params)
-      redirect_to @worktype, notice: 'Worktype was successfully updated.'
+      redirect_to "/worktypes", notice: 'Worktype was successfully updated.'
     else
       render :edit
     end
@@ -53,6 +59,6 @@ class WorktypesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def worktype_params
-      params.require(:worktype).permit(:name)
+      params.require(:worktype).permit(:name, :description, :show)
     end
 end

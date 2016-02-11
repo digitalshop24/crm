@@ -1,9 +1,417 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @worktype.name %>
-</p>
+<div class="outerwrapper">
+	<!-- =header -->
+	<header class="header">
+		<div class="container">
+			<div class="mainnav pull-left">
+				<!-- =nav -->
+				<nav class="navbar navbar-default">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Навигация</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="/" class="navbar-brand">Red<span>Student</span></a>
+					</div>
+					<div class="collapse navbar-collapse" id="navbar-collapse-1">
+						<ul>
+							<li>
+								<a href="service.html" title="">Услуги</a>
+								 <ul>
+                				   <% @worktypes.each do |w| %>
+                                     <li><a href="<%=w.id%>" title=""><%= w.name%></a></li>
+                                   <%end%>
+                                 </ul>
+							</li>
+							<li>
+								<a href="#" title="">Клиентам</a>
+								<ul>
+									<li><a href="#" title="">Контрольная работа</a></li>
+									<li><a href="#" title="">Дипломная работа</a></li>
+									<li><a href="#" title="">Контрольная работа</a></li>
+									<li><a href="#" title="">Курсовая работа</a></li>
+									<li class="active"><a href="#" title="">Курсовая работа</a></li>
+									<li><a href="#" title="">Дипломная работа</a></li>
+									<li><a href="#" title="">Контрольная работа</a></li>
+									<li><a href="#" title="">Курсовая работа</a></li>
+									<li><a href="#" title="">Дипломная работа</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" title="">О компании</a>	
+								<ul>
+									<li><a href="#" title="">Контрольная работа</a></li>
+									<li><a href="#" title="">Дипломная работа</a></li>
+									<li class="active"><a href="#" title="">Курсовая работа</a></li>
+									<li><a href="#" title="">Контрольная работа</a></li>
+									<li><a href="#" title="">Курсовая работа</a></li>
+									<li><a href="#" title="">Дипломная работа</a></li>
+									<li><a href="#" title="">Контрольная работа</a></li>
+									<li><a href="#" title="">Курсовая работа</a></li>
+									<li><a href="#" title="">Дипломная работа</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" title="">Контакты</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<!-- =/nav -->
+			</div>
 
-<%= link_to 'Edit', edit_worktype_path(@worktype) %> |
-<%= link_to 'Back', worktypes_path %>
+			<!-- =auth -->
+			<div class="auth-cost">
+				<a href="#" title="" class="in">Войти</a>
+				<a href="#" class="to-cost" data-toggle="modal" data-target="#modalorder">Узнать стоимость</a>
+			</div>
+			<!-- =/auth -->
+		</div>
+	</header>
+	<!-- =/header -->
+
+	<!-- =floatcontacts -->
+	<div class="floatcontacts container">
+		<div>
+			<a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
+			<p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+		</div>		
+	</div>
+	<!-- =/floatcontacts -->
+	
+	<!-- InstanceBeginEditable name="EditRegion3" -->
+	<!-- =service-order -->
+	<div class="service-order">
+		<div class="container">
+			<div class="row"></div>
+			<div class="breadcrumbs">
+				<ul>
+					<li><a href="#" title="">Услуги и цены</a></li>
+					<li></li>
+					<li><span>Контрольные работы</span></li>
+				</ul>
+			</div>
+			<div class="service-order__title text-center"><%= @worktype.name.mb_chars.upcase %> <br>НА ЗАКАЗ</div>
+			<div class="service-order__content row">
+				<div class="col-sm-6 col-xs-12">
+					<div class="box">
+						<div class="title"><strong>ЗАКАЖИ КОНТРОЛЬНУЮ РАБОТУ И ПОЛУЧИ СКИДКУ -20%</strong></div>
+						<p>Конечно, тексты-описания весьма разнообразны в зависимости от целого ряда условий. Во-первых, большую роль играет сам объект описания: одушевлённый – неодушевлённый, портрет, пейзаж, событие и т.д. Во-вторых, очень важно, является ли описание статическим, то есть таким, которое прерывает развитие текста, или динамическим – обычно небольшим по объёму.</p>
+						<a href="#" class="more btn btn_white">Узнать подробнее об акции</a>
+					</div>
+				</div>
+				<div class="col-sm-6 col-xs-12">
+					<div class="form">
+						<% if notice %><p id="notice" class="text-center"><%= notice %></p><% end %>
+						<%= form_for(@order, url: welcome_orders_path, method: :post, html: { onsubmit: "return validate_form()", multipart: true, class: '', id: ""}) do |f| %>
+						   
+						  <div class="form-group" style="margin-top:0px;">
+						    <%= f.collection_select :worktype_id, Worktype.all, :id, :name, { prompt: 'Выберите тип работы' }, 
+						                  class: "form-control", onchange: "win_close()" %>
+						    <div id="txt1"></div>
+						  </div>
+						  <div class="form-group">
+						    <%= f.collection_select :speciality_id, Speciality.all, :id, :name, { prompt: 'Выберите предмет'} ,
+						                  class: "form-control", onchange: "win_close()" %>
+						    <div id="txt2"></div>
+						  </div>
+						  <div class="form-group">
+						    <%= f.text_field :theme, class: "form-control", placeholder: "Тема работы", onKeyUp: "win_close()" %>
+						    <div id="txt3"></div>
+						  </div>  
+						  <div class="form-group">
+						    <%= file_field_tag "materials[]", :multiple =>:true, id: "file" %>
+						  </div>
+						  <div class="form-group">
+						    <div class="row">
+							   <div class="col-md-6 col-xs-12">
+							    <div id="term">
+							     <div class="input-group date" >
+							       <input type="text" name="order[deadline]" class="form-control" value="" placeholder="Срок сдачи" />
+								<span class="input-group-addon">
+								<%= image_tag('calendar.png')%>
+						                </span>
+							       </div>
+							     </div>
+							  </div> 
+							    <div class="col-md-6 col-xs-12">
+						        <%= f.number_field :page_number, class: "form-control", placeholder: "10 страниц" %>
+						      </div>
+						    </div>
+						  </div>
+						  <% unless current_user %>
+						    <%= f.fields_for @client do |g| %>
+						     <div class="form-group"> 
+						       <div class="row">
+						        <div class="col-md-6 col-xs-12">
+						          <%= g.text_field :email, class: "form-control oneItem", placeholder: "Email", onKeyUp: "win_close()" %>
+						        <div id="txt4"></div>
+						      </div>
+						      <div class="col-md-6 col-xs-12">
+						        <%= g.text_field :phone, class: 'mobile-phone form-control oneItem', placeholder: "Телефон", onKeyUp: "win_close()" %>
+						        <div id="txt5"></div>
+						        </div>
+						      </div>
+						      </div>
+						    <% end %>
+						  <% end %>
+						  
+						   <div class="form-group">
+						      <div class="row">
+						        <div class="col-sm-6 col-xs-12 pull-right">
+						          <%= f.submit 'Отправить заявку', class: "btn btn_red" %>
+						        </div>
+						      </div>
+						    </div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- =/service-order -->
+
+	<!-- =advantages -->
+	<section class="advantages text-center">
+		<div class="container">
+			<header>
+				<h1>наши Преимущества</h1>
+			</header>
+			<div class="row">
+				<div class="col-sm-3 col-xs-12">
+					<%= image_tag('aicon-1.png')%>
+					Сроки выполнения от 1 дня
+				</div>
+				<div class="col-sm-3 col-xs-12">
+					<%= image_tag('aicon-2.png')%>
+					Персональный менеджер для каждого клиента
+				</div>
+				<div class="col-sm-3 col-xs-12">
+					<%= image_tag('aicon-3.png')%>
+					Стоимость работы от 69 руб. за лист
+				</div>
+				<div class="col-sm-3 col-xs-12">
+					<%= image_tag('aicon-4.png')%>
+					Более 70% уникального текста
+				</div>
+			</div>
+		</div>		
+	</section>
+	<!-- =/advantages -->
+
+
+	<!-- =quickorder -->
+	<section class="quickorder">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-8 col-xs-12">
+					<header>
+						<h1>БЫСТРЫЙ ЗАКАЗ</h1>
+					</header>
+					<p><%=@worktype.description%></p>
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-12">
+					<form action="#" method="post" class="form">
+						<fieldset>
+							<div class="form-group">
+								<input type="text" class="form-control" name="type" value="<%=@worktype.name%>" placeholder="<%=@worktype.name%>" />
+							</div>
+							<div class="form-group">
+								<input type="tel" class="form-control" name="tel" value="" placeholder="Телефон" />
+							</div>
+							<div class="form-group">
+								<input type="button" class="submit btn btn_red" value="Отправить заявку" />
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- =/quickorder -->
+
+
+	<!-- =steps -->
+	<section class="steps steps_row container text-center">
+		<header>
+			<h1>КАК МЫ РАБОТАЕМ</h1>
+		</header>
+		<div class="row">
+			<div class="col-sm-3 col-xs-12">
+				<div class="item">
+					<img src="<%=asset_path('step1.gif')%>" alt="" />
+				</div>
+				<h4><span>1.</span> Закажите работу</h4>
+				<p>Сделать это можно с помощью формы заказа, по телефону или одном из наших офисов в Москве или Санкт-Петербурге</p>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<div class="item">
+					<img src="<%=asset_path('step2.gif')%>" alt="" />
+				</div>
+				<h4><span>2.</span> Внесите предоплату</h4>
+				<p>Чтобы ваш заказ был отправлен в работу, нужно внести предоплату. Реквизиты вы найдете в разделе «Способы оплаты»</p>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<div class="item">
+					<img src="<%=asset_path('step3.gif')%>" alt="" />
+				</div>
+				<h4><span>3.</span> Дождитесь выполнения </h4>
+				<p>Статус своего заказа вы можете узнать, зайдя в раздел «Личный кабинет» на нашем сайте либо связавшись с вашим менеджером</p>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<div class="item">
+					<img src="<%=asset_path('step4.gif')%>" alt="" />
+				</div>
+				<h4><span>4.</span> Скачайте заказ</h4>
+				<p>Как только менеджер уведомит вас о готовности работы, вам нужно будет внести оставшуюся часть оплаты. После этого вы сможете скачать готовую работу в личном кабинете</p>
+			</div>
+		</div>
+	</section>
+	<!-- =/steps -->
+
+	<div class="line"></div>
+    
+	<!-- InstanceEndEditable -->	
+
+	<!-- =bottom -->
+	  <div class="bottom container">
+    <div class="row">
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Новости</div>
+        <div class="box">
+          <%= image_tag 'new.jpg', class: "img-responsive" %>
+          <% if @news %>
+            <div class="title_red"><a href="#"><%=@news.title%></a></div>
+            <p><%=@news.text.slice(0, 300)%></p>
+            <p class="date"><%=@news.date%></p>
+          <%end%>
+        </div>
+        <a href="/news" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">вопрос / ответ</div>
+        <div class="box">
+         <% if @question %>  
+          <div class="title_red">Вопрос:</div>
+          <p><%=@question.question%></p>
+          <div class="title_green">Ответ: </div>
+          <p><%=@question.answer%></p>
+        <%end%>
+        </div>
+        <a href="/questions" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Отзывы</div>
+        <div class="box">
+         <% if @feedback %> 
+          <div class="title_red"><%=@feedback.name%></div>
+          <p><%=@feedback.feedback%></p>
+          <div class="date"><%=@feedback.date%></div>
+          <%end%>
+        </div>
+        <a href="/feedbacks" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+    </div>
+  </div>
+	<!-- =/bottom -->
+</div>
+
+<!-- =footer -->
+<footer>
+	<!-- =menu -->
+	<div class="menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3 col-xs-12">
+					<dl>
+						<dt>Услуги</dt>
+						<dd><a href="#" title="">Контрольные работы</a></dd>
+						<dd><a href="#" title="">Дипломные работы</a></dd>
+						<dd><a href="#" title="">Курсовые работы</a></dd>
+						<dd><a href="#" title="">Рефераты</a></dd>
+						<dd><a href="#" title="">Другие работы</a></dd>
+					</dl>
+				</div>
+				<div class="col-sm-3 col-xs-12">
+					<dl>
+						<dt>Клиентам</dt>
+						<dd><a href="#" title="">Способы оплаты</a></dd>
+						<dd><a href="#" title="">Гарантии</a></dd>
+						<dd><a href="#" title="">Как оформить заказ</a></dd>
+						<dd><a href="#" title="">Наши преимущества</a></dd>
+						<dd><a href="#" title="">Публичная оферта</a></dd>
+					</dl>
+				</div>
+				<div class="col-sm-3 col-xs-12">
+					<dl>
+						<dt>О компании</dt>
+						<dd><a href="#" title="">Контакты</a></dd>
+						<dd><a href="#" title="">Авторам</a></dd>
+						<dd><a href="#" title="">Отзывы</a></dd>
+						<dd><a href="#" title="">Новости</a></dd>
+					</dl>
+				</div>
+				<div class="payment-card col-sm-3 col-xs-12">
+					<h4>Мы принимаем</h4>
+					<div class="row">
+						<div class="item col-md-4 col-sm-6 col-xs-12"><img src="http://dummyimage.com/60x30/" alt="placeholder+image"></div>
+						<div class="item col-md-4 col-sm-6 col-xs-12"><img src="http://dummyimage.com/60x30/" alt="placeholder+image"></div>
+						<div class="item col-md-4 col-sm-6 col-xs-12"><img src="http://dummyimage.com/60x30/" alt="placeholder+image"></div>
+						<div class="item col-md-4 col-sm-6 col-xs-12"><img src="http://dummyimage.com/60x30/" alt="placeholder+image"></div>
+						<div class="item col-md-4 col-sm-6 col-xs-12"><img src="http://dummyimage.com/60x30/" alt="placeholder+image"></div>
+						<div class="item col-md-4 col-sm-6 col-xs-12"><img src="http://dummyimage.com/60x30/" alt="placeholder+image"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- =/menu -->
+
+	<!-- =copyright -->
+	<div class="copyright text-center">
+		© 2008, RedStudent. Все права защищены
+	</div>
+	<!-- =/copyright -->
+</footer>
+<!-- =/footer -->
+
+
+<!-- =Modal -->
+<div class="modal fade" id="modalorder" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="images/close.png" alt="" /></button>
+			<div class="modal-body center-block">
+				<form action="#" method="post" class="form">
+					<fieldset>
+						<div class="form-group">
+							<input type="text" class="form-control" name="type" value="" placeholder="Тип работы" />
+						</div>
+						<div class="form-group">
+							<input type="tel" class="form-control" name="tel" value="" placeholder="Телефон" />
+						</div>
+						<div class="form-group">
+							<input type="button" class="submit btn btn_red" value="Отправить заявку" />
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- =/Modal -->
+
+<link rel="stylesheet" href="<%= asset_path('stylesheets/jquery.formstyler.css')%>" property="stylesheet"/>
+<link rel="stylesheet" href="<%= asset_path('stylesheets/bootstrap-datetimepicker.css')%>" property="stylesheet"/>
+<script src="<%= asset_path('javascripts/bootstrap.min.js')%>"></script>
+<script src="<%= asset_path('javascripts/carousel.min.js')%>"></script>
+<script src="<%= asset_path('javascripts/jquery.formstyler.min.js')%>"></script>
+<script src="<%= asset_path('javascripts/moment-with-locales.min.js')%>"></script>
+<script src="<%= asset_path('javascripts/bootstrap-datetimepicker.min.js')%>"></script>
+<script src="<%= asset_path('javascripts/engine.js')%>"></script>
+<script src="<%= asset_path('javascripts/placeholders.min.js')%>"></script>
+<script src="<%= asset_path('javascripts/modernizr.js')%>"></script>
+
+
