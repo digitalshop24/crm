@@ -1,11 +1,11 @@
-//= require jquery
-//= require jquery_ujs
 //= require moment
 //= require moment/ru.js
 //= require bootstrap-sprockets
 //= require maskedinput
+//= require jquery.nice-select.min
+//= require my
+//= require bootstrap-datetimepicker
 //= require faye
-//= require_tree .
 
 $(function() {
   $('body').on("click", "#users th a, #users .pagination a", function() {
@@ -46,6 +46,3 @@ ready = function() {
   };
 $(document).ready(ready);
 $(document).on('page:load', ready)
-
-
-

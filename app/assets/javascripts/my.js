@@ -1,5 +1,5 @@
 var ready;
-ready = function() {
+$(document).ready(function() {
     role = $("#user_role");
 
     role.change(function() {
@@ -40,7 +40,7 @@ ready = function() {
     });
     $('select.oneItem').niceSelect();   
     $('#messages.panel-scroll').scrollTop(999999);
-};
+});
 
-$(document).ready(ready);
-$(document).on('page:load', ready)
+//$(document).ready(ready);
+//$(document).on('page:load', ready)
