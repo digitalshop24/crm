@@ -15,39 +15,35 @@
           <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <ul>
               <li>
-                <a href="service" title="">Услуги</a>
-                <ul>
+                <a href="/service" title="">Услуги</a>
+              <ul>
                 <% @worktypes.each do |w| %>
-                  <li><a href="#" title=""><%= w.name%></a></li>
+                  <% if w.show %>
+                    <li><a href="/worktypes/<%=w.id%>" title=""><%= w.name%></a></li>
+                  <%end%>
                 <%end%>
+                 <li><a href="/service" title="">Другие работы</a></li>
               </ul>
               </li>
               <li>
                 <a href="#" title="">Клиентам</a>
                 <ul>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Курсовая работа</a></li>
-                  <li class="active"><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
+                  <li><a href="#" title="">Условия работы</a></li>
+                  <li><a href="#" title="">Способы оплаты</a></li>
+                  <li><a href="#" title="">Преимущества</a></li>
+                  <li><a href="#" title="">Гарантии</a></li>
+                  <li><a href="/actions" title="">Акции</a></li>
+                  <li><a href="/questions" title="">Вопросы и ответы</a></li>
                 </ul>
               </li>
               <li>
                 <a href="#" title="">О компании</a> 
                 <ul>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
-                  <li class="active"><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
-                  <li><a href="#" title="">Контрольная работа</a></li>
-                  <li><a href="#" title="">Курсовая работа</a></li>
-                  <li><a href="#" title="">Дипломная работа</a></li>
+                  <li><a href="/feedbacks" title="">Отзывы</a></li>
+                  <li><a href="/news" title="">Новости</a></li>
+                  <li><a href="#" title="">Вакансии</a></li>
+                  <li><a href="#" title="">Партнерам</a></li>
+                  <li><a href="#" title="">Авторам</a></li>
                 </ul>
               </li>
               <li>

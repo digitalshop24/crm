@@ -26,6 +26,13 @@ class WelcomeController < ApplicationController
       if @client.save
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
+        binding.pry
+          sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Здравствуйте,вы зарегестрировались на сайте www.redstudent.ru, к Вам на почту выслан Логин и пароль для входа. Ваш Редстудент")
+          email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
+          uri = URI(email)
+          url = URI(sms)
+          a = Net::HTTP.get(uri)
+          a = Net::HTTP.get(url)
         #UserMailer.delay.set_password_instructions(@client, token)
         if @order.save
           if params[:materials]

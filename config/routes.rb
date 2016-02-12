@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :revisions
   resources :materials
   resources :notes
+  resources :actions
   resources :events
   resources :worktypes
   resources :parts do

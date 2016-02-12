@@ -2,8 +2,8 @@
 <%= render 'header' %>
 <div class="floatcontacts container">
     <div>
-      <a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
-      <p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+      <a href="tel:+375291111111" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <p class="skype"> Звонок бесплатный</p>
     </div>    
   </div>
   <!-- =/floatcontacts -->
@@ -21,7 +21,7 @@
                 <div class="title">С 15 февраля по 15 марта скидки 15% всем новым клиентам в честь 10 –ти летия компании.</div>
                 <p>Также командой Редстудент разработана уникальная для России система скидок : при заказе
 одновременно 2-х любых работ Вы получаете скидку 20%, при заказе 3-х работ – 25%, 5-ти работ – 30% на каждую работу. Редстудент, прояви инициативу – чем больше друзей, тем больше экономия!</p>
-                <a href="#" class="more btn btn_white">Узнать подробнее об акции</a>
+                <a href="/actions" class="more btn btn_white">Узнать подробнее об акции</a>
               </div>
             </div>
             <div class="col-sm-6 col-xs-12"> 
@@ -191,7 +191,7 @@
           <%= image_tag 'new.jpg', class: "img-responsive" %>
           <% if @news %>
             <div class="title_red"><a href="#"><%=@news.title%></a></div>
-            <p><%=@news.text%></p>
+             <p><%=@news.text.slice(0, 300)%></p>
             <p class="date"><%=@news.created_at.to_s(:db)%></p>
           <%end%>
         </div>
