@@ -27,6 +27,10 @@ Rails.application.routes.draw do
       get '/resend', to: 'messages#resend', as: :resend, on: :member
     end
   end
+  get '/stat', to: 'static#statistic'
+  get '/advantages', to: 'static#advantages'
+  get '/conditions', to: 'static#conditions'
+  get '/guarantees', to: 'static#guarantees'
   post '/orders/welcome', to: 'welcome#create_order', as: :welcome_orders
   resources :feedbacks
   resources :service

@@ -6,6 +6,7 @@
 //= require moment-with-locales.min
 //= require bootstrap-datetimepicker.min
 //= require engine
+//= require users
 //= require placeholders.min
 //= require modernizr
 

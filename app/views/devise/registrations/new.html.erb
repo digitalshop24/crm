@@ -1,5 +1,6 @@
+<div class="outerwrapper">
 <%= render 'welcome/header' %>
-<section class="HeroSection" style="margin-bottom:-40px;">
+
   <div class="container">
     <div class="my-block">
       <% role = params[:role] || resource.role.downcase %>
@@ -41,4 +42,5 @@
     </div>
   </div>
 </section>
+</div>
 <%= render 'welcome/footer' %>

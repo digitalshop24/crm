@@ -1,8 +1,11 @@
+//= require jquery
+//= require jquery_ujs
 //= require moment
 //= require moment/ru.js
 //= require maskedinput
 //= require jquery.nice-select.min
 //= require my
+//= require users
 //= require bootstrap-datetimepicker
 //= require faye
 

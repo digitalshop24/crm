@@ -1,0 +1,122 @@
+<div class="outerwrapper">
+	<!-- =header -->
+<%= render 'welcome/header' %>
+	<!-- =floatcontacts -->
+	<div class="floatcontacts container">
+		<div>
+			<a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
+			<p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+		</div>		
+	</div>
+	<!-- =/floatcontacts -->
+	
+	<!-- InstanceBeginEditable name="EditRegion3" -->
+    
+	<div class="main">
+		<div class="container">
+			<div class="static">
+				<h1>Условия работы</h1>
+
+				<h2 class="justifycenter">Мы работаем на условиях, выгодных для вас:</h2>
+				<br>
+				<p style="font-size:18px">Шаг 1: оформление заказа</p>
+				<ul>
+					<li>- телефон нашего офиса в Москве запомнить очень просто – 8 800 000 00 00;</li>
+					<li>- наши менеджеры Московского офиса готовы оформить заявку на месте, если вы решите лично нанести визит;</li>
+					<li>- самый простой и доступный способ – оформление онлайн заявки на нашем сайте. Форма заказа работы, как и звонок на горячую линию нашего многоканального номера, не позволяют досконально изложить тонкости заказа, но не стоит переживать, наши менеджеры свяжутся с вами в течение нескольких минут и уточнят подробности работы.</li> 
+				</ul>
+				<br>
+				<p style="font-size:18px"> Шаг 2: внесение предоплаты</p>
+				<ul>
+					<li> Первый платеж составляет 25% от общей суммы и может быть внесен любым, удобным для вас способом. Мы работаем с банковскими картами, принимаем наличные и электронные деньги, вы можете оформить банковский перевод, заплатить с помощью мобильного телефона или через терминал.</li>
+				
+				</ul>
+				<br>
+				<p style="font-size:18px"> Шаг 3: выполнение заказа</p>
+				<ul>
+					<li> Как только первый платеж поступит на наш счет, автор немедленно приступит к выполнению заказа. Поскольку, каждый зарегистрированный пользователем автоматически становится владельцем личного кабинета, то дальнейшее общение с автором происходит именно в нем. Заказчик в любое время может уточнить, на какой стадии находится работа, внести уточнения и поправки, адресовав их непосредственно исполнителю.
+					</li>
+				</ul>
+				<br>
+				<p style="font-size:18px"> Шаг 4: ознакомление</p>
+				<ul>
+					<li> В оговоренный срок заказчик получает фрагмент готовой работы. Ознакомившись с ним и дав свое одобрение, он дает согласие на дальнейшие действия администрации.
+					</li>
+				</ul>
+				<br>
+				<p style="font-size:18px"> Шаг 5: оплата заказа</p>
+				<ul>
+					<li> После ознакомления с первой частью работы, заказчик вносит оставшуюся сумму.
+					</li>
+				</ul>
+				<br>
+				<p style="font-size:18px"> Шаг 6: завершение заказа</p>
+				<ul>
+					<li> Оплаченный заказ отправляется клиенту способом, который он сам выберет:
+					</li>
+					<li> - По электронной почте;</li>
+					<li> - Курьерской доставкой; </li>
+					<li> - В личный кабинет на сайте.</li>
+					<li> Кроме того, вы можете сами заехать в наш офис и забрать готовую работу.</li>
+
+				</ul>
+				<br><br>
+
+
+				
+
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class="line"></div>
+
+<!-- =bottom -->
+  <div class="bottom container">
+    <div class="row">
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Новости</div>
+        <div class="box">
+          <%= image_tag 'new.jpg', class: "img-responsive" %>
+          <% if @news %>
+            <div class="title_red"><a href="#"><%=@news.title%></a></div>
+                       <p><%=@news.text.slice(0, 300)%></p>
+            <p class="date"><%=@news.created_at.to_s(:db)%></p>
+          <%end%>
+        </div>
+        <a href="news" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">вопрос / ответ</div>
+        <div class="box">
+         <% if @question %>  
+          <div class="title_red">Вопрос:</div>
+          <p><%=@question.question%></p>
+          <div class="title_green">Ответ: </div>
+          <p><%=@question.answer%></p>
+        <%end%>
+        </div>
+        <a href="questions" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <div class="title">Отзывы</div>
+        <div class="box">
+         <% if @feedback %> 
+          <div class="title_red"><%=@feedback.name%></div>
+          <p><%=@feedback.feedback%></p>
+          <div class="date"><%=@feedback.created_at.to_s(:db)%></div>
+          <%end%>
+        </div>
+        <a href="feedbacks" class="btn btn_green pull-right">Перейти к разделу</a>
+      </div>
+    </div>
+  </div>
+  <!-- =/bottom -->
+</div>
+
+<!-- =footer -->
+<!-- =footer -->
+<%= render 'welcome/footer' %>
+<!-- =/footer -->

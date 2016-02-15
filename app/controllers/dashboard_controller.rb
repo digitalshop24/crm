@@ -22,7 +22,8 @@ class DashboardController < ApplicationController
   end
 
   def new_orders
-    @orders = Order.employee_searching.where(speciality_id: current_user.speciality_id).paginate(page: params[:page])
+    binding.pry
+    @orders = Order.employee_searching.where(speciality: current_user.speciality).paginate(page: params[:page])
     render 'dashboard/employee/new_orders'
   end
 
