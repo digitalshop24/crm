@@ -1,0 +1,55 @@
+ 
+<div class="outerwrapper">
+<%= render 'welcome/header' %>
+
+  <!-- =floatcontacts -->
+  <div class="floatcontacts container">
+    <div>
+      <a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
+      <p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+    </div>    
+  </div>
+  <!-- =/floatcontacts -->
+  
+  <!-- InstanceBeginEditable name="EditRegion3" -->
+    
+  <div id="myEditor"></div>
+<button id="saveButton">Save</button>
+
+<script>
+  $(function() {
+    $('#myEditor')
+      .froalaEditor({
+        language: 'ru',
+        // Set the save param.
+        saveParam: 'content',
+
+        // Set the save URL.
+        saveURL: 'http://localhost:3000/contacts/edit',
+
+        // HTTP request type.
+        saveMethod: 'GET',
+
+        // Additional save params.
+        saveParams: {id: 'my_editor'}
+      })
+      .on('froalaEditor.save.before', function (e, editor) {
+        // Before save request is made.
+      })
+      .on('froalaEditor.save.after', function (e, editor, response) {
+        alert('изменения сохранены');
+      })
+      .on('froalaEditor.save.error', function (e, editor, error) {
+        // Do something here.
+      })
+  });
+
+  $('#saveButton').click (function () {
+    $('#myEditor').froalaEditor('save.save')
+  })
+</script>
+
+ 
+</div>
+
+<%= render 'welcome/footer' %>

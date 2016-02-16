@@ -1,0 +1,18 @@
+<div class="outerwrapper">
+<%= render 'welcome/header' %>
+<div class="floatcontacts container">
+    <div>
+      <a href="tel:+375291111111" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <p class="skype"> Звонок бесплатный</p>
+    </div>    
+  </div>
+  <div class="container">
+<%- model_class = @gallery.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                                 :default => "New #{model_class.model_name.human}") %></h1>
+</div>
+<%= render :partial => 'form' %>
+</div>
+</div>
+<%= render 'welcome/footer' %>

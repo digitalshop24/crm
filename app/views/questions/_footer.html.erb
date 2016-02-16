@@ -7,20 +7,20 @@
         <div class="col-sm-3 col-xs-12">
           <dl>
             <dt>Услуги</dt>
-            <dd><a href="#" title="">Контрольные работы</a></dd>
-            <dd><a href="#" title="">Дипломные работы</a></dd>
-            <dd><a href="#" title="">Курсовые работы</a></dd>
-            <dd><a href="#" title="">Рефераты</a></dd>
-            <dd><a href="#" title="">Другие работы</a></dd>
+             <% @worktypes.each do |w| %>
+                  <% if w.show %>
+                   <dd><a href="/worktypes/<%=w.id%>" title=""><%= w.name%></a></dd>
+                  <%end%>
+                <%end%>
           </dl>
         </div>
         <div class="col-sm-3 col-xs-12">
           <dl>
             <dt>Клиентам</dt>
             <dd><a href="#" title="">Способы оплаты</a></dd>
-            <dd><a href="#" title="">Гарантии</a></dd>
-            <dd><a href="#" title="">Как оформить заказ</a></dd>
-            <dd><a href="#" title="">Наши преимущества</a></dd>
+            <dd><a href="/guarantees" title="">Гарантии</a></dd>
+            <dd><a href="/steps" title="">Как оформить заказ</a></dd>
+            <dd><a href="/advantages" title="">Наши преимущества</a></dd>
             <dd><a href="#" title="">Публичная оферта</a></dd>
           </dl>
         </div>
@@ -29,8 +29,8 @@
             <dt>О компании</dt>
             <dd><a href="#" title="">Контакты</a></dd>
             <dd><a href="#" title="">Авторам</a></dd>
-            <dd><a href="#" title="">Отзывы</a></dd>
-            <dd><a href="#" title="">Новости</a></dd>
+            <dd><a href="/feedbacks" title="">Отзывы</a></dd>
+            <dd><a href="/news" title="">Новости</a></dd>
           </dl>
         </div>
         <div class="payment-card col-sm-3 col-xs-12">

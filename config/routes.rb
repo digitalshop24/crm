@@ -27,6 +27,21 @@ Rails.application.routes.draw do
       get '/resend', to: 'messages#resend', as: :resend, on: :member
     end
   end
+  resources :galleries 
+  resources :pictures
+  get '/vacancies', to: 'static#vacancy'
+  get '/vacancies/edit', to: 'static#vedit'
+  get '/partners', to: 'static#partners'
+  get '/partners/edit', to: 'static#paedit'
+  get '/pay/edit', to: 'static#pedit'
+  get '/pay', to: 'static#payment'
+  get '/offer', to: 'static#offer'
+  get '/offer/edit', to: 'static#oedit'
+  get '/contacts', to: 'static#contacts'
+  get '/contacts/edit', to: 'static#cedit'
+  get '/advantages', to: 'static#advantages'
+  get '/conditions', to: 'static#conditions'
+  get '/guarantees', to: 'static#guarantees'
   post '/orders/welcome', to: 'welcome#create_order', as: :welcome_orders
   resources :feedbacks
   resources :service

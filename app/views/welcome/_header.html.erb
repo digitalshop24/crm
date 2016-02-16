@@ -28,10 +28,10 @@
               <li>
                 <a href="#" title="">Клиентам</a>
                 <ul>
-                  <li><a href="#" title="">Условия работы</a></li>
-                  <li><a href="#" title="">Способы оплаты</a></li>
-                  <li><a href="#" title="">Преимущества</a></li>
-                  <li><a href="#" title="">Гарантии</a></li>
+                  <li><a href="/conditions" title="">Условия работы</a></li>
+                  <li><a href="/pay" title="">Способы оплаты</a></li>
+                  <li><a href="/advantages" title="">Преимущества</a></li>
+                  <li><a href="/guarantees" title="">Гарантии</a></li>
                   <li><a href="/actions" title="">Акции</a></li>
                   <li><a href="/questions" title="">Вопросы и ответы</a></li>
                 </ul>
@@ -41,14 +41,23 @@
                 <ul>
                   <li><a href="/feedbacks" title="">Отзывы</a></li>
                   <li><a href="/news" title="">Новости</a></li>
-                  <li><a href="#" title="">Вакансии</a></li>
-                  <li><a href="#" title="">Партнерам</a></li>
+                  <li><a href="/vacancies" title="">Вакансии</a></li>
+                  <li><a href="/partners" title="">Партнерам</a></li>
                   <li><a href="#" title="">Авторам</a></li>
                 </ul>
               </li>
               <li>
-                <a href="#" title="">Контакты</a>
+                <a href="/contacts" title="">Контакты</a>
               </li>
+              <% if current_user %>
+        <% if "Admin".include? current_user.role %>
+        <li>
+
+                <a href="/galleries" title="">Галлерея</a>
+              </li>
+        <%end%>
+      <%end%>
+              
             </ul>
           </div>
         </nav>

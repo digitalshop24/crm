@@ -22,7 +22,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'maskedinput-rails', '~> 1.4'
 gem 'draper', '~> 1.3'
-
+gem "wysiwyg-rails"
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'sinatra', require: false
 gem 'sidekiq'

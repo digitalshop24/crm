@@ -1,0 +1,41 @@
+<div class="outerwrapper">
+<%= render 'welcome/header' %>
+<div class="floatcontacts container">
+    <div>
+      <a href="tel:+375291111111" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <p class="skype"> Звонок бесплатный</p>
+    </div>    
+  </div>
+  <div class="container">
+<div class="row">
+  <h1>Гaллерея</h1>
+  <%= link_to 'New', new_gallery_path, :class => 'btn-default' %>
+  <p></p>
+  <ul class="thumbnails files">
+    <% @galleries.each do |gallery| %>
+        <li class="span4" id="gallery_<%= gallery.id %>">
+          <div class="thumbnail">
+            <% if gallery.pictures.first %>
+            <%= link_to image_tag(gallery.pictures.first.image.url), gallery_path(gallery) %>
+            <% else %>
+              N/A
+            <% end %>
+            <div class="caption">
+              <p style="text-align: center;">
+                <%= gallery.name.truncate(14) %>
+                <%= link_to "Show", gallery_path(gallery) %>
+                <%= link_to "Edit", edit_gallery_path(gallery) %>
+                <%= link_to "Delete", gallery,
+                  :data => { :confirm => "Are you sure?" },
+                  :method => :delete
+                %>
+              </p>
+            </div>
+          </div>
+        </li>
+    <% end %>
+  </ul>
+</div>
+</div>
+</div>
+<%= render 'welcome/footer' %>

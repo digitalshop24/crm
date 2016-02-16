@@ -1,4 +1,16 @@
+<div class="outerwrapper">
+<%= render 'welcome/header' %>
+<div class="floatcontacts container">
+    <div>
+      <a href="tel:+375291111111" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <p class="skype"> Звонок бесплатный</p>
+    </div>    
+  </div>
+  <div class="container">
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'Изменить', edit_question_path(@question) %> |
 <%= link_to 'Назад', questions_path %>
+</div>
+</div>
+<%= render 'welcome/footer' %>
