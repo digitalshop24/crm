@@ -150,10 +150,6 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     maskedinput-rails (1.4.0.0)
-    mercury-rails (0.3.1)
-      coffee-script
-      paperclip
-      rails (>= 3.1.0)
     method_source (0.8.2)
     mime-types (2.6.2)
     mimemagic (0.3.0)
@@ -297,7 +293,6 @@ DEPENDENCIES
   httparty
   jquery-rails
   maskedinput-rails (~> 1.4)
-  mercury-rails
   momentjs-rails (>= 2.9.0)
   paperclip (~> 4.3)
   pg
@@ -312,7 +307,6 @@ DEPENDENCIES
   web-console (~> 2.0)
   will_paginate (~> 3.0.6)
   will_paginate-bootstrap (~> 1.0.1)
-
   wysiwyg-rails
 
 BUNDLED WITH
