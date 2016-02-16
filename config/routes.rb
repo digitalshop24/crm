@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get '/resend', to: 'messages#resend', as: :resend, on: :member
     end
   end
+<<<<<<< HEAD
   resources :galleries 
   resources :pictures
   get '/vacancies', to: 'static#vacancy'
@@ -39,6 +40,9 @@ Rails.application.routes.draw do
   get '/offer/edit', to: 'static#oedit'
   get '/contacts', to: 'static#contacts'
   get '/contacts/edit', to: 'static#cedit'
+=======
+  get '/stat', to: 'static#statistic'
+>>>>>>> 6e2bf722358f7293f4556e9bb09e5031ee5df80d
   get '/advantages', to: 'static#advantages'
   get '/conditions', to: 'static#conditions'
   get '/guarantees', to: 'static#guarantees'
