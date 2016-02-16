@@ -312,10 +312,8 @@ DEPENDENCIES
   web-console (~> 2.0)
   will_paginate (~> 3.0.6)
   will_paginate-bootstrap (~> 1.0.1)
-<<<<<<< HEAD
+
   wysiwyg-rails
-=======
->>>>>>> 6e2bf722358f7293f4556e9bb09e5031ee5df80d
 
 BUNDLED WITH
    1.11.2
