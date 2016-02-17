@@ -4,10 +4,8 @@ class CreateSeos < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :title
+      t.string :code_title
       t.timestamps null: false
   end
-  end
-  def change
-    add_column :seos, :code_title, :string
-  end
+end
 end
