@@ -55,7 +55,6 @@ class ActionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def action_params
-    	binding.pry
       permitted_arr = [:title, :text, :image, :date]
       params.require(:action).permit(:image)
     end
