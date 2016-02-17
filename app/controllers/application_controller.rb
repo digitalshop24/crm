@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_current_user
+  before_filter :init
   layout :layout_by_resource
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -54,7 +55,22 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
-
+  def init
+    @contact=Seo.where(:code_title => 'Contacts').first
+    @service=Seo.where(:code_title => 'Service').first
+    @condition=Seo.where(:code_title => 'Conditions').first
+    @pay=Seo.where(:code_title => 'Pay').first
+    @advantage=Seo.where(:code_title => 'Advantages').first
+    @g=Seo.where(:code_title => 'G').first
+    @action = Seo.where(:code_title => 'Actions').first
+    @ques = Seo.where(:code_title => 'Questions').first
+    @feed = Seo.where(:code_title => 'Feedbacks').first
+    @ne = Seo.where(:code_title => 'News').first
+    @vacancy = Seo.where(:code_title => 'Vacancies').first
+    @partner = Seo.where(:code_title => 'Partners').first
+    @step = Seo.where(:code_title => 'Steps').first
+    @offer = Seo.where(:code_title => 'Offers').first
+  end
   def set_current_user
     User.current = current_user
     @worktypes = Worktype.all

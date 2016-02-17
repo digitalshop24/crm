@@ -18,9 +18,16 @@
     <%= f.text_field :description, autofocus: true, required: true, class: 'form-control', placeholder: 'Описание' %>
   </div>
   <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, autofocus: true, required: true, class: 'form-control', placeholder: 'Название страницы' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :mdescription %><br>
+    <%= f.text_field :mdescription, autofocus: true, required: true, class: 'form-control', placeholder: 'Описание meta' %>
+  </div>
+  <div class="form-group">
     <%= f.label "Отображать" %><br>
     <%= f.check_box :show%><br>
-   
   </div>
   <%= f.button "Сохранить", class: 'btn btn-primary' %>
   <%= link_to 'В каталог', worktypes_path, class: 'btn btn-default' %>

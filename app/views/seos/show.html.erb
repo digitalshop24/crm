@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @seo.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @seo.description %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @seo.title %>
+</p>
+
+<p>
+  <strong>Code title:</strong>
+  <%= @seo.code_title %>
+</p>
+
+<%= link_to 'Edit', edit_seo_path(@seo) %> |
+<%= link_to 'Back', seos_path %>

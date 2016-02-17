@@ -1,0 +1,2 @@
+module SeosHelper
+end

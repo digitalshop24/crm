@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Crm</title>
+    
     <%= stylesheet_link_tag    'welcome', media: 'all' %>
     <%= javascript_include_tag 'welcome' %>
     <%= csrf_meta_tags %>
+    <%= yield :head %>
   </head>
   <body>
     <%= yield %>

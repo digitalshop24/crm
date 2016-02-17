@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Seos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Title</th>
+      <th>Code title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @seos.each do |seo| %>
+      <tr>
+        <td><%= seo.name %></td>
+        <td><%= seo.description %></td>
+        <td><%= seo.title %></td>
+        <td><%= seo.code_title %></td>
+        <td><%= link_to 'Show', seo %></td>
+        <td><%= link_to 'Edit', edit_seo_path(seo) %></td>
+        <td><%= link_to 'Destroy', seo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Seo', new_seo_path %>

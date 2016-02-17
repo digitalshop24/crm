@@ -15,7 +15,7 @@
           <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <ul>
               <li>
-                <a href="/service" title="">Услуги</a>
+                <a href="/service" title=""><%= @service.name if @service%></a>
 		          <ul>
 		            <% @worktypes.each do |w| %>
                   <% if w.show %>
@@ -28,26 +28,26 @@
               <li>
                 <a href="#" title="">Клиентам</a>
                 <ul>
-                  <li><a href="/conditions" title="">Условия работы</a></li>
-                  <li><a href="/pay" title="">Способы оплаты</a></li>
-                  <li><a href="/advantages" title="">Преимущества</a></li>
-                  <li><a href="/guarantees" title="">Гарантии</a></li>
-                  <li><a href="/actions" title="">Акции</a></li>
-                  <li><a href="/questions" title="">Вопросы и ответы</a></li>
+                  <li><a href="/conditions" title=""><%= @condition.name if @condition%></a></li>
+                  <li><a href="/pay" title=""><%= @pay.name if @pay%></a></li>
+                  <li><a href="/advantages" title=""><%= @advantage.name if @advantage%></a></li>
+                  <li><a href="/guarantees" title=""><%= @g.name if @g%></a></li>
+                  <li><a href="/actions" title=""><%= @action.name if @action%></a></li>
+                  <li><a href="/questions" title=""><%= @ques.name if @ques%></a></li>
                 </ul>
               </li>
               <li>
                 <a href="#" title="">О компании</a> 
                 <ul>
-                  <li><a href="/feedbacks" title="">Отзывы</a></li>
-                  <li><a href="/news" title="">Новости</a></li>
-                  <li><a href="/vacancies" title="">Вакансии</a></li>
-                  <li><a href="/partners" title="">Партнерам</a></li>
+                  <li><a href="/feedbacks" title=""><%= @feed.name if @feed%></a></li>
+                  <li><a href="/news" title=""><%= @ne.name if @ne%></a></li>
+                  <li><a href="/vacancies" title=""><%= @vacancy.name if @vacancy%></a></li>
+                  <li><a href="/partners" title=""><%= @partner.name if @partner%></a></li>
                   <li><a href="#" title="">Авторам</a></li>
                 </ul>
               </li>
               <li>
-                <a href="/contacts" title="">Контакты</a>
+                <a href="/contacts" title=""><%= @contact.name if @contact%></a>
               </li>
               <% if current_user %>
         <% if "Admin".include? current_user.role %>

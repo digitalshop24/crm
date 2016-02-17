@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216151556) do
+ActiveRecord::Schema.define(version: 20160217130409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,6 +226,15 @@ ActiveRecord::Schema.define(version: 20160216151556) do
 
   add_index "revisions", ["order_id"], name: "index_revisions_on_order_id", using: :btree
 
+  create_table "seos", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "title"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "code_title"
+  end
+
   create_table "specialities", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -285,10 +294,12 @@ ActiveRecord::Schema.define(version: 20160216151556) do
 
   create_table "worktypes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.text     "description"
     t.boolean  "show"
+    t.string   "title"
+    t.string   "mdescription"
   end
 
   add_foreign_key "accounts", "users"

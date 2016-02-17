@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  resources :seos
   get '/account', to: 'accounts#show', as: :show_account
   mount Sidekiq::Web, at: '/sidekiq'
   resources :payments do
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
   get '/conditions', to: 'static#conditions'
   get '/guarantees', to: 'static#guarantees'
   post '/orders/welcome', to: 'welcome#create_order', as: :welcome_orders
+  resources :seo
   resources :feedbacks
   resources :service
   resources :steps
