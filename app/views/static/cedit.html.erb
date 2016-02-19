@@ -10,43 +10,27 @@
   </div>
   
   <!--InstanceBeginEditable name="EditRegion3" -->
-    <div class="main">
+  <div class="main">
     <div class="container">
     <div class="static">
-
-<div id="froala-editor">
-  <%= render 'contactscontent' %>
+  <div id="myEditor"> <%= render 'contactscontent' %></div>
+<button id="saveButton">Save</button>
 </div>
-<br/>
-<pre id="eg-previewer" class="prettyprint">
-</pre>
-<button id="saveButton">Сохранить</button>
-
-
-  </div>
-  </div>
+</div>
 </div>
 <script>
   $(function() {
-    $('div#froala-editor')
-       .froalaEditor({
+    $('#myEditor')
+      .froalaEditor({
         language: 'ru',
         // Set the save param.
         saveParam: 'content',
-
         // Set the save URL.
         saveURL: 'http://localhost:3000/contacts/edit',
-
         // HTTP request type.
         saveMethod: 'GET',
-
         // Additional save params.
         saveParams: {id: 'my_editor'}
-      })
-      .on('froalaEditor.contentChanged froalaEditor.initialized', function (e, editor) {
-        $('pre#eg-previewer').text(editor.codeBeautifier.run(editor.html.get()))
-        $('pre#eg-previewer').removeClass('prettyprinted');
-        prettyPrint()
       })
       .on('froalaEditor.save.before', function (e, editor) {
         // Before save request is made.
@@ -58,11 +42,10 @@
         // Do something here.
       })
   });
-   $('#saveButton').click (function () {
-    $('#froala-editor').froalaEditor('save.save')
+  $('#saveButton').click (function () {
+    $('#myEditor').froalaEditor('save.save')
   })
 </script>
-
 
  
 </div>

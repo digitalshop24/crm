@@ -70,7 +70,7 @@
       <div class="auth-cost">
         <% if user_signed_in? %>
           <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: "in") %>
-           <a href="http://localhost:3000/dashboard" class="to-cost"  data-target="#modalorder">Личный кабинет</a>
+           <a href="/dashboard" class="to-cost"  data-target="#modalorder">Личный кабинет</a>
         <% else %>
           <%= link_to('Войти', new_user_session_path, class: "in")  %>
            <a href="#" class="to-cost" data-toggle="modal" >Узнать стоимость</a>
