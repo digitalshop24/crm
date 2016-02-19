@@ -2,28 +2,34 @@
 <div class="outerwrapper">
 <%= render 'welcome/header' %>
 
-  <!-- =floatcontacts -->
   <div class="floatcontacts container">
     <div>
-      <a href="tel:+375291111111" class="tel"><span>+375 (29)</span> 111 11 11</a>
-      <p class="skype">skype: <a href="skype:RedStudent" class="skype_link">RedStudent</a></p>
+      <a href="tel:+375291111111" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <p class="skype"> Звонок бесплатный</p>
     </div>    
   </div>
-  <!-- =/floatcontacts -->
   
   <!--InstanceBeginEditable name="EditRegion3" -->
     <div class="main">
     <div class="container">
     <div class="static">
-  <div id="myEditor"></div>
-<button id="saveButton">Save</button>
+
+<div id="froala-editor">
+  <%= render 'contactscontent' %>
 </div>
-</div>
+<br/>
+<pre id="eg-previewer" class="prettyprint">
+</pre>
+<button id="saveButton">Сохранить</button>
+
+
+  </div>
+  </div>
 </div>
 <script>
   $(function() {
-    $('#myEditor')
-      .froalaEditor({
+    $('div#froala-editor')
+       .froalaEditor({
         language: 'ru',
         // Set the save param.
         saveParam: 'content',
@@ -37,6 +43,11 @@
         // Additional save params.
         saveParams: {id: 'my_editor'}
       })
+      .on('froalaEditor.contentChanged froalaEditor.initialized', function (e, editor) {
+        $('pre#eg-previewer').text(editor.codeBeautifier.run(editor.html.get()))
+        $('pre#eg-previewer').removeClass('prettyprinted');
+        prettyPrint()
+      })
       .on('froalaEditor.save.before', function (e, editor) {
         // Before save request is made.
       })
@@ -47,11 +58,11 @@
         // Do something here.
       })
   });
-
-  $('#saveButton').click (function () {
-    $('#myEditor').froalaEditor('save.save')
+   $('#saveButton').click (function () {
+    $('#froala-editor').froalaEditor('save.save')
   })
 </script>
+
 
  
 </div>

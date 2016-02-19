@@ -96,7 +96,7 @@ $(document).ready(function(){
 
 	$('.quickorder .submit').click(function(e){
 		e.preventDefault();
-		$('body').append('<div class="thank-popup modal in"><div class="modal-dialog"><div class="modal-content"><button class="close" type="button"><img alt="" src="images/close.png"></button><div class="modal-body center-block thank">' + thankmsg + '</div></div></div></div>');
+		$('body').append('<div class="thank-popup modal in"><div class="modal-dialog"><div class="modal-content"><button class="close" type="button"><%= image_tag 'close.png'%></button><div class="modal-body center-block thank">' + thankmsg + '</div></div></div></div>');
 		startClock('.thank-popup'); // автоматически скрываем форму с сообщением
 	});
 

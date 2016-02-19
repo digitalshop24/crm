@@ -1,5 +1,26 @@
-<h1>Новый отзыв</h1>
+<div class="outerwrapper">
+<%= render 'welcome/header' %>
+<div class="floatcontacts container">
+    <div>
+      <a href="tel:+375291111111" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <p class="skype"> Звонок бесплатный</p>
+    </div>    
+  </div>
+  <div class="container">
+  <div class="main">
+    
+    <div class="static">
+<h1>Создать</h1>
 
 <%= render 'form' %>
 
+  </div>
+  </div>
+
 <%= link_to 'Назад', feedbacks_path %>
+</div>
+</div>
+<%= render 'welcome/footer'%>
+
+
+

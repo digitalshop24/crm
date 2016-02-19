@@ -26,7 +26,7 @@ class WelcomeController < ApplicationController
       if @client.save
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
-          sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Здравствуйте,вы зарегестрировались на сайте redstudent, к Вам на почту выслан Логин и пароль для входа. Ваш Редстудент")
+          sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
           #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
           #uri = URI(email)
           url = URI(sms)

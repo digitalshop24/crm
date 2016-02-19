@@ -5,7 +5,7 @@ class NewsController < ApplicationController
   # GET /news
   def index
     @worktypes = Worktype.all
-    @newss = News.all.paginate(:page => params[:page], :per_page => 4)
+    @newss = News.all.order(date: :desc).paginate(:page => params[:page], :per_page => 4)
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last

@@ -73,4 +73,7 @@ layout 'welcome'
  	  text = params['content']
       File.write(File.join(Rails.root, 'app','views','static', '_contactscontent.html.erb'), text) if text
 	end
+	def event
+		binding.pry
+	end
 end
