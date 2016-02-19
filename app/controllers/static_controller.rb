@@ -69,9 +69,10 @@ layout 'welcome'
     @feedback = Feedback.last
 	end
 	def cedit
+		binding.pry
 	  @worktypes = Worktype.all
  	  text = params['content']
- 	  p text
+ 	  p "??????"
       File.write(File.join(Rails.root, 'app','views','static', '_contactscontent.html.erb'), text) if text
       p File.join(Rails.root, 'app','views','static', '_contactscontent.html.erb') if text
 	end
