@@ -1,5 +1,6 @@
 class StaticController < ApplicationController
 layout 'welcome'
+skip_before_filter :verify_authenticity_token, :only => [:pedit, :vedit,:paedit, :oedit, :cedit]
 	def conditions
 		@worktypes = Worktype.all
     @news = News.last
