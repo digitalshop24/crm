@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def user_params
-    permitted_arr = [:role, :email, :password, :name, :phone, :city]
+    permitted_arr = [:role, :email, :password, :name, :phone, :city, :activated]
     if params[:user][:role] == 'Employee'
       permitted_arr << [:skype, speciality_ids: [], subspeciality_ids: []]
     end
