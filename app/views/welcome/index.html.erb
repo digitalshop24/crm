@@ -55,54 +55,23 @@
             <th>Стоимость, руб.</th>
             <th class="text-center">Заказать</th>
           </tr>
-          <tr>
-            <td>Диссертация</td>
-            <td>от 12 дней</td>
-            <td>от 11 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+          <% @worktypes.each do |worktype| %>
+            <% if worktype.show %>
+            <tr>
+            <td><%= worktype.name%></td>
+            <td><%= worktype.terms%></td>
+            <td><%= worktype.price%></td>
+            <td class="text-center"><a href="/worktypes/<%=worktype.id%>" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
+            </tr>
+            <%else%>
+            <tr class="hide">
+            <td><%= worktype.name%></td>
+            <td><%= worktype.terms%></td>
+            <td><%= worktype.price%></td>
+            <td class="text-center"><a href="/worktypes/<%=worktype.id%>" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
           </tr>
-          <tr>
-            <td>Дипломная работа</td>
-            <td>от 9 дней</td>
-            <td>от 9 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
-          </tr>
-          <tr>
-            <td>Курсовая работа</td>
-            <td>от 3 дней</td>
-            <td>от 10 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
-          </tr>
-          <tr>
-            <td>Контрольная работа</td>
-            <td>от 7 дней</td>
-            <td>от 3 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
-          </tr>
-          <tr>
-            <td>Реферат</td>
-            <td>от 2 дней</td>
-            <td>от 15 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
-          </tr>
-          <tr>
-            <td>Другие работы</td>
-            <td>от 2 дней</td>
-            <td>от 15 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
-          </tr>
-          <tr class="hide">
-            <td>Реферат</td>
-            <td>от 2 дней</td>
-            <td>от 15 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
-          </tr>
-          <tr class="hide">
-            <td>Другие работы</td>
-            <td>от 2 дней</td>
-            <td>от 15 000 руб.</td>
-            <td class="text-center"><a href="#" class="buy" title=""><%= image_tag 'buy.png' %></a></td>
-          </tr>         
+          <%end%>
+          <%end%>
         </table>
       </div>
       <a href="#" class="more btn btn_green">Полный список</a>

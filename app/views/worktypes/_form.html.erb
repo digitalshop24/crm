@@ -10,19 +10,27 @@
     </div>
   <% end %>
   <div class="form-group">
-    <%= f.label :name %><br>
+    <%= f.label 'Название' %><br>
     <%= f.text_field :name, autofocus: true, required: true, class: 'form-control', placeholder: 'Название специальности' %>
   </div>
   <div class="form-group">
-    <%= f.label :description %><br>
+    <%= f.label 'Описание' %><br>
     <%= f.text_field :description, autofocus: true, required: true, class: 'form-control', placeholder: 'Описание' %>
   </div>
+   <div class="form-group">
+    <%= f.label 'Сроки' %><br>
+    <%= f.text_field :terms, autofocus: true, required: true, class: 'form-control', placeholder: 'Сроки' %>
+  </div>
+   <div class="form-group">
+    <%= f.label 'Цена' %><br>
+    <%= f.text_field :price, autofocus: true, required: true, class: 'form-control', placeholder: 'Цена' %>
+  </div>
   <div class="form-group">
-    <%= f.label :title %><br>
+    <%= f.label 'Заголовок страницы (html)' %><br>
     <%= f.text_field :title, autofocus: true, required: true, class: 'form-control', placeholder: 'Название страницы' %>
   </div>
   <div class="form-group">
-    <%= f.label :mdescription %><br>
+    <%= f.label 'Описание (meta description)' %><br>
     <%= f.text_field :mdescription, autofocus: true, required: true, class: 'form-control', placeholder: 'Описание meta' %>
   </div>
   <div class="form-group">
