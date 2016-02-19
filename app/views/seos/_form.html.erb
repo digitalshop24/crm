@@ -11,21 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label 'Название страницы' %><br>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+  <div class="form-group">
+    <%= f.label 'Описание html' %><br>
+    <%= f.text_field :description, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :code_title %><br>
-    <%= f.text_field :code_title %>
+  <div class="form-group">
+    <%= f.label 'Заголовок' %><br>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>

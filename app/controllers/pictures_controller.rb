@@ -1,6 +1,7 @@
 class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.json
+  load_and_authorize_resource
   def index
 
     @gallery = Gallery.find(params[:gallery_id])

@@ -1,6 +1,7 @@
 class SeosController < ApplicationController
   before_action :set_seo, only: [:show, :edit, :update, :destroy]
-
+  layout 'welcome'
+  load_and_authorize_resource
   # GET /seos
   def index
     @seos = Seo.all

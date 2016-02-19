@@ -50,13 +50,15 @@
                 <a href="/contacts" title=""><%= @contact.name if @contact%></a>
               </li>
               <% if current_user %>
-        <% if "Admin".include? current_user.role %>
-        <li>
-
-                <a href="/galleries" title="">Галлерея</a>
-              </li>
-        <%end%>
-      <%end%>
+                <% if "Admin".include? current_user.role %>
+                  <li>
+                    <a href="/galleries" title="">Галлерея</a>
+                  </li>
+                   <li>
+                    <a href="/seos" title="">СЕО</a>
+                  </li>
+                <%end%>
+              <%end%>
               
             </ul>
           </div>
