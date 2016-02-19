@@ -18,7 +18,7 @@
     
 	<div class="main">
 		<div class="container">
-		<%= render 'contactscontent' %>
+		<%= render :file => 'public/contactscontent.html'%>
       <% if current_user %>
         <% if "Admin".include? current_user.role %>
           

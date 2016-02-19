@@ -71,8 +71,8 @@ layout 'welcome'
 	def cedit
 	  @worktypes = Worktype.all
  	  text = params['content']
- 	  p "??????"
-      File.write(File.join(Rails.root, 'app','views','static', '_contactscontent.html.erb'), text) if text
+ 	  
+      File.write(File.join(Rails.root, 'public','contactscontent.html'), text) if text
       p File.join(Rails.root, 'app','views','static', '_contactscontent.html.erb') if text
 	end
 	def event
