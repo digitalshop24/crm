@@ -69,7 +69,6 @@ layout 'welcome'
     @feedback = Feedback.last
 	end
 	def cedit
-		binding.pry
 	  @worktypes = Worktype.all
  	  text = params['content']
  	  p "??????"
