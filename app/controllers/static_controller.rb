@@ -19,6 +19,7 @@ layout 'welcome'
     @feedback = Feedback.last
 	end
 	def payment
+		@text = Static.where(:title => 'payment').first
 		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
@@ -27,9 +28,18 @@ layout 'welcome'
 	def pedit
 		@worktypes = Worktype.all
  		text = params['content']
-    File.write(File.join(Rails.root, 'app','views','static', '_content.html.erb'), text) if text
-	end
+	  @text = Static.where(:title => 'payment').first
+    if text
+    	record = Static.where(:title => 'payment').first
+    	if record
+    		record.update_attribute(:text, text)
+    	else
+    		Static.create(:title => 'payment', :text => text)
+    	end
+    end
+ 	end
 	def vacancy
+		@text = Static.where(:title => 'vacancy').first
 	  @worktypes = Worktype.all
     @news = News.last
     @question = Question.last
@@ -38,9 +48,18 @@ layout 'welcome'
 	def vedit
 	  @worktypes = Worktype.all
  	  text = params['content']
-    File.write(File.join(Rails.root, 'app','views','static', '_vacancycontent.html.erb'), text) if text
+	  @text = Static.where(:title => 'vacancy').first
+    if text
+    	record = Static.where(:title => 'vacancy').first
+    	if record
+    		record.update_attribute(:text, text)
+    	else
+    		Static.create(:title => 'vacancy', :text => text)
+    	end
+    end
 	end
 	def partners
+		@text = Static.where(:title => 'partners').first
 		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
@@ -49,16 +68,34 @@ layout 'welcome'
 	def paedit
 	  @worktypes = Worktype.all
  	  text = params['content']
-    File.write(File.join(Rails.root, 'app','views','static', '_partnercontent.html.erb'), text) if text
+	  @text = Static.where(:title => 'partners').first
+ 	  text = params['content']
+    if text
+    	record = Static.where(:title => 'partners').first
+    	if record
+    		record.update_attribute(:text, text)
+    	else
+    		Static.create(:title => 'partners', :text => text)
+    	end
+    end
 	end
 	def oedit
- 		@worktypes = Worktype.all
+ 	 	@worktypes = Worktype.all
+	  @text = Static.where(:title => 'offer').first
  	  text = params['content']
-    File.write(File.join(Rails.root, 'app','views','static', '_offercontent.html.erb'), text) if text
+    if text
+    	record = Static.where(:title => 'offer').first
+    	if record
+    		record.update_attribute(:text, text)
+    	else
+    		Static.create(:title => 'offer', :text => text)
+    	end
+    end
 	end
 	def offer
 		@worktypes = Worktype.all
   	@news = News.last
+    @text = Static.where(:title => 'offer').first
     @question = Question.last
     @feedback = Feedback.last
 	end
