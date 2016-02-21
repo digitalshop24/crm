@@ -31,14 +31,14 @@ layout 'welcome'
 	end
 	def vacancy
 	  @worktypes = Worktype.all
-      @news = News.last
-      @question = Question.last
-      @feedback = Feedback.last
+    @news = News.last
+    @question = Question.last
+    @feedback = Feedback.last
 	end
 	def vedit
 	  @worktypes = Worktype.all
  	  text = params['content']
-      File.write(File.join(Rails.root, 'app','views','static', '_vacancycontent.html.erb'), text) if text
+    File.write(File.join(Rails.root, 'app','views','static', '_vacancycontent.html.erb'), text) if text
 	end
 	def partners
 		@worktypes = Worktype.all
@@ -49,33 +49,39 @@ layout 'welcome'
 	def paedit
 	  @worktypes = Worktype.all
  	  text = params['content']
-      File.write(File.join(Rails.root, 'app','views','static', '_partnercontent.html.erb'), text) if text
+    File.write(File.join(Rails.root, 'app','views','static', '_partnercontent.html.erb'), text) if text
 	end
 	def oedit
- @worktypes = Worktype.all
+ 		@worktypes = Worktype.all
  	  text = params['content']
-      File.write(File.join(Rails.root, 'app','views','static', '_offercontent.html.erb'), text) if text
+    File.write(File.join(Rails.root, 'app','views','static', '_offercontent.html.erb'), text) if text
 	end
 	def offer
-	@worktypes = Worktype.all
-    @news = News.last
+		@worktypes = Worktype.all
+  	@news = News.last
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def contacts
-	@worktypes = Worktype.all
+		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
+    @text = Static.where(:title => 'contacts').first
 	end
 	def cedit
 	  @worktypes = Worktype.all
+	  @text = Static.where(:title => 'contacts').first
  	  text = params['content']
- 	  
-      File.write(File.join(Rails.root, 'public','contactscontent.html'), text) if text
-      p File.join(Rails.root, 'app','views','static', '_contactscontent.html.erb') if text
-	end
+    if text
+    	record = Static.where(:title => 'contacts').first
+    	if record
+    		record.update_attribute(:text, text)
+    	else
+    		Static.create(:title => 'contacts', :text => text)
+    	end
+    end
+  end
 	def event
-		binding.pry
 	end
 end

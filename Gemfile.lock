@@ -308,6 +308,3 @@ DEPENDENCIES
   will_paginate (~> 3.0.6)
   will_paginate-bootstrap (~> 1.0.1)
   wysiwyg-rails
-
-BUNDLED WITH
-   1.11.2
