@@ -19,6 +19,9 @@
     <%= f.label "Отзыв" %><br>
     <%= f.text_area :feedback, class: "form-control" %>
   </div>
+   <div class="form-group">
+  <%= f.date_field :date, class: "form-control"%>
+  </div>
   <div class="form-group">
     <%= f.submit "Сохранить"%>
   </div>

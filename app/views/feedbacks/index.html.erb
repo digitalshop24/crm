@@ -26,7 +26,7 @@
         <div class="item">
           <h3><%=feedback.name%></h3>
           <p><%=feedback.feedback%></p>
-          <time datetime="2015-10-22"><%=feedback.created_at.to_s(:db)%></time>
+          <time datetime="2015-10-22"><%=feedback.date%></time>
         <% if current_user %>
         <% if "Admin".include? current_user.role %>
           <%= link_to 'Изменить', edit_feedback_path(feedback) %>

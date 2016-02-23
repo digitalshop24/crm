@@ -1,6 +1,6 @@
 <header class="header">
     <div class="container">
-      <div class="mainnav pull-left">
+      <div class="mainnav pull-left ">
         <!-- =nav -->
         <nav class="navbar navbar-default">
           <div class="navbar-header">
@@ -26,7 +26,7 @@
 	  	        </ul>
               </li>
               <li>
-                <a href="#" title="">Клиентам</a>
+                <a href="/conditions" title="">Клиентам</a>
                 <ul>
                   <li><a href="/conditions" title=""><%= @condition.name if @condition%></a></li>
                   <li><a href="/pay" title=""><%= @pay.name if @pay%></a></li>
@@ -73,7 +73,7 @@
            <a href="/dashboard" class="to-cost"  data-target="#modalorder">Личный кабинет</a>
         <% else %>
           <%= link_to('Войти', new_user_session_path, class: "in")  %>
-           <a href="#" class="to-cost" data-toggle="modal" >Узнать стоимость</a>
+          <a href="#" class="to-cost" data-toggle="modal" data-target="#modalorder">Узнать стоимость</a>
         <% end %>
        
       </div>

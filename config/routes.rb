@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   end
   resources :galleries 
   resources :pictures
-  post '/static/event', to: 'static#event'
+  get '/getprice', to: 'static#event'
   get '/vacancies', to: 'static#vacancy'
   get '/vacancies/edit', to: 'static#vedit'
   get '/partners', to: 'static#partners'

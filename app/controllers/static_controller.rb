@@ -120,5 +120,7 @@ layout 'welcome'
     end
   end
 	def event
+        binding.pry
+        redirect_to(:back)
 	end
 end
