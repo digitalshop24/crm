@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
     @pay=Seo.where(:code_title => 'Pay').first
     @advantage=Seo.where(:code_title => 'Advantages').first
     @g=Seo.where(:code_title => 'G').first
-    @act = Seo.where(:code_title => 'Actions').first
+    @act= Seo.where(:code_title => 'Actions').first
     @ques = Seo.where(:code_title => 'Questions').first
     @feed = Seo.where(:code_title => 'Feedbacks').first
     @ne = Seo.where(:code_title => 'News').first
