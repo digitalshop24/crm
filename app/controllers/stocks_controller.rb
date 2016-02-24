@@ -1,7 +1,7 @@
 class StocksController < ApplicationController
   layout 'welcome'
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:index]
 
   # GET /stocks
   def index
