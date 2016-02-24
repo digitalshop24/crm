@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  resources :stocks
   match '*any' => 'application#options', :via => [:options]
   resources :seos
   get '/account', to: 'accounts#show', as: :show_account

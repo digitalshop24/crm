@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221142440) do
+ActiveRecord::Schema.define(version: 20160224140632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,12 @@ ActiveRecord::Schema.define(version: 20160221142440) do
 
   add_index "payouts", ["order_id"], name: "index_payouts_on_order_id", using: :btree
 
+  create_table "pays", force: :cascade do |t|
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pictures", force: :cascade do |t|
     t.string   "description"
     t.string   "image_file_name"
@@ -224,9 +230,9 @@ ActiveRecord::Schema.define(version: 20160221142440) do
     t.string   "name"
     t.string   "description"
     t.string   "title"
-    t.string   "code_title"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "code_title"
   end
 
   create_table "specialities", force: :cascade do |t|
@@ -249,6 +255,18 @@ ActiveRecord::Schema.define(version: 20160221142440) do
     t.text     "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.string   "title"
+    t.text     "text"
+    t.date     "date"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "subspecialities", force: :cascade do |t|

@@ -5,7 +5,7 @@ class ActionsController < ApplicationController
   # GET /action
   def index
     @worktypes = Worktype.all
-    @actions = Action.all.paginate(:page => params[:page], :per_page => 4)
+    @actions = Action.all.order(date: :desc).paginate(:page => params[:page], :per_page => 4)
   end
 
   # GET /action/1
@@ -56,6 +56,6 @@ class ActionsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def action_params
       permitted_arr = [:title, :text, :image, :date]
-      params.require(:action).permit(:image)
+    params.require(:action).permit(permitted_arr)
     end
 end
