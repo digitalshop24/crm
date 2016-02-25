@@ -29,7 +29,7 @@
               <p><%= "Сегодня дедлайн у данного заказа" %></p>
             </td>
             <td>
-              <p><%= event.created_at.to_s(:db) %></p>
+              <p><%= event.created_at.localtime.to_s(:db) %></p>
             </td>
           <% else %>
             <td>
@@ -39,7 +39,7 @@
               <p><%= "Пользователь #{event.user.name if event.user} оставил #{event.event_type} \"#{event.content}\" " %></p>
             </td>
             <td>
-              <p><%= event.created_at.to_s(:db) %></p>
+              <p><%= event.created_at.localtime.to_s(:db) %></p>
             </td>
           <% end %>
         <td>

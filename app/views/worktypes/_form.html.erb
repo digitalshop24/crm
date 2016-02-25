@@ -33,6 +33,10 @@
     <%= f.label 'Описание (meta description)' %><br>
     <%= f.text_field :mdescription, autofocus: true, required: true, class: 'form-control', placeholder: 'Описание meta' %>
   </div>
+   <div class="form-group">
+    <%= f.label 'Порядковый номер' %><br>
+    <%= f.text_field :order, autofocus: true, required: true, class: 'form-control', placeholder: 'Порядковый номер' %>
+  </div>
   <div class="form-group">
     <%= f.label "Отображать" %><br>
     <%= f.check_box :show%><br>

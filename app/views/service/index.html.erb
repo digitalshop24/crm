@@ -11,7 +11,7 @@
 	<!-- =floatcontacts -->
 <div class="floatcontacts container">
     <div>
-      <a href="tel:+375291111111" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <a href="tel:+78007757681" class="tel"><span>+7 (800) </span>775-76-81</a>
       <p class="skype"> Звонок бесплатный</p>
     </div>    
   </div>
@@ -28,7 +28,8 @@
 			<div class="list">
 			<% @worktypes.each do |w| %>
 				<article>
-					<h2><%= w.name%> на заказ</h2>
+          <a href="/worktypes/<%= w.id%>">
+					<h2><%= w.name%> на заказ</h2></a>
 					<div class="text">
 						<p><%= w.description%></p>
 					</div>
@@ -38,7 +39,7 @@
 							<%=w.terms%>
 						</div>
 						<div class="col-xs-8 text-right">
-							<a href="#" class="to-qorder btn btn_green" data-toggle="modal" data-target="#modalorder">Быстрый заказ</a>
+							<a href="#" class="to-qorder btn btn_green" data-toggle="modal" data-target="#modalorder">Узнать</a>
 							<a href="/worktypes/<%= w.id%>" class="buy btn btn_red"><%= image_tag 'buy-2.png' %>Заказать</a>
 						</div>
 					</div>
@@ -93,4 +94,4 @@
   </div>
   <!-- =/bottom -->
 </div>
- <%= render 'footer' %>
+ <%= render 'welcome/footer' %>

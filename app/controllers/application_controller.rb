@@ -69,6 +69,7 @@ class ApplicationController < ActionController::Base
     end
   end
   def init
+    @worktypes = Worktype.all.order(:order)
     @contact=Seo.where(:code_title => 'Contacts').first
     @service=Seo.where(:code_title => 'Service').first
     @condition=Seo.where(:code_title => 'Conditions').first
@@ -86,7 +87,6 @@ class ApplicationController < ActionController::Base
   end
   def set_current_user
     User.current = current_user
-    @worktypes = Worktype.all
   end
 
   def set_specialities

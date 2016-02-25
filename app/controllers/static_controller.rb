@@ -1,32 +1,27 @@
 class StaticController < ApplicationController
 layout 'welcome'
 	def conditions
-		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def guarantees
-		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def advantages
-		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def payment
 		@text = Static.where(:title => 'payment').first
-		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def pedit
-		@worktypes = Worktype.all
  		text = params['content']
 	  @text = Static.where(:title => 'payment').first
     if text
@@ -40,13 +35,11 @@ layout 'welcome'
  	end
 	def vacancy
 		@text = Static.where(:title => 'vacancy').first
-	  @worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def vedit
-	  @worktypes = Worktype.all
  	  text = params['content']
 	  @text = Static.where(:title => 'vacancy').first
     if text
@@ -60,13 +53,11 @@ layout 'welcome'
 	end
 	def partners
 		@text = Static.where(:title => 'partners').first
-		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def paedit
-	  @worktypes = Worktype.all
  	  text = params['content']
 	  @text = Static.where(:title => 'partners').first
  	  text = params['content']
@@ -80,7 +71,6 @@ layout 'welcome'
     end
 	end
 	def oedit
- 	 	@worktypes = Worktype.all
 	  @text = Static.where(:title => 'offer').first
  	  text = params['content']
     if text
@@ -93,21 +83,18 @@ layout 'welcome'
     end
 	end
 	def offer
-		@worktypes = Worktype.all
   	@news = News.last
     @text = Static.where(:title => 'offer').first
     @question = Question.last
     @feedback = Feedback.last
 	end
 	def contacts
-		@worktypes = Worktype.all
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
     @text = Static.where(:title => 'contacts').first
 	end
 	def cedit
-	  @worktypes = Worktype.all
 	  @text = Static.where(:title => 'contacts').first
  	  text = params['content']
     if text

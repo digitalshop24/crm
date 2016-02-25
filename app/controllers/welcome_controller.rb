@@ -2,7 +2,6 @@ class WelcomeController < ApplicationController
   # load_and_authorize_resource :class => false
   layout 'welcome'
   def index
-    @worktypes = Worktype.all
     @order = Order.new
     @client = Client.new
     @news = News.last

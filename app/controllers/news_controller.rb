@@ -4,7 +4,6 @@ class NewsController < ApplicationController
   load_and_authorize_resource
   # GET /news
   def index
-    @worktypes = Worktype.all
     @newss = News.all.order(date: :desc).paginate(:page => params[:page], :per_page => 4)
     @news = News.last
     @question = Question.last
