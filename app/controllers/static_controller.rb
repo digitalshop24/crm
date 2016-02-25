@@ -4,6 +4,7 @@ layout 'welcome'
     @news = News.last
     @question = Question.last
     @feedback = Feedback.last
+    @text = Static.where(:title => 'condition').first
 	end
 	def guarantees
     @news = News.last
@@ -110,4 +111,16 @@ layout 'welcome'
         binding.pry
         redirect_to(:back)
 	end
+  def condedit
+    @text = Static.where(:title => 'condition').first
+    text = params['content']
+    if text
+      record = Static.where(:title => 'condition').first
+      if record
+        record.update_attribute(:text, text)
+      else
+        Static.create(:title => 'condition', :text => text)
+      end
+    end
+  end
 end
