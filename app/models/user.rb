@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"
   has_one :account, dependent: :destroy
   has_many :events, dependent: :destroy
+  after_create :add_event
 
   def self.search(search)
     if search
@@ -56,5 +57,9 @@ class User < ActiveRecord::Base
   end
   def self.current=(user)
     Thread.current[:user] = user
+  end
+  def add_event
+      event_params = { :user_id => self.id, :event_type => self.role, :content  => self.email, :link => "admin/users/#{self.id}/edit/", :string => 'usr'}
+      event = Event.create(event_params)
   end
 end

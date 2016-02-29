@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
   has_attached_file :document
   validates_attachment_file_name :document, :matches => [/docx?\Z/, /pdf\Z/, /xlsx?\Z/]
 
-  after_update :add_event
+  after_save :add_event
 
   enum status: %i[moderation approved employee_searching prepayment_waiting in_work solved finished]
 
@@ -59,19 +59,20 @@ class Order < ActiveRecord::Base
     end
   end
   def add_event
+    binding.pry
+      event_params = { :user_id => User.current.id, :event_type => "заказ", :content  => "создал или изменил заказ", :link => "orders/#{self.id}" }
+      event = Event.create(event_params)
     if User.current.role!="Manager"
       if note_changed?
         event_params = { :user_id => User.current.id, :event_type => "заметку", :content  => self.note, :link => "orders/#{self.id}" }
-      event = Event.new(event_params)
-      event.save
-    end
-    if commentary_changed?
-      event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
-      event = Event.new(event_params)
-      event.save
+        event = Event.create(event_params)
+      end
+      if commentary_changed?
+        event_params = { :user_id => User.current.id, :event_type => "заметку для автора", :content  => self.commentary, :link => "orders/#{self.id}" }
+        event = Event.create(event_params)
+      end
     end
   end
-end
 def self.search(search)
   unless search.empty_values?
     statements = []

@@ -6,7 +6,7 @@ class Revision < ActiveRecord::Base
   belongs_to :order
 
   enum status: %i[moderation approved denied]
-   after_save :add_event
+  after_save :add_event
   def add_event
     if User.current.role!="Manager"
       event_params = { :user_id => User.current.id, :content => self.comment, :event_type => "доработку", :link => "orders/#{self.order.id}" }
