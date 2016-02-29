@@ -28,6 +28,8 @@ module ApplicationHelper
   def will_paginate_bootstrap(list, remote = true)
     will_paginate list, previous_label: "&laquo;", next_label: "&raquo;", renderer: BootstrapPagination::Rails, remote: true
   end
+
+
 end
 
 module ActionView

@@ -1,3 +1,4 @@
+require "smsc_api.rb"
 class WelcomeController < ApplicationController
   # load_and_authorize_resource :class => false
   layout 'welcome'
@@ -25,13 +26,15 @@ class WelcomeController < ApplicationController
       if @client.save
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
-          sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
+        sms = SMSC.new()
+        ret = sms.send_sms("+375293265502", "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
+          #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
           #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
           #uri = URI(email)
-          url = URI(sms)
+          #url = URI(sms)
           #a = Net::HTTP.get(uri)
-          a = Net::HTTP.get(url)
-        UserMailer.delay.set_password_instructions(@client, token)
+          #a = Net::HTTP.get(url)
+       #UserMailer.delay.set_password_instructions(@client, token)
         if @order.save
           if params[:materials]
             params[:materials].each {|file| 
