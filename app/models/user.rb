@@ -1,3 +1,4 @@
+require "smsc_api.rb"
 class User < ActiveRecord::Base
   ROLES = ['admin', 'manager', 'employee', 'client']
   devise :database_authenticatable, :registerable,
@@ -59,6 +60,17 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
   def add_event
+        @client = self
+        token = @client.send(:set_reset_password_token)
+        message = edit_password_url(@client, reset_password_token: token)
+        sms = SMSC.new()
+        ret = sms.send_sms( @client.phone, "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
+        email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
+          #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
+          #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
+        uri = URI(email)
+          #url = URI(sms)
+        a = Net::HTTP.get(uri)
       event_params = { :user_id => self.id, :event_type => self.role, :content  => self.email, :link => "admin/users/#{self.id}/edit/", :string => 'usr'}
       event = Event.create(event_params)
   end
