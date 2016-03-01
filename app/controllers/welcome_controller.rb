@@ -26,16 +26,18 @@ class WelcomeController < ApplicationController
       @client = Client.new(order_params[:client].merge({ activated: true }))
       @client.password = SecureRandom.hex
       if @client.save
+        binding.pry
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
+        message = edit_password_url(@client, reset_password_token: token)
         sms = SMSC.new()
-        #ret = sms.send_sms("+375293265502", "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
-        #"https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=vania.kabashnikov@gmail.com&mes=Awesome&sender=Avtor@redstudent.ru&subj=Registration&mail=1"
+        ret = sms.send_sms( @client.phone, "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
+        email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
           #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
           #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
-          #uri = URI(email)
+        uri = URI(email)
           #url = URI(sms)
-          #a = Net::HTTP.get(uri)
+        a = Net::HTTP.get(uri)
           #a = Net::HTTP.get(url)
        #UserMailer.delay.set_password_instructions(@client, token)
         if @order.save
