@@ -47,9 +47,9 @@ class RevisionsController < ApplicationController
     # В данном случае CanCanCan настроен так, что никто не может вызвать update или destroy,
     # если он не Manager или Admin, поэтому отдельно присоединять статус не надо
     if ["Admin", "Manager"].include?(current_user.role)
-      params.require(:revision).permit(:document, :comment, :status)
+      params.require(:revision).permit(:document, :comment, :status, :order_id)
     else
-      params.require(:revision).permit(:document, :comment)
+      params.require(:revision).permit(:document, :comment, :order_id)
     end
   end
 end

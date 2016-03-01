@@ -47,9 +47,9 @@ class MaterialsController < ApplicationController
     # В данном случае CanCanCan настроен так, что никто не может вызвать update или destroy,
     # если он не Manager или Admin, поэтому отдельно присоединять статус не надо
     if ["Admin", "Manager"].include?(current_user.role)
-      params.require(:material).permit(:document, :status)
+      params.require(:material).permit(:document, :status, :order_id)
     else
-      params.require(:material).permit(:document)
+      params.require(:material).permit(:document, :order_id)
     end
   end
 end

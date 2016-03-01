@@ -31,7 +31,9 @@ class Ability
       can :read, Part
 			can :create, Payout 
       can :read, Material, order: {employee_id: user.id}, status: 'approved'
+      can :create, Material, order: {employee_id: user.id}, status: 'approved'
       can :read, Revision, order: {employee_id: user.id}, status: 'approved'
+      can :create, Revision, order: {employee_id: user.id}, status: 'approved'
       can :read, Order, employee_id: user.id
       can :read, Order, employee_id: nil
       can :upload, Part do |part|
