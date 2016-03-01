@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
   resources :galleries 
   resources :pictures
+  get '/authors', to: 'static#authors'
   get '/conditions/edit', to: 'static#condedit'
   get '/getprice', to: 'static#event'
   get '/vacancies', to: 'static#vacancy'

@@ -11,7 +11,9 @@ class WelcomeController < ApplicationController
   end
 
   def create_order
+    binding.pry
     @order = Order.new(order_params.except(:client))
+    @order.deadline = Date.parse(params[:order][:deadline])
     if current_user
       @order.client_id = current_user.id if current_user.role = "Client"
       if @order.save
@@ -27,7 +29,8 @@ class WelcomeController < ApplicationController
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
         sms = SMSC.new()
-        ret = sms.send_sms("+375293265502", "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
+        #ret = sms.send_sms("+375293265502", "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
+        #"https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=vania.kabashnikov@gmail.com&mes=Awesome&sender=Avtor@redstudent.ru&subj=Registration&mail=1"
           #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
           #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
           #uri = URI(email)

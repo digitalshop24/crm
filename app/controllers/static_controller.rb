@@ -1,26 +1,16 @@
 class StaticController < ApplicationController
 layout 'welcome'
 	def conditions
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
+  
     @text = Static.where(:title => 'condition').first
 	end
+  def 
 	def guarantees
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
 	end
 	def advantages
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
 	end
 	def payment
 		@text = Static.where(:title => 'payment').first
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
 	end
 	def pedit
  		text = params['content']
@@ -36,9 +26,6 @@ layout 'welcome'
  	end
 	def vacancy
 		@text = Static.where(:title => 'vacancy').first
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
 	end
 	def vedit
  	  text = params['content']
@@ -54,9 +41,6 @@ layout 'welcome'
 	end
 	def partners
 		@text = Static.where(:title => 'partners').first
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
 	end
 	def paedit
  	  text = params['content']
@@ -84,15 +68,9 @@ layout 'welcome'
     end
 	end
 	def offer
-  	@news = News.last
     @text = Static.where(:title => 'offer').first
-    @question = Question.last
-    @feedback = Feedback.last
 	end
 	def contacts
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
     @text = Static.where(:title => 'contacts').first
 	end
 	def cedit
@@ -106,6 +84,8 @@ layout 'welcome'
     		Static.create(:title => 'contacts', :text => text)
     	end
     end
+  end
+  def authors
   end
 	def event
         redirect_to(:back)

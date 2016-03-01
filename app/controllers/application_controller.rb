@@ -69,6 +69,9 @@ class ApplicationController < ActionController::Base
     end
   end
   def init
+    @news = News.last
+    @question = Question.last
+    @feedback = Feedback.last
     @worktypes = Worktype.all.order(:order)
     @contact=Seo.where(:code_title => 'Contacts').first
     @service=Seo.where(:code_title => 'Service').first
