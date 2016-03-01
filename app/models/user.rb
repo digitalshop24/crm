@@ -60,9 +60,10 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
   def add_event
+    binding.pry
         @client = self
         token = @client.send(:set_reset_password_token)
-        message = edit_password_url(@client, reset_password_token: token)
+        message = "#{ENV['host']}/users/password/edit?reset_password_token=#{token}"
         sms = SMSC.new()
         ret = sms.send_sms( @client.phone, "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
         email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
