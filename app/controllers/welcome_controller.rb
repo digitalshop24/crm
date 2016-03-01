@@ -11,7 +11,6 @@ class WelcomeController < ApplicationController
   end
 
   def create_order
-    binding.pry
     @order = Order.new(order_params.except(:client))
     @order.deadline = Date.parse(params[:order][:deadline])
     if current_user
@@ -26,7 +25,6 @@ class WelcomeController < ApplicationController
       @client = Client.new(order_params[:client].merge({ activated: true }))
       @client.password = SecureRandom.hex
       if @client.save
-        binding.pry
         @order.client_id = @client.id
         token = @client.send(:set_reset_password_token)
         message = edit_password_url(@client, reset_password_token: token)
