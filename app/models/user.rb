@@ -60,7 +60,6 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
   def add_event
-    binding.pry
         @client = self
         token = @client.send(:set_reset_password_token)
         message = "#{ENV['host']}/users/password/edit?reset_password_token=#{token}"
