@@ -20,7 +20,7 @@ ready = function() {
         if ($(this).val() != '') {
             $("#speciality_other").addClass("hidden");
         }
-    });
+    });    
 };
 
 $(document).ready(ready);
