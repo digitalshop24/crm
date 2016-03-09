@@ -200,6 +200,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.4)
     railties (4.2.3)
       actionpack (= 4.2.3)
       activesupport (= 4.2.3)
@@ -298,6 +303,7 @@ DEPENDENCIES
   pg
   pry (~> 0.10.3)
   rails (= 4.2.3)
+  rails_12factor
   sass-rails (~> 5.0)
   sidekiq
   sinatra
@@ -308,3 +314,6 @@ DEPENDENCIES
   will_paginate (~> 3.0.6)
   will_paginate-bootstrap (~> 1.0.1)
   wysiwyg-rails
+
+BUNDLED WITH
+   1.11.2
