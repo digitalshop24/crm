@@ -30,6 +30,7 @@ gem 'faye-rails', '~> 2.0', '>= 2.0.1'
 gem 'thin', '~> 1.6', '>= 1.6.4'
 
 group :production do
+  gem 'rails_12factor'
   gem 'unicorn', '~> 4.9'
 end
 
