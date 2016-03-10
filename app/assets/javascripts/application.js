@@ -1,5 +1,7 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require autocomplete-rails
 //= require moment
 //= require moment/ru.js
 //= require maskedinput

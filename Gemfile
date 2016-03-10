@@ -6,6 +6,7 @@ gem 'pg'
 gem 'uglifier', '>= 1.3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.1.0'
+gem "jquery-ui-rails"
 gem 'jquery-rails'
 gem 'gon', '~> 6.0', '>= 6.0.1'
 
@@ -28,6 +29,7 @@ gem 'sinatra', require: false
 gem 'sidekiq'
 gem 'faye-rails', '~> 2.0', '>= 2.0.1'
 gem 'thin', '~> 1.6', '>= 1.6.4'
+gem 'rails4-autocomplete'
 
 group :production do
   gem 'unicorn', '~> 4.9'

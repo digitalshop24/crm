@@ -2,15 +2,14 @@ require "smsc_api.rb"
 class WelcomeController < ApplicationController
   # load_and_authorize_resource :class => false
   layout 'welcome'
+  autocomplete :subspeciality, :subspeciality
   def index
     @order = Order.new
     @client = Client.new
-    @news = News.last
-    @question = Question.last
-    @feedback = Feedback.last
   end
 
   def create_order
+    binding.pry
     @order = Order.new(order_params.except(:client))
     @order.deadline = Date.parse(params[:order][:deadline])
     if current_user

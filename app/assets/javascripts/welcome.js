@@ -1,5 +1,7 @@
 //= require jquery-1.11.2.min
 //= require jquery_ujs
+//= require jquery-ui
+//= require autocomplete-rails
 //= require bootstrap.min
 //= require owl.carousel.min
 //= require jquery.formstyler.min

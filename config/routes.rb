@@ -90,5 +90,7 @@ Rails.application.routes.draw do
     get 'create_order', to: 'dashboard#create_order', as: :dashboard_create_order
     get 'new_orders', to: 'dashboard#new_orders', as: :dashboard_new_orders
   end
-  root 'welcome#index'
+  root 'welcome#index' 
+  get 'welcome/autocomplete_subspeciality_subspeciality'
+     resources :welcome
 end
