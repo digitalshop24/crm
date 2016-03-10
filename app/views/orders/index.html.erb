@@ -7,6 +7,9 @@
     <div class="col-md-4">
       <%= collection_select :search, :status, Order.statuses_names_for_filter_select, :first, :second, { prompt: 'Все' }, class: 'form-control' %>
     </div>
+    <div class="col-md-4">
+      <%= collection_select :search, :worktype_id, Worktype.all, :id, :name, { prompt: 'Работы всех типов' }, class: 'form-control' %>
+    </div>
   </div>
   <div id="orders">
     <%= hidden_field_tag :direction, params[:direction] || '' %>

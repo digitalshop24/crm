@@ -118,7 +118,7 @@ class OrdersController < ApplicationController
   end
 
   def search_params
-    params.require(:search).permit(:id, :theme, :created_at, :inform_date, :status)
+    params.require(:search).permit(:id, :theme, :created_at, :inform_date, :status, :worktype_id)
   end
 
   def sort_column

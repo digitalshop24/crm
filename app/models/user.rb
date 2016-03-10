@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where(["name LIKE ? and email LIKE ?", "%#{search[:name]}%", "%#{search[:email]}%"])
+      where(["lower(name) LIKE lower(?) and lower(email) LIKE lower(?)", "%#{search[:name]}%", "%#{search[:email]}%"])
     else
       all
     end

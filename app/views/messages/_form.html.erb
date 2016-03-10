@@ -17,9 +17,11 @@
           <%= f.hidden_field :order_id, value: @order.id %>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <label class="checkbox-inline">Email <%= check_box_tag 'send_email' %></label>
-          <label class="checkbox-inline">SMS <%= check_box_tag 'send_sms' %></label>
-          <p></p>
+          <% if current_user.role.in? ['Manager', 'Admin'] %>
+            <label class="checkbox-inline">Email <%= check_box_tag 'send_email' %></label>
+            <label class="checkbox-inline">SMS <%= check_box_tag 'send_sms' %></label>
+            <p></p>
+          <% end %>
           <% if current_user.role == 'Manager' %>
             <%= f.submit "Отправить заказчику", class: 'btn btn-primary btn-block send_button', 'data-receiver' => @order.client_id if @order.client_id %>
             <%= f.submit "Отправить автору", class: 'btn btn-warning btn-block send_button', 'data-receiver' => @order.employee_id if @order.employee_id %>

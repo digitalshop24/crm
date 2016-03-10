@@ -12,6 +12,9 @@ class ApplicationDecorator < Draper::Decorator
       object.inform_date.strftime("%d.%m.%Y %H:%M")
     end
   end
+  def show_icon
+    h.object_glyphicon_link(object, 'eye-open', 'Открыть')
+  end
   def edit_icon
     h.object_glyphicon_link(object, 'edit', 'Редактировать', { action: :edit })
   end

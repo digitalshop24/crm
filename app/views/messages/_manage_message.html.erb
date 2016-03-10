@@ -17,7 +17,7 @@
         <span class="glyphicon <%= message.sender.glyphicon %>" aria-hidden="true"></span>
       <% end %>
       <%= link_to '', '#message_form', class: 'glyphicon glyphicon-envelope set_receiver', 
-            title: 'Отправить сообщение', 'data-receiver' => message.sender.id, 'data-receiver-name' => message.sender.name %>
+            title: 'Отправить сообщение', 'data-receiver' => message.sender.id, 'data-receiver-name' => "#{message.sender.name}" %>
     </div>
     <div class="media-body">
       <h4 class="media-heading">

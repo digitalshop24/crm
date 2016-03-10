@@ -44,7 +44,7 @@ $(document).ready(function() {
     $('.set_receiver').click(function(){
         var receiver = { 'id': $(this).attr('data-receiver'), 'name': $(this).attr('data-receiver-name')};
         $('input#message_receiver_id').val(receiver['id']);
-        $('#receiver_id_show span').html(receiver['name']);
+        $('#receiver_id_show span').html(receiver['name'] + ' (id: ' + receiver['id'] + ')');
         $('#receiver_id_show, .send_button_main').removeClass('hidden');
         $('html, body').animate({
           scrollTop: $("#message_form").offset().top
