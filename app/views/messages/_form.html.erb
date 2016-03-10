@@ -1,9 +1,11 @@
-<div class="panel panel-default">
+<div class="panel panel-default" id="message_form">
   <div class="panel-body">
     <%= form_for(Message.new, remote: true) do |f| %>
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
           <div class="form-group">
+            <%= f.hidden_field :receiver_id, required: true %>
+            <p class="hidden" id="receiver_id_show">Получатель: <span></span></p>
             <% if current_user.role == 'Employee' %>
               <%= f.label :price %> (рублей)<br />
               <%= text_field_tag :price, nil, type: "number", class: 'form-control' %>
@@ -15,21 +17,26 @@
           <%= f.hidden_field :order_id, value: @order.id %>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <p>Отправить сообщение</p>
-          <% if current_user.role == 'Manager' %>
-            <%= f.submit "Отправить заказчику", class: 'btn btn-primary btn-block', name: "receiver[#{@order.client_id}]" if @order.client_id %>
-            <%= f.submit "Отправить автору", class: 'btn btn-warning btn-block', name: "receiver[#{@order.employee_id}]" if @order.employee_id %>
-          <% elsif current_user.role == 'Admin' %>
-            <%= f.submit "Отправить менеджеру", class: 'btn btn-primary btn-block', name: "receiver[#{@order.manager_id}]" if @order.manager_id %>
-            <%= f.submit "Отправить автору", class: 'btn btn-warning btn-block', name: "receiver[#{@order.employee_id}]" if @order.employee_id %>
-            <%= f.submit "Отправить заказчику", class: 'btn btn-primary btn-block', name: "receiver[#{@order.client_id}]" if @order.client_id %>
-          <% elsif current_user.role == 'Client' %>
-            <%= f.submit "Отправить менеджеру", class: 'btn btn-primary btn-block', name: "receiver[#{@order.manager_id}]" if @order.manager_id %>
-            <%= f.submit "Отправить автору", class: 'btn btn-warning btn-block', name: "receiver[#{@order.employee_id}]" if @order.employee_id %>
-          <% elsif current_user.role == 'Employee' %>
-            <%= f.submit "Отправить менеджеру", class: 'btn btn-primary btn-block', name: "receiver[#{@order.manager_id}]" if @order.manager_id %>
-            <%= f.submit "Отправить заказчику", class: 'btn btn-warning btn-block', name: "receiver[#{@order.client_id}]" if @order.client_id %>
+          <% if current_user.role.in? ['Manager', 'Admin'] %>
+            <label class="checkbox-inline">Email <%= check_box_tag 'send_email' %></label>
+            <label class="checkbox-inline">SMS <%= check_box_tag 'send_sms' %></label>
+            <p></p>
           <% end %>
+          <% if current_user.role == 'Manager' %>
+            <%= f.submit "Отправить заказчику", class: 'btn btn-primary btn-block send_button', 'data-receiver' => @order.client_id if @order.client_id %>
+            <%= f.submit "Отправить автору", class: 'btn btn-warning btn-block send_button', 'data-receiver' => @order.employee_id if @order.employee_id %>
+          <% elsif current_user.role == 'Admin' %>
+            <%= f.submit "Отправить менеджеру", class: 'btn btn-primary btn-block send_button', 'data-receiver' => @order.manager_id if @order.manager_id %>
+            <%= f.submit "Отправить автору", class: 'btn btn-warning btn-block send_button', 'data-receiver' => @order.employee_id if @order.employee_id %>
+            <%= f.submit "Отправить заказчику", class: 'btn btn-primary btn-block send_button', 'data-receiver' => @order.client_id if @order.client_id %>
+          <% elsif current_user.role == 'Client' %>
+            <%= f.submit "Отправить менеджеру", class: 'btn btn-primary btn-block send_button', 'data-receiver' => @order.manager_id if @order.manager_id %>
+            <%= f.submit "Отправить автору", class: 'btn btn-warning btn-block send_button', 'data-receiver' => @order.employee_id if @order.employee_id %>
+          <% elsif current_user.role == 'Employee' %>
+            <%= f.submit "Отправить менеджеру", class: 'btn btn-primary btn-block send_button', 'data-receiver' => @order.manager_id if @order.manager_id %>
+            <%= f.submit "Отправить заказчику", class: 'btn btn-warning btn-block send_button', 'data-receiver' => @order.client_id if @order.client_id %>
+          <% end %>
+          <%= f.submit "Отправить", class: 'btn btn-warning btn-block hidden send_button_main' %>
         </div>
       </div>
     <% end %>

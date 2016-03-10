@@ -9,11 +9,18 @@ class MessagesController < ApplicationController
         @message.content = "Стоимость: #{params[:price]} рублей <br>#{@message.content}"
       end
       @message.sender_id = current_user.id
-      @message.receiver_id = params['receiver'].first.first
       unless (['Admin', 'Manager'] & [current_user.role, User.find(@message.receiver_id).role]).empty?
         @message.approved!
       end
-      if @message.save
+      if @message.save!
+        if params[:send_email]
+          # send email
+          puts 'Отправлен email'
+        end
+        if params[:send_sms]
+          #send sms
+          puts 'Отправлено sms'
+        end
         flash.now[:success] = 'Сообщение отправлено'
       else
         flash.now[:error] = 'Ошибка'

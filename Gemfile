@@ -32,6 +32,7 @@ gem 'thin', '~> 1.6', '>= 1.6.4'
 gem 'rails4-autocomplete'
 
 group :production do
+  gem 'rails_12factor'
   gem 'unicorn', '~> 4.9'
 end
 

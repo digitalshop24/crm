@@ -40,6 +40,21 @@ $(document).ready(function() {
     });
     $('select.oneItem').niceSelect();   
     $('#messages.panel-scroll').scrollTop(999999);
+
+    $('.set_receiver').click(function(){
+        var receiver = { 'id': $(this).attr('data-receiver'), 'name': $(this).attr('data-receiver-name')};
+        $('input#message_receiver_id').val(receiver['id']);
+        $('#receiver_id_show span').html(receiver['name'] + ' (id: ' + receiver['id'] + ')');
+        $('#receiver_id_show, .send_button_main').removeClass('hidden');
+        $('html, body').animate({
+          scrollTop: $("#message_form").offset().top
+        }, 1000);
+    });
+
+    $('.send_button').click(function(){
+      $('input#message_receiver_id').val($(this).attr('data-receiver'));
+      $('#receiver_id_show, .send_button_main').addClass('hidden');
+    }); 
 });
 
 //$(document).ready(ready);

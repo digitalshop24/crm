@@ -28,7 +28,6 @@ pickle-email-*.html
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
 /shared
 /public/system/
-/Procfile
 
 # if using bower-rails ignore default bower_components path bower.json files
 /vendor/assets/bower_components
