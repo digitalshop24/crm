@@ -31,6 +31,16 @@
             <td>
               <p><%= event.created_at.localtime.to_s(:db) %></p>
             </td>
+          <% elsif event.string == 'стоимость' %>
+           <td>
+              <p><%= event.id %></p>
+            </td>
+            <td>
+              <p><%= "#{event.content}" %></p>
+            </td>
+            <td>
+              <p><%= event.created_at.localtime.to_s(:db) %></p>
+            </td>
           <% elsif event.string == 'usr' %>
              <td>
               <p><%= event.id %></p>

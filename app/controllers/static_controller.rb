@@ -88,7 +88,10 @@ layout 'welcome'
   def authors
   end
 	def event
-        redirect_to(:back)
+    event_params = { :content => "оставлена заявка с номером #{params[:tel]} и типом работы #{params[:type]}", :event_type => "стоимость" }
+    event = Event.new(event_params)
+    event.save
+    redirect_to(:back)
 	end
   def condedit
     @text = Static.where(:title => 'condition').first
