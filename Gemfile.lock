@@ -303,11 +303,8 @@ DEPENDENCIES
   pg
   pry (~> 0.10.3)
   rails (= 4.2.3)
-<<<<<<< HEAD
   rails4-autocomplete
-=======
   rails_12factor
->>>>>>> 6d74b444f4d8b04d9af54b2b1e66b6010bc557dd
   sass-rails (~> 5.0)
   sidekiq
   sinatra
