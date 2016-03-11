@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
 
   def create_order
     @order = Order.new(order_params.except(:client))
-    @order.subspeciality = Subspeciality.where(subspeciality: params[:subspeciality]).firstra
+    @order.subspeciality = Subspeciality.where(subspeciality: params[:subspeciality]).first
     @order.deadline = Date.parse(params[:order][:deadline])
     if current_user
       @order.client_id = current_user.id if current_user.role = "Client"
