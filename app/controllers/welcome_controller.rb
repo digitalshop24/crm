@@ -9,8 +9,8 @@ class WelcomeController < ApplicationController
   end
 
   def create_order
-    binding.pry
     @order = Order.new(order_params.except(:client))
+    @order.subspeciality = Subspeciality.where(subspeciality: params[:subspeciality]).firstra
     @order.deadline = Date.parse(params[:order][:deadline])
     if current_user
       @order.client_id = current_user.id if current_user.role = "Client"
@@ -28,13 +28,13 @@ class WelcomeController < ApplicationController
         token = @client.send(:set_reset_password_token)
         message = edit_password_url(@client, reset_password_token: token)
         sms = SMSC.new()
-        ret = sms.send_sms( @client.phone, "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
-        email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
+        #tut ret = sms.send_sms( @client.phone, "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
+        #tut email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
           #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
           #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
-        uri = URI(email)
+        # tut uri = URI(email)
           #url = URI(sms)
-        a = Net::HTTP.get(uri)
+        #tut a = Net::HTTP.get(uri)
           #a = Net::HTTP.get(url)
        #UserMailer.delay.set_password_instructions(@client, token)
         if @order.save
@@ -55,7 +55,7 @@ class WelcomeController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:worktype_id, :worktype_other, :speciality_id, :speciality_other,
+    params.require(:order).permit(:subspeciality_id, :worktype_id, :worktype_other, :speciality_id, :speciality_other,
                                   :institution, :theme, :uniqueness, :document, :comment, :deadline,
                                   :page_number, { client: [:email, :phone] })
   end

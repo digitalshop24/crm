@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225103541) do
+ActiveRecord::Schema.define(version: 20160311134623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,9 +132,11 @@ ActiveRecord::Schema.define(version: 20160225103541) do
     t.integer  "employee_price"
     t.string   "commentary"
     t.string   "note"
+    t.integer  "subspeciality_id"
   end
 
   add_index "orders", ["speciality_id"], name: "index_orders_on_speciality_id", using: :btree
+  add_index "orders", ["subspeciality_id"], name: "index_orders_on_subspeciality_id", using: :btree
   add_index "orders", ["worktype_id"], name: "index_orders_on_worktype_id", using: :btree
 
   create_table "parts", force: :cascade do |t|
@@ -185,6 +187,12 @@ ActiveRecord::Schema.define(version: 20160225103541) do
 
   add_index "payouts", ["order_id"], name: "index_payouts_on_order_id", using: :btree
 
+  create_table "pays", force: :cascade do |t|
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pictures", force: :cascade do |t|
     t.string   "description"
     t.string   "image_file_name"
@@ -224,9 +232,9 @@ ActiveRecord::Schema.define(version: 20160225103541) do
     t.string   "name"
     t.string   "description"
     t.string   "title"
-    t.string   "code_title"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "code_title"
   end
 
   create_table "specialities", force: :cascade do |t|

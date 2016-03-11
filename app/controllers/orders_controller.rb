@@ -55,6 +55,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   def update
     if @order.update(order_params)
+       @order.subspeciality = Subspeciality.find(params[:order][:subspeciality_id])
       if params[:materials]
         params[:materials].each {|file|
         @order.materials.create(document: file)}
@@ -130,7 +131,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    permitted_arr = [:worktype_id, :worktype_other, :speciality_id, :speciality_other,
+    permitted_arr = [:subspeciality_id, :worktype_id, :worktype_other, :speciality_id, :speciality_other,
                      :institution, :theme, :uniqueness, :document, :comment, :deadline, :page_number, :status, :materials]
     if ["Admin", "Manager"].include?(current_user.role)
       permitted_arr << [:client_id, :employee_id, :employee_deadline, :inform_date, :status, :price, :employee_price]
