@@ -20,7 +20,7 @@
         <td><%= payment.status %></td>
         <td><%= link_to 'Чек', payment.check.url, target: '_blank' if payment.check_file_name %></td>
         <td>
-          <% if payment.moderation? and payment.check_file_name %>
+          <% if payment.модерация? and payment.check_file_name %>
             <%= link_to 'Одобрить', approve_payment_path(payment) %>
             <%= link_to 'Отклонить', deny_payment_path(payment) %>
           <% end %>

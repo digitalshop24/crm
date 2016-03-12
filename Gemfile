@@ -9,7 +9,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "jquery-ui-rails"
 gem 'jquery-rails'
 gem 'gon', '~> 6.0', '>= 6.0.1'
-
+gem 'httparty'
 gem 'devise', '~> 3.5.2'
 gem 'devise-async', '~> 0.10.1'
 gem 'cancancan', '~> 1.13', '>= 1.13.1'

@@ -1,6 +1,6 @@
 <%= render "dashboard/#{current_user.role.downcase}/header" %>
 <h3>Счет №<%= @payment.id %></h3>
-<% if @payment.waiting? %>
+<% if @payment.ожидает? %>
   <h4>Оплата в банке</h4>
   <p><strong>Сумма: </strong><%= @payment.amount %></p>
   <p><strong>Реквизиты для оплаты: </strong>3423423423423434</p>
@@ -20,17 +20,17 @@
   <h4>Оплата через PayMaster</h4>
   <p>Paymaster принимает Visa, Mastercard, Webmonry</p>
   <% link_to 'Оплатить', @payment.paymaster_link %> -->
-<% elsif @payment.moderation? %>
+<% elsif @payment.модерация? %>
   <p>
     Ваш платеж проверяется
   </p>
   <% if @payment.check_file_name %>
     Загруженный чек: <%= link_to @payment.check_file_name, @payment.check.url, target: '_blank'  %>
   <% end %>
-<% elsif @payment.approved? %>
+<% elsif @payment.подтвержден? %>
   <p><strong>Статус: </strong><%= @payment.status %></p>
   <p><strong>Дата выставления: </strong><%= @payment.created_at %></p>
   <p><strong>Дата оплаты: </strong><%= @payment.sys_date %></p>
-<% elsif @payment.denied? %>
+<% elsif @payment.отклонен? %>
   <p>Платеж отклонен</p>
 <% end %>

@@ -15,7 +15,7 @@
         <td><%= payment.created_at %></td>
         <td><%= link_to payment.order.id, payment.order if payment.order %></td>
         <td><%= payment.status %></td>
-        <% link = payment.waiting? ? 'Оплатить' : 'Посмотреть' %>
+        <% link = payment.ожидает? ? 'Оплатить' : 'Посмотреть' %>
         <td><%= link_to link, payment %></td>
       </tr>
     <% end %>

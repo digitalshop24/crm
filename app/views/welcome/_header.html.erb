@@ -59,8 +59,14 @@
                   </li>
                 <%end%>
               <%end%>
+              <li  class="pull-right"><% if user_signed_in? %>
+                <% else %>
+                <a href="/users/sign_up/client" title="">Регистрация</a>
               
+                <% end %>
+              </li>
             </ul>
+
           </div>
         </nav>
         <!-- =/nav -->
@@ -73,7 +79,7 @@
            <a href="/dashboard" class="to-cost"  data-target="#modalorder">Личный кабинет</a>
         <% else %>
           <%= link_to('Войти', new_user_session_path, class: "in")  %>
-          <a href="#" class="to-cost" data-toggle="modal" data-target="#modalorder">узнать стоимость</a>
+          <a href="#" class="to-cost" data-toggle="modal" data-target="#modalorder">Узнать стоимость</a>
         <% end %>
        
       </div>

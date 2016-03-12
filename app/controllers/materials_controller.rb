@@ -4,32 +4,26 @@ class MaterialsController < ApplicationController
   def create
     material_creation_params = material_params.merge(params.require(:material).permit(:order_id))
     @material = Material.new(material_creation_params)
-    respond_to do |format|
       if @material.save
-        flash[:success] = 'Доработка успешно создана.'
-        format.html { redirect_to :back }
-        format.json { render :show, status: :created, location: @material }
+        redirect_to :back, notice: 'Файл успешно создан.'
       else
-        flash[:danger] = 'Доработка не была создана.'
-        format.html { redirect_to :back }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
+        flash[:danger] = 'Файл не была создан.'
+        redirect_to :back 
       end
-    end
   end
 
   def update
     if @material.update(material_params)
-      flash[:success] = 'Доработка успешно обновлена.'
-      redirect_to :back
+      redirect_to :back, notice: 'Файл успешно обновлен.'
     else
-      flash[:danger] = 'Доработка не была обновлена.'
+      flash[:danger] = 'Файл не была обновлен.'
       redirect_to :back
     end
   end
 
   def destroy
     @material.destroy
-    flash[:success] = 'Доработка успешно удалена'
+    flash[:success] = 'Файл успешно удален'
     redirect_to :back
   end
 

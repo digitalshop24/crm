@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
+    #UserMailer.password_reset(self).deliver
   end
 
   def glyphicon
@@ -60,18 +60,23 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
   def add_event
+        binding.pry
         @client = self
         token = @client.send(:set_reset_password_token)
-        message = "#{ENV['host']}/users/password/edit?reset_password_token=#{token}"
+        mes1 = ERB::Util.url_encode("Здравствуйте, вы успешно зарегистрировались в системе ")
+        mes2 = ERB::Util.url_encode(" Перейти в личный кабинет: s")
+        s = "https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes="+ mes1 + "http://redstudent.ru/." + mes2 + "http://redstudent.ru/users/password/edit?reset_password_token=#{token}&sender=Avtor@redstudent.ru&subj=Registration&mail=1&charset=utf-8"
+        res = HTTParty.get(s)
         sms = SMSC.new()
         ret = sms.send_sms( @client.phone, "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
-        email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
-          #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
-          #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
-        uri = URI(email)
-          #url = URI(sms)
-        a = Net::HTTP.get(uri)
-      event_params = { :user_id => self.id, :event_type => self.role, :content  => self.email, :link => "admin/users/#{self.id}/edit/", :string => 'usr'}
-      event = Event.create(event_params)
+        #message = "#{ENV['host']}/users/password/edit?reset_password_token=#{token}"
+        #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
+        #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")
+        #email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=test&sender=3206297@mail.ru&subj=test&mail=1")
+        #uri = URI(email)
+        #url = URI(sms)
+        #a = Net::HTTP.get(uri)
+        event_params = { :user_id => self.id, :event_type => self.role, :content  => self.email, :link => "admin/users/#{self.id}/edit/", :string => 'usr'}
+        event = Event.create(event_params)
   end
 end

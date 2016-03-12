@@ -42,10 +42,10 @@ class Order < ActiveRecord::Base
   end
 
   def received_cash
-    self.payments.approved.sum(:amount)
+    self.payments.подтвержден.sum(:amount)
   end
   def waiting_cash
-    self.payments.waiting.sum(:amount)
+    self.payments.ожидает.sum(:amount)
   end
   def waiting_cash?
     waiting_cash > 0

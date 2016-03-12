@@ -34,8 +34,10 @@
 //= require users
 //= require placeholders.min
 //= require modernizr
+//= require jquery.mask.js
 
 $(document).ready(function(){
+    $(".mobile-phone").mask("+999 (99) 999 99 99");
     var counter = 2;
     $('#del_file').hide();
     $('img#add_file').click(function(){
@@ -51,4 +53,7 @@ $(document).ready(function(){
         $('#f'+counter).remove();
     });
 });
+
+$(document).ready(ready);
+$(document).on('page:load', ready)
 

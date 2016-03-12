@@ -25,9 +25,7 @@ class WelcomeController < ApplicationController
       @client.password = SecureRandom.hex
       if @client.save
         @order.client_id = @client.id
-        token = @client.send(:set_reset_password_token)
-        message = edit_password_url(@client, reset_password_token: token)
-        sms = SMSC.new()
+        #sms = SMSC.new()
         #tut ret = sms.send_sms( @client.phone, "Вы успешно зарегистрированы на сайте редстудент, вам на электронную почту придут дальнейшие инструкции")
         #tut email = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes=#{message}&sender=Avtor@redstudent.ru&subj=Registration&mail=1")
           #sms = URI.encode("https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.phone}&mes=Ваш Редстудент")

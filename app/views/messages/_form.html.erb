@@ -7,10 +7,10 @@
             <%= f.hidden_field :receiver_id, required: true %>
             <p class="hidden" id="receiver_id_show">Получатель: <span></span></p>
             <% if current_user.role == 'Employee' %>
-              <%= f.label :price %> (рублей)<br />
+              <%= f.label 'Цена (Укажите сумму за которую вы готовы выполнить заказ)' %> <br />
               <%= text_field_tag :price, nil, type: "number", class: 'form-control' %>
             <% end %>
-            <%= f.label :content %><br />
+            <%= f.label 'Комментарий' %><br />
             <%= f.text_area :content, required: true, class: 'form-control', 
                  placeholder: 'Текст сообщения', rows: 5 %>
           </div>

@@ -10,12 +10,12 @@ require "erb"
 class SMSC
 	# Константы для настройки библиотеки
 	SMSC_LOGIN = "redstudent"			# логин клиента
-	SMSC_PASSWORD = "964647d902a7622644e83675d0ae0c16"	# пароль или MD5-хеш пароля в нижнем регистре
-	SMSC_POST = false				# использовать метод POST
-	SMSC_HTTPS = false				# использовать HTTPS протокол
+	SMSC_PASSWORD = "ERKol73Q"	# пароль или MD5-хеш пароля в нижнем регистре
+	SMSC_POST = true				# использовать метод POST
+	SMSC_HTTPS = true				# использовать HTTPS протокол
 	SMSC_CHARSET = "utf-8"			# кодировка сообщения: koi8-r или windows-1251 (по умолчанию utf-8)
-	SMSC_DEBUG = false				# флаг отладки
-	SMTP_FROM = "api@smsc.ru"		# e-mail адрес отправителя
+	SMSC_DEBUG = true			# флаг отладки
+	SMTP_FROM = "Avtor@redstudent.ru"		# e-mail адрес отправителя
 
 	# Функция отправки SMS
 	#
