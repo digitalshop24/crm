@@ -2,14 +2,13 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.3'
 gem 'pg'
-
+gem 'yaml_db', :git => 'git://github.com/ludicast/yaml_db.git'
 gem 'uglifier', '>= 1.3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem "jquery-ui-rails"
 gem 'jquery-rails'
 gem 'gon', '~> 6.0', '>= 6.0.1'
-gem 'httparty'
 gem 'devise', '~> 3.5.2'
 gem 'devise-async', '~> 0.10.1'
 gem 'cancancan', '~> 1.13', '>= 1.13.1'
