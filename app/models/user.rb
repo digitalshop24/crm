@@ -2,7 +2,7 @@ require "smsc_api.rb"
 class User < ActiveRecord::Base
   ROLES = ['admin', 'manager', 'employee', 'client']
   devise :database_authenticatable, :registerable,
-    :recoverable, :async, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
   self.inheritance_column = 'role'
   has_many :sended_messages, foreign_key: "sender_id", class_name: "Message"
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"

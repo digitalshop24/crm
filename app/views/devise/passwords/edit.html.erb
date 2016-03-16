@@ -1,25 +1,55 @@
-<h2>Change your password</h2>
+<div class="outerwrapper">
+<%= render 'welcome/header' %>
+ <div class="floatcontacts container">
+    <div>
+      <a href="tel:+78007757681" class="tel"><span>+7 (800) </span>775-76-81</a>
+      <p class="skype"> Звонок бесплатный</p>
+    </div>    
+  </div>
+   <div class="main">
+<section class="HeroSection SmallPageSection">
+  <div class="container">
+
+
+
+<h2>Поменять пароль</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+  <div class="row">
+    <div class="form-group col-md-4">
+      <%= f.label :password, "Новый пароль" %><br />
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> символов минимум)</em><br />
+      <% end %>
+      <%= f.password_field :password,class: 'form-control', autofocus: true, autocomplete: "off" %>
+    </div>
+  </div>
+ <div class="row">
+    <div class="form-group col-md-4">
+      <%= f.label :password_confirmation, "Подтвердите новый пароль" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
+   <div class="row">
+      <div class="col-md-4">
+        <%= f.button "Восстановить пароль", class: 'btn btn-primary' %>
+      </div>
+    </div>
 <% end %>
+<br>
+      <div class="row">
+        <div class="col-md-4">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
 
-<%= render "devise/shared/links" %>
+ </div>
+</section>
+</div>
+</div>
+<%= render 'welcome/footer' %>
+

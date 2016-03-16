@@ -14,11 +14,11 @@ class MessagesController < ApplicationController
       end
       if @message.save!
         if params[:send_email]
-          # send email
+          binding.pry
           puts 'Отправлен email'
         end
         if params[:send_sms]
-          #send sms
+          binding.pry
           puts 'Отправлено sms'
         end
         flash.now[:success] = 'Сообщение отправлено'
