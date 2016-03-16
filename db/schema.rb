@@ -187,12 +187,6 @@ ActiveRecord::Schema.define(version: 20160311134623) do
 
   add_index "payouts", ["order_id"], name: "index_payouts_on_order_id", using: :btree
 
-  create_table "pays", force: :cascade do |t|
-    t.text     "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pictures", force: :cascade do |t|
     t.string   "description"
     t.string   "image_file_name"
@@ -232,9 +226,9 @@ ActiveRecord::Schema.define(version: 20160311134623) do
     t.string   "name"
     t.string   "description"
     t.string   "title"
+    t.string   "code_title"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "code_title"
   end
 
   create_table "specialities", force: :cascade do |t|

@@ -14,27 +14,27 @@
       <h1 class="text-center">Вход</h1>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 col-xs-12">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'E-mail' %>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 col-xs-12">
             <%= f.label :password %><br />
             <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Пароль' %>
           </div>
         </div>
         <% if devise_mapping.rememberable? -%>
           <div class="row">
-            <div class="checkbox col-md-4">
+            <div class="checkbox col-md-4 col-xs-12">
               <%= f.check_box :remember_me, style: "margin-top:-11px; margin-left: 1px" %>
               <%= f.label :remember_me %>
             </div>
           </div>
         <% end %>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-xs-12">
             <%= f.button "Вход", class: 'btn btn-primary' %>
           </div>
         </div>
