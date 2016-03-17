@@ -185,6 +185,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -312,6 +313,7 @@ DEPENDENCIES
   paperclip (~> 4.3)
   pg
   pry (~> 0.10.3)
+  rack-cors
   rails (= 4.2.3)
   rails4-autocomplete
   rails_12factor
