@@ -8,6 +8,11 @@ class WelcomeController < ApplicationController
     @client = Client.new
   end
 
+  def tform
+    Tform.create(name: params[:name], city: params[:city], email: params[:email])
+    render nothing: true
+  end
+
   def create_order
     @order = Order.new(order_params.except(:client))
     @order.subspeciality = Subspeciality.where(subspeciality: params[:subspeciality]).first

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311134623) do
+ActiveRecord::Schema.define(version: 20160317151449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -288,6 +288,14 @@ ActiveRecord::Schema.define(version: 20160311134623) do
   add_index "subspecialities_users", ["employee_id", "subspeciality_id"], name: "index_subspecialities_users_on_employee_id_and_subspeciality_id", unique: true, using: :btree
   add_index "subspecialities_users", ["employee_id"], name: "index_subspecialities_users_on_employee_id", using: :btree
   add_index "subspecialities_users", ["subspeciality_id"], name: "index_subspecialities_users_on_subspeciality_id", using: :btree
+
+  create_table "tforms", force: :cascade do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
