@@ -11,7 +11,7 @@
     <% @user.speciality.each do |sp| %>
       <% subsp = sp.subspecialities.joins('join subspecialities_users on subspecialities.id = subspecialities_users.subspeciality_id').where('subspecialities_users.employee_id = ?', @user.id) %>
       <% unless subsp.empty? %>
-        <% subsp.each do |subs| %>
+        
           <div class="row" id="<%= "speciality_1000#{sp.id}" %>">
             <div class="form-group col-md-5">
               <select name="user[speciality_ids][]" class="form-control speciality_select" required>
@@ -20,16 +20,15 @@
               </select>
             </div>
             <div class="form-group col-md-6">
-              <select required name="user[subspeciality_ids][]" class="form-control subspeciality_select">
-                <option value="" id="subspeciality_prompt">Выберите подспециализацию</option>
-                <%= options_from_collection_for_select(sp.subspecialities, :id, :subspeciality, subs.id) %>
+              <select multiple required name="user[subspeciality_ids][]" class="form-control subspeciality_select">
+                <option value="" id="subspeciality_prompt">Выберите подспециализацию(зажмите ctrl для выбора несокльких)</option>
+                <%= options_from_collection_for_select(sp.subspecialities, :id, :subspeciality, @user.subspeciality_ids) %>
               </select>
             </div>
             <div class="col-md-1">
               <a class="btn btn-default delete_speciality"><span class="glyphicon glyphicon-minus"></span></a>
             </div>
           </div>
-        <% end %>
       <% else %>
         <div class="row" id="<%= "speciality_1000#{sp.id}" %>">
           <div class="form-group col-md-5">
@@ -39,9 +38,9 @@
             </select>
           </div>
           <div class="form-group col-md-6">
-            <select name="user[subspeciality_ids][]" class="form-control subspeciality_select">
+            <select multiple name="user[subspeciality_ids][]" class="form-control subspeciality_select">
               <option value="" id="subspeciality_prompt">Выберите подспециализацию</option>
-              <%= options_from_collection_for_select(sp.subspecialities, :id, :subspeciality) %>
+              <%= options_from_collection_for_select(sp.subspecialities, :id, :subspeciality, "@user.subspeciality.first.id") %>
             </select>
           </div>
           <div class="col-md-1">

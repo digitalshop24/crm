@@ -18,7 +18,6 @@ class Devise::PasswordsController < DeviseController
     user.reset_password_sent_at = Time.now
     user.save
     mes1 = ERB::Util.url_encode("Здравствуйте, чтобы восстановить пароль перейдите по ссылке: ")
-    binding.pry
     s = "https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{resource_params[:email]}&mes="+ mes1  + "http://redstudent.ru/users/password/edit?reset_password_token=#{@raw_token}&sender=Avtor@redstudent.ru&subj=Registration&mail=1&charset=utf-8"
     res = HTTParty.get(s)
     p "/users/password/edit?initial=true&reset_password_token=#{@raw_token}"
