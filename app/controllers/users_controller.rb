@@ -38,8 +38,36 @@ class UsersController < ApplicationController
     parms = user_params
     parms.delete(:password) if parms[:password].blank?
     parms.delete(:password_confirmation) if parms[:password].blank? and parms[:password_confirmation].blank?
+    parms.delete(:speciality_ids)
+    parms.delete(:subspeciality_ids)
     if @user.update_attributes(parms)
-      flash[:notice] = "Пользователь обновлен"
+      if @user.role == 'Employee'
+        @user.speciality.clear
+        @user.subspeciality.clear
+        if params[:user][:speciality_ids]
+          params[:user][:speciality_ids].each do |s|
+            begin
+              @user.speciality<<Speciality.find(s)
+            rescue
+              @mes = "Нельзя выбирать одинаквые специальности"
+             end
+          end
+        end
+        if  params[:user][:subspeciality_ids]
+          params[:user][:subspeciality_ids].each do |s|
+            begin
+            @user.subspeciality<<Subspeciality.find(s)
+          rescue
+              @mes = "Нельзя выбирать одинаквые специальности"
+            end
+          end
+        end
+      end
+      if @mes 
+         flash[:danger] = @mes
+      else
+        flash[:notice] = "Пользователь обновлен"
+      end
       redirect_to action: :index
     else
       render action: 'edit'
