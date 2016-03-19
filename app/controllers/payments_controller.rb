@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
 
   def upload_check
     if @payment.update(upload_params)
-      @payment.update(status: :moderation)
+      @payment.update(status: :модерация)
       redirect_to :back, notice: 'Чек загружен'
     else
       redirect_to :back, alert: 'Ошибка'
@@ -53,8 +53,8 @@ class PaymentsController < ApplicationController
   end
 
   def approve
-    if @payment.moderation?
-      if @payment.approved!
+    if @payment.модерация?
+      if @payment.подтвержден!
         unless @payment.order_id
           account = @payment.client.account
           if account.currency == @payment.currency
@@ -75,7 +75,7 @@ class PaymentsController < ApplicationController
     if (current_user.account.amount > @payment.amount)
       account = current_user.account
       account.update(amount: account.amount - @payment.amount)
-      @payment.update(status: :approved, sys_date: Time.now)
+      @payment.update(status: :подтвержден, sys_date: Time.now)
       redirect_to :back, notice: 'Оплачено'
     else
       redirect_to :back, alert: 'Недостаточно денег'
@@ -83,8 +83,8 @@ class PaymentsController < ApplicationController
   end
 
   def deny
-    if @payment.moderation?
-      if @payment.denied!
+    if @payment.модерация?
+      if @payment.отклонен!
         redirect_to :back, notice: 'Оплата отклонена'
       else
         redirect_to :back, notice: 'Ошибка'
@@ -94,7 +94,7 @@ class PaymentsController < ApplicationController
 
   def confirm_invoice
     if params[:LMI_MERCHANT_ID] == Payment::LMI_MERCHANT_ID
-      payments = Payment.waiting.where(id: params[:LMI_PAYMENT_NO], amount: params[:LMI_PAYMENT_AMOUNT], currency: params[:LMI_CURRENCY])
+      payments = Payment.ожидает.where(id: params[:LMI_PAYMENT_NO], amount: params[:LMI_PAYMENT_AMOUNT], currency: params[:LMI_CURRENCY])
       if payments.count == 1
         return render plain: "YES"
       end
@@ -104,9 +104,9 @@ class PaymentsController < ApplicationController
 
   def notify
     if params[:LMI_MERCHANT_ID] == Payment::LMI_MERCHANT_ID
-      payment = Payment.waiting.find_by(id: params[:LMI_PAYMENT_NO], amount: params[:LMI_PAYMENT_AMOUNT], currency: params[:LMI_CURRENCY])
+      payment = Payment.ожидает.find_by(id: params[:LMI_PAYMENT_NO], amount: params[:LMI_PAYMENT_AMOUNT], currency: params[:LMI_CURRENCY])
       if payment
-        payments.first.update(sys_id: params[:LMI_SYS_PAYMENT_ID], status: :approved, sys_date: params[:LMI_SYS_PAYMENT_DATE])
+        payments.first.update(sys_id: params[:LMI_SYS_PAYMENT_ID], status: :подтвержден, sys_date: params[:LMI_SYS_PAYMENT_DATE])
       end
     end
     render nothing: true
