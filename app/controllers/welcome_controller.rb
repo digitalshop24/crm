@@ -20,6 +20,9 @@ class WelcomeController < ApplicationController
     if current_user
       @order.client_id = current_user.id if current_user.role = "Client"
       if @order.save
+        if params[:materials]
+          params[:materials].each {|file| @order.materials.create(document: file)}
+        end
         redirect_to root_path, notice: 'Заказ успешно создан.'
       else
         flash[:notice] = 'Ошибка'
@@ -40,10 +43,9 @@ class WelcomeController < ApplicationController
         #tut a = Net::HTTP.get(uri)
           #a = Net::HTTP.get(url)
        #UserMailer.delay.set_password_instructions(@client, token)
-        if @order.save
+        if @order.save  
           if params[:materials]
-            params[:materials].each {|file| 
-              @order.materials.create(document: file)}
+            params[:materials].each {|file| @order.materials.create(document: file)}
           end
           sign_in(:user, @client)
           redirect_to dashboard_index_path, notice: 'Заказ создан. Вы получите на email инструкцию для задания пароля'
