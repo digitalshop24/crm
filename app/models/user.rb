@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"
   has_one :account, dependent: :destroy
   has_many :events, dependent: :destroy
- # after_create :add_event
+  after_create :add_event
 
   def self.search(search)
     if search
@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
         @client = self
         token = @client.send(:set_reset_password_token)
         mes1 = ERB::Util.url_encode("Здравствуйте, вы успешно зарегистрировались в системе ")
-        mes2 = ERB::Util.url_encode(" Перейти в личный кабинет: s")
+        mes2 = ERB::Util.url_encode(" Перейти в личный кабинет: ")
         s = "https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@client.email}&mes="+ mes1 + "http://redstudent.ru/." + mes2 + "http://redstudent.ru/users/password/edit?reset_password_token=#{token}&sender=Avtor@redstudent.ru&subj=Registration&mail=1&charset=utf-8"
         res = HTTParty.get(s)
         sms = SMSC.new()
