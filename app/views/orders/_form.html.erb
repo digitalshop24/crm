@@ -11,48 +11,50 @@
   <% end %>
   <div class="form-group">
     <%= f.label :worktype %><br>
-    <%= f.collection_select :worktype_id, Worktype.all, :id, :name, { prompt: 'Выберите тип работы'}, {class: 'form-control'} %>
+    <%= f.collection_select :worktype_id, Worktype.all, :id, :name, { prompt: 'Выберите тип работы'}, {class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client')} %>
   </div>
   <div class="form-group" id="worktype_other" >
     <%= f.label :worktype_other %><br>
-    <%= f.text_field :worktype_other, class: 'form-control', placeholder: 'Введите тип работы, если его нет в списке', class: 'form-control' %>
+    <%= f.text_field :worktype_other, class: 'form-control', placeholder: 'Введите тип работы, если его нет в списке', class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
   <div class="form-group" id="worktype_other" >
     <%= f.label 'Подспециальность' %><br>
-    <%= f.collection_select :subspeciality_id, Subspeciality.all, :id, :subspeciality, { prompt: 'Подспециальность'}, {class: 'form-control'} %>
+    <%= f.collection_select :subspeciality_id, Subspeciality.all, :id, :subspeciality, { prompt: 'Подспециальность'}, {class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client')} %>
   </div>
   <div class="form-group">
     <%= f.label :speciality %><br>
-    <%= f.collection_select :speciality_id, Speciality.all, :id, :name, { prompt: 'Выберите предмет'}, {class: 'form-control'} %>
+    <%= f.collection_select :speciality_id, Speciality.all, :id, :name, { prompt: 'Выберите предмет'}, {class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client')} %>
   </div>
   <div class="form-group" id="speciality_other">
     <%= f.label :speciality_other %><br>
-    <%= f.text_field :speciality_other, class: 'form-control', placeholder: 'Введите название предмета, если его нет в списке', class: 'form-control' %>
+    <%= f.text_field :speciality_other, class: 'form-control', placeholder: 'Введите название предмета, если его нет в списке', class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
   <div class="form-group">
     <%= f.label :institution %><br>
-    <%= f.text_field :institution, placeholder: 'Учебное заведение', class: 'form-control' %>
+    <%= f.text_field :institution, placeholder: 'Учебное заведение', class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
   <div class="form-group">
     <%= f.label :theme %><br>
-    <%= f.text_field :theme, placeholder: 'Тема работы', class: 'form-control' %>
+    <%= f.text_field :theme, placeholder: 'Тема работы', class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
   <div class="form-group">
     <%= f.label :uniqueness %><br>
-    <%= f.text_field :uniqueness, placeholder: 'Уникальность', class: 'form-control' %>
+    <%= f.text_field :uniqueness, placeholder: 'Уникальность', class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
   <div class="form-group">
     <%= f.label :comment %><br>
-    <%= f.text_area :comment, placeholder: 'Комментарий', class: 'form-control' %>
+    <%= f.text_area :comment, placeholder: 'Комментарий', class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
   <div class="form-group">
     <%= f.label :deadline %><br>
-    <%= f.date_select :deadline, class: 'form-control' %>
+    <%= f.date_select :deadline, class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
   <div class="form-group">
     <%= f.label :page_number %><br>
-    <%= f.number_field :page_number, placeholder: 'Количество страниц', class: 'form-control' %>
+    <%= f.number_field :page_number, placeholder: 'Количество страниц', class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client') %>
   </div>
+<% if current_user.role == 'Client' && @order.status == 'approved'%>
+<%else%>
   <div class="form-group">
   <%= f.label :document %><br>
     <% if f.object.materials %>
@@ -78,11 +80,9 @@
      <%= image_tag 'add.png', id: "add_file", title: 'Добавить файл', height: "35", width:"35" %>
         Добавить файл  
     </div>
-    <% end %>
-  
-    
-   
+    <% end %> 
   </div>
+<%end%>
   <% if ["Admin", "Manager"].include? current_user.role %>
     <div class="row">
       <div class="col-sm-6 col-xs-12">
@@ -118,5 +118,11 @@
       </div>
     </div>
   <% end %>
-  <%= f.button "Сохранить", class: 'btn btn-primary' %>
+  <% if current_user.role == 'Client' && @order.status == 'approved'%>
+  <%else%>
+ 
+<div style="float:left; padding-top:22px;">
+    <%= f.button "Сохранить", class: 'btn btn-primary' %>
+    </div>
+  <% end %>  
 <% end %>

@@ -53,7 +53,7 @@ class WelcomeController < ApplicationController
           redirect_to root_path, notice: 'Ошибка'
         end
       else
-        redirect_to root_path, notice: 'Такой email уже зарегистрирован в системе'
+        redirect_to root_path, notice: 'Такой email уже зарегистрирован в системе. Восстановить пароль <a href="/users/password/new">тут</a>'
       end
     end
   end

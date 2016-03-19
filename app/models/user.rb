@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"
   has_one :account, dependent: :destroy
   has_many :events, dependent: :destroy
-  after_create :add_event
+  #after_create :add_event
 
   def self.search(search)
     if search

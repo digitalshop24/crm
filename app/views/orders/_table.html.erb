@@ -2,6 +2,7 @@
   <tr class="info">
     <th>Номер заказа</th>
     <th>Наименование</th>
+    <th>Статус</th>
     <% if can? :manage, Order %>
       <th>Дата оформления</th>
       <th>Дата информирования</th>
@@ -14,6 +15,15 @@
     <tr <%= 'class=new-item' if order.moderation? %>>
       <td><%= link_to order.id, order %></td>
       <td><%= link_to order.theme, order %></td>
+      <td>
+        <%="завершен" if order.status=="finished" %>
+        <%="модерация" if order.status=="moderation" %>
+        <%="подтвержден" if order.status=="approved" %>
+        <%="поиск исполниеля" if order.status=="employee_searching" %>
+        <%="ожидает предоплаты" if order.status=="prepayment_waiting" %>
+        <%="в работе" if order.status=="in_work" %>
+        <%="решен" if order.status=="solved" %>
+      </td>
       <% if can? :manage, Order %>
         <td><%= order.created_at.strftime("%d.%m.%Y %H:%M") if order.created_at %></td>
         <td><%= order.inform_date.strftime("%d.%m.%Y %H:%M") if order.inform_date %></td>

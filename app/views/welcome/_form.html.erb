@@ -1,4 +1,4 @@
-<% if notice %><p id="notice" class="text-center"><%= notice %></p><% end %>
+<% if notice %><p id="notice" class="text-center"><%= raw(notice) %></p><% end %>
 <%= form_for(@order, url: welcome_orders_path, method: :post, html: { onsubmit: "return validate_form()", multipart: true, class: '', id: ""}) do |f| %>
    
   <div class="form-group" style="margin-top:0px;">

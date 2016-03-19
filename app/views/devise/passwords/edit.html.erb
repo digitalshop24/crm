@@ -18,27 +18,26 @@
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div class="row">
-    <div class="form-group col-md-4">
+   <div class="row">
+          <div class="col-xs-6">
+           <div class="form-group">
       <%= f.label :password, "Новый пароль" %><br />
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> символов минимум)</em><br />
       <% end %>
       <%= f.password_field :password,class: 'form-control', autofocus: true, autocomplete: "off" %>
     </div>
-  </div>
- <div class="row">
-    <div class="form-group col-md-4">
+      
+          <div class="form-group">
       <%= f.label :password_confirmation, "Подтвердите новый пароль" %><br />
       <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
     </div>
-  </div>
+  
 
-   <div class="row">
-      <div class="col-md-4">
+  <div class="form-group">
         <%= f.button "Восстановить пароль", class: 'btn btn-primary' %>
       </div>
-    </div>
+  
 <% end %>
 <br>
       <div class="row">
@@ -46,7 +45,7 @@
           <%= render "devise/shared/links" %>
         </div>
       </div>
-
+</div>
  </div>
 </section>
 </div>
