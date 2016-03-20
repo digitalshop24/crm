@@ -1,4 +1,4 @@
-<% if material.document_file_name %>
+<% if material.document_file_name  %>
   <p><strong>Прикреплённый файл:</strong></p>
   <p class="text-primary multiline"><%= link_to material.document_file_name, material.document.url(:original, false) %></p>
 <% end %>

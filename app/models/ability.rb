@@ -30,7 +30,7 @@ class Ability
     elsif user.role == 'Employee' && user.activated
       can :read, Part
 			can :create, Payout 
-      can :read, Material, order: {employee_id: user.id}, status: 'approved'
+      can :read, Material, status: 'approved'
       can :create, Material, order: {employee_id: user.id}, status: 'approved'
       can :read, Revision, order: {employee_id: user.id}, status: 'approved'
       can :create, Revision, order: {employee_id: user.id}, status: 'approved'
