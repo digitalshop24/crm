@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :set_specialities, only: [:new, :edit, :add_speciality, :update, :create]
-
+  layout 'welcome', :only => [:new]
+  
   def update_specialities
     @specialitiy_number = params[:speciality_number]
     unless params[:speciality_id].empty?

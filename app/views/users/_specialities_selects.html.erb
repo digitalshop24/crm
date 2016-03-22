@@ -1,3 +1,4 @@
+ <b>Специальность</b>
 <div class="row" id='<%= "speciality_#{@speciality_number}" %>'>
   <div class="form-group col-md-5">
     <select name="user[speciality_ids][]" class="form-control speciality_select">
@@ -5,13 +6,11 @@
       <%= options_from_collection_for_select(@specialities, :id, :name) %>
     </select>
   </div>
+  <b style="margin-left:15px;">Подспециальность</b>
   <div class="form-group col-md-6">
     <select multiple name="user[subspeciality_ids][]" class="form-control subspeciality_select">
       <option value="" id="subspeciality_prompt">Выберите подспециализацию(зажмите ctrl для выбора несокльких</option>
       <%= options_from_collection_for_select(@subspecialities, :id, :subspeciality) %>
     </select>
-  </div>
-  <div class="col-md-1">
-    <a class="btn btn-default delete_speciality"><span class="glyphicon glyphicon-minus"></span></a>
   </div>
 </div>
