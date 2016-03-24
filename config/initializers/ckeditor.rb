@@ -21,7 +21,9 @@ Ckeditor.setup do |config|
   # config.authorize_with :cancan
 
   # Asset model classes
-  # config.picture_model { Ckeditor::Picture }
+  config.picture_model { Ckeditor::Epicture }
+
+
   # config.attachment_file_model { Ckeditor::AttachmentFile }
 
   # Paginate assets
