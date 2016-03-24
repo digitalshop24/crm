@@ -1,4 +1,4 @@
-Ckeditor::Epicture < Ckeditor::Asset
+class Ckeditor::Epicture < Ckeditor::Asset
   has_attached_file :data,
                     :url  => "/ckeditor_assets/epictures/:id/:style_:basename.:extension",
                     :path => ":rails_root/public/ckeditor_assets/epictures/:id/:style_:basename.:extension",
