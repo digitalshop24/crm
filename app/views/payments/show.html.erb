@@ -3,7 +3,14 @@
 <% if @payment.ожидает? %>
   <h4>Оплата в банке</h4>
   <p><strong>Сумма: </strong><%= @payment.amount %></p>
-  <p><strong>Реквизиты для оплаты: </strong>3423423423423434</p>
+  <p><strong>Реквизиты для оплаты: </strong></br>ООО "Редстудент" </br>
+ОГРН 1166733050912</br>
+ИНН 6732118523</br>
+КПП 673201001</br>
+в Смоленском отд. №8609 ПАО Сбербанк г.Смоленск БИК 046614632</br>
+30101810000000000632</br>
+Юрид. адрес 214019 РФ, г.Смоленск, ул. 25Сентября д.20 пом.6 оф.2</br>
+тел. +79303068512</p>
   <p>Если вы оплатили, можете загрузить фотографию чека:</p>
   <%= form_for @payment, url: upload_check_payment_path(@payment), html: { class: 'form-inline' } do |f| %>
     <div class="form-group">
@@ -11,11 +18,7 @@
     </div>
     <%= f.button 'Загрузить', class: "btn btn-primary" %>
   <% end %>
-  <% if @payment.order %>
-    <h4>Оплата в с личного счета</h4>
-    Оплатить <%= @payment.amount %> рублей с личного счета
-    <%= link_to 'Оплатить', pay_payment_path(@payment), class: 'btn btn-primary' %>
-  <% end %>
+ 
   <!--
   <h4>Оплата через PayMaster</h4>
   <p>Paymaster принимает Visa, Mastercard, Webmonry</p>

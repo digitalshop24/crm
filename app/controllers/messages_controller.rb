@@ -1,3 +1,4 @@
+require "smsc_api.rb"
 class MessagesController < ApplicationController
   before_action :set_message, only: [:approve, :destroy, :resend]
   load_and_authorize_resource
@@ -14,11 +15,14 @@ class MessagesController < ApplicationController
       end
       if @message.save!
         if params[:send_email]
-          binding.pry
+          mes1 = ERB::Util.url_encode("Здравствуйте, вам оставленно сообщение на сайте редстудент: ")
+          s = "https://smsc.ru/sys/send.php?login=redstudent&psw=ERKol73Q&phones=#{@message.receiver.email}&mes="+ mes1 + @message.content + "&sender=Avtor@redstudent.ru&subj=Registration&mail=1&charset=utf-8"
+          res = HTTParty.get(s)
           puts 'Отправлен email'
         end
         if params[:send_sms]
-          binding.pry
+          sms = SMSC.new()
+          ret = sms.send_sms( @message.receiver.phone, "Здравствуйте, вам оставленно сообщение на сайте редстудент")
           puts 'Отправлено sms'
         end
         flash.now[:success] = 'Сообщение отправлено'

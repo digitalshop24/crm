@@ -19,7 +19,8 @@
   </div>
   <div class="form-group" id="worktype_other" >
     <%= f.label 'Подспециальность' %><br>
-    <%= f.collection_select :subspeciality_id, Subspeciality.all, :id, :subspeciality, { prompt: 'Подспециальность'}, {class: 'form-control', :disabled => (@order.status == 'approved' && current_user.role =='Client')} %>
+     <%= text_field_tag :subspeciality_id, params[:search], class: "form-control",value: @order.subspeciality.subspeciality, placeholder: "Предмет", type: "search", data: {autocomplete: welcome_autocomplete_subspeciality_subspeciality_path} %> 
+  
   </div>
   <div class="form-group">
     <%= f.label :speciality %><br>

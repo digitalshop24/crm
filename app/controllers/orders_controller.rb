@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_order, only: [:edit, :update, :destroy, :approve]
+  autocomplete :subspeciality, :subspeciality
   load_and_authorize_resource
   # GET /orders
   def index
@@ -55,7 +56,13 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   def update
     if @order.update(order_params)
+      if params[:subspeciality_id]
+        
+        @order.subspeciality = Subspeciality.where(:subspeciality => params[:subspeciality_id]).first
+        @order.save
+      elsif params[:order][:subspeciality_id]
        @order.subspeciality = Subspeciality.find(params[:order][:subspeciality_id])
+      end
       if params[:materials]
         params[:materials].each {|file|
         @order.materials.create(document: file)}

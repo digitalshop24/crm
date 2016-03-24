@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post '/paymaster/notify', to: 'payments#notify', as: :paymaster_notify
   resources :messages
   resources :orders do
+    get 'new/autocomplete_subspeciality_subspeciality'
     get '/change_status/:status', to: 'orders#change_status', as: :change_status, on: :member
     get '/search_employee', to: 'orders#search_employee', as: :search_employee, on: :member
     get '/approve', to: 'orders#approve', as: :approve, on: :member

@@ -7,6 +7,8 @@
       <th>Заказ</th>
       <th>Статус</th>
       <th>Чек</th>
+      <th>Действие</th>
+      <th>Email</th>
       <th></th>
     </tr>
   </thead>
@@ -25,6 +27,7 @@
             <%= link_to 'Отклонить', deny_payment_path(payment) %>
           <% end %>
         </td>
+        <td><%= payment.client.email %></td>
       </tr>
     <% end %>
   </tbody>

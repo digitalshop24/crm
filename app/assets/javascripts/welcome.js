@@ -59,7 +59,7 @@ $( '.dropdown-menu a' ).on( 'click', function( event ) {
    console.log( options );
    return false;
 });
-    $(".mobile-phone").mask("+7 (999) 999 99 99");
+    $(".mobile-phone").mask("+7 999 999 99 99");
     var counter = 2;
     $('#del_file').hide();
     $('img#add_file').click(function(){
