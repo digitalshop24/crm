@@ -12,39 +12,18 @@
   <div class="main">
     <div class="container">
     <div class="static">
-  <div id="myEditor"><%= render 'contactscontent'%></div>
-<button id="saveButton">Save</button>
+    </br>
+</br>
+</br>
+  <%= form_tag("/contacts/edit", method: "get") do %>
+  <%= cktext_area_tag(:content, @c) %>
+  <%= submit_tag("Сохранить") %>
+<% end %>
+
 </div>
 </div>
 </div>
-<script>
-  $(function() {
-    $('#myEditor')
-      .froalaEditor({
-        language: 'ru',
-        // Set the save param.
-        saveParam: 'content',
-        // Set the save URL.
-        saveURL: "/contacts/edit",
-        // HTTP request type.
-        saveMethod: 'GET',
-        // Additional save params.
-        saveParams: {id: 'my_editor'}
-      })
-      .on('froalaEditor.save.before', function (e, editor) {
-        // Before save request is made.
-      })
-      .on('froalaEditor.save.after', function (e, editor, response) {
-        alert('изменения сохранены');
-      })
-      .on('froalaEditor.save.error', function (e, editor, error) {
-        // Do something here.
-      })
-  });
-  $('#saveButton').click (function () {
-    $('#myEditor').froalaEditor('save.save')
-  })
-</script>
+
 
  
 </div>

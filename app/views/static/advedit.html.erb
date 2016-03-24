@@ -1,32 +1,28 @@
- 
-<div class="outerwrapper">
+ <div class="outerwrapper">
 <%= render 'welcome/header' %>
 
-  <!-- =floatcontacts -->
   <div class="floatcontacts container">
     <div>
       <a href="tel:+78007757681" class="tel"><span>+7 (800) </span>775-76-81</a>
       <p class="skype"> Звонок бесплатный</p>
     </div>    
   </div>
-  <!-- =/floatcontacts -->
-     <div class="main">
+  
+  <!--InstanceBeginEditable name="EditRegion3" -->
+  <div class="main">
     <div class="container">
     <div class="static">
+    </br>
 </br>
 </br>
-</br>
- <%= form_tag("/offer/edit", method: "get") do %>
+  <%= form_tag("/advantages/edit", method: "get") do %>
   <%= cktext_area_tag(:content, @c) %>
   <%= submit_tag("Сохранить") %>
 <% end %>
 
-
-
-  </div>
-  </div>
 </div>
-
+</div>
+</div>
 
 
  

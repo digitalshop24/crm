@@ -13,56 +13,20 @@
     <div class="main">
     <div class="container">
     <div class="static">
-
-<div id="froala-editor">
-  <%= render 'content' %>
-</div>
-<br/>
-<pre id="eg-previewer" class="prettyprint">
-</pre>
-<button id="saveButton">Сохранить</button>
+    </br>
+</br>
+</br>
+ <%= form_tag("/pay/edit", method: "get") do %>
+  <%= cktext_area_tag(:content, @c) %>
+  <%= submit_tag("Сохранить") %>
+<% end %>
 
 
   </div>
   </div>
 </div>
 
-<script>
-  $(function() {
-    $('div#froala-editor')
-       .froalaEditor({
-        language: 'ru',
-        // Set the save param.
-        saveParam: 'content',
 
-        // Set the save URL.
-        saveURL: '/pay/edit',
-
-        // HTTP request type.
-        saveMethod: 'GET',
-
-        // Additional save params.
-        saveParams: {id: 'my_editor'}
-      })
-      .on('froalaEditor.contentChanged froalaEditor.initialized', function (e, editor) {
-        $('pre#eg-previewer').text(editor.codeBeautifier.run(editor.html.get()))
-        $('pre#eg-previewer').removeClass('prettyprinted');
-        prettyPrint()
-      })
-      .on('froalaEditor.save.before', function (e, editor) {
-        // Before save request is made.
-      })
-      .on('froalaEditor.save.after', function (e, editor, response) {
-        alert('изменения сохранены');
-      })
-      .on('froalaEditor.save.error', function (e, editor, error) {
-        // Do something here.
-      })
-  });
-   $('#saveButton').click (function () {
-    $('#froala-editor').froalaEditor('save.save')
-  })
-</script>
 
  
 </div>

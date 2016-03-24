@@ -25,6 +25,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem "wysiwyg-rails"
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'sinatra', require: false
+gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'sidekiq'
 gem 'faye-rails', '~> 2.0', '>= 2.0.1'
 gem 'thin', '~> 1.6', '>= 1.6.4'

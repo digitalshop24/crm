@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   resources :stocks
   match '*any' => 'application#options', :via => [:options]
   resources :seos
@@ -49,8 +50,10 @@ Rails.application.routes.draw do
   get '/contacts/edit', to: 'static#cedit'
 
   get '/advantages', to: 'static#advantages'
+  get '/advantages/edit', to: 'static#advedit'
   get '/conditions', to: 'static#conditions'
   get '/guarantees', to: 'static#guarantees'
+  get '/guarantees/edit', to: 'static#guaredit'
   post '/orders/welcome', to: 'welcome#create_order', as: :welcome_orders
   resources :seo
   resources :feedbacks

@@ -10,6 +10,7 @@
 //= require users
 //= require bootstrap-datetimepicker
 //= require faye
+//= require ckeditor/init
 
 $(function() {
   $('body').on("click", "#users th a, #users .pagination a", function() {

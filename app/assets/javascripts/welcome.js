@@ -35,6 +35,7 @@
 //= require placeholders.min
 //= require modernizr
 //= require jquery.mask.js
+//= require ckeditor/init
 
 $(document).ready(function(){
     var options = [];
