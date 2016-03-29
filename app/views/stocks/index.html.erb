@@ -30,9 +30,9 @@
             <div class="description col-md-8 col-sm-7 col-xs-12">
               <h3><a href="#"><%=news.title%></a></h3>
               <div class="text">
-              <p><%=news.text.slice(0, 1000)%></p>
+              <p><%=raw (news.text.slice(0, 1000))%></p>
                 <div class="moretext">
-                  <p> <%=news.text.slice(1000, news.text.length)%><p/>
+                  <p> <%=raw (news.text.slice(1000, news.text.length))%><p/>
               </div>
               </div>
               <div class="meta">
