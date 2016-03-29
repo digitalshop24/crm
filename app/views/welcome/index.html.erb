@@ -161,7 +161,7 @@
     <div class="row">
       <div class="col-sm-4 col-xs-12">
         <div class="title">Новости</div>
-        <div class="box">
+        <div class="box" style="height: 420px;">
           <%= image_tag 'new.jpg', class: "img-responsive" %>
           <% if @news %>
             <div class="title_red"><a href="#"><%=@news.title%></a></div>
@@ -173,23 +173,34 @@
       </div>
       <div class="col-sm-4 col-xs-12">
         <div class="title">вопрос / ответ</div>
-        <div class="box">
+        <div class="box" style="height: 420px;">
          <% if @question %>  
           <div class="title_red">Вопрос:</div>
           <p><%=@question.question%></p>
           <div class="title_green">Ответ: </div>
           <p><%=@question.answer%></p>
         <%end%>
+         <% if @question1 %>  
+          <div class="title_red">Вопрос:</div>
+          <p><%=@question1.question%></p>
+          <div class="title_green">Ответ: </div>
+          <p><%=@question1.answer%></p>
+        <%end%>
         </div>
         <a href="questions" class="btn btn_green pull-right">Перейти к разделу</a>
       </div>
       <div class="col-sm-4 col-xs-12">
         <div class="title">Отзывы</div>
-        <div class="box">
+        <div class="box" style="height: 420px;">
          <% if @feedback %> 
           <div class="title_red"><%=@feedback.name%></div>
           <p><%=@feedback.feedback%></p>
           <div class="date"><%=@feedback.created_at.to_s(:db)%></div>
+          <%end%>
+          <% if @feedback1 %> 
+          <div class="title_red"><%=@feedback1.name%></div>
+          <p><%=@feedback1.feedback%></p>
+          <div class="date"><%=@feedback1.created_at.to_s(:db)%></div>
           <%end%>
         </div>
         <a href="feedbacks" class="btn btn_green pull-right">Перейти к разделу</a>
