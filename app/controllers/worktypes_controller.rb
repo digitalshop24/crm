@@ -59,6 +59,6 @@ class WorktypesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def worktype_params
-      params.require(:worktype).permit(:name, :description, :show, :title, :mdescription, :terms, :price, :order)
+      params.require(:worktype).permit(:name, :descr, :description, :show, :title, :mdescription, :terms, :price, :order)
     end
 end

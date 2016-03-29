@@ -343,6 +343,7 @@ ActiveRecord::Schema.define(version: 20161127122427) do
     t.text     "price"
     t.text     "terms"
     t.integer  "order"
+    t.string   "descr"
   end
 
   add_foreign_key "accounts", "users"
