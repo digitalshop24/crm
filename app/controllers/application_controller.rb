@@ -69,6 +69,7 @@ class ApplicationController < ActionController::Base
     end
   end
   def init
+    @stock = Stock.last
     @news = News.last
     @question = Question.last
     @question1 = Question.first
