@@ -82,6 +82,7 @@ class PaymentsController < ApplicationController
     end
   end
 
+
   def deny
     if @payment.модерация?
       if @payment.отклонен!
@@ -91,12 +92,13 @@ class PaymentsController < ApplicationController
       end
     end
   end
+ 
 
   def confirm_invoice
     if params[:LMI_MERCHANT_ID] == Payment::LMI_MERCHANT_ID
       payments = Payment.ожидает.where(id: params[:LMI_PAYMENT_NO], amount: params[:LMI_PAYMENT_AMOUNT], currency: params[:LMI_CURRENCY])
       if payments.count == 1
-        return render plain: "YES"
+        return render :nothing => true, :status => 200
       end
     end
     render plain: "NO"

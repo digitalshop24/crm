@@ -17,6 +17,8 @@
       <%= f.file_field :check %>
     </div>
     <%= f.button 'Загрузить', class: "btn btn-primary" %>
+    <p>Или оплатить через paymaster</p>
+    <a href="https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=d2445484-8d40-4603-b43f-76d49c5a755a&LMI_PAYMENT_NO=<%=@payment.id%>&LMI_SIM_MODE=0&LMI_PAYMENT_AMOUNT=<%=@payment.amount%>&LMI_CURRENCY=RUB&LMI_PAYMENT_DESC=good">Оплатить</a>
   <% end %>
  
   <!--

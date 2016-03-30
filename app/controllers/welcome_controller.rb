@@ -13,6 +13,9 @@ class WelcomeController < ApplicationController
     render nothing: true
   end
 
+def fail
+end
+
   def create_order
     @order = Order.new(order_params.except(:client))
     @order.subspeciality = Subspeciality.where(subspeciality: params[:subspeciality]).first
