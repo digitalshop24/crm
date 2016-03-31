@@ -16,9 +16,17 @@
     <div class="form-group">
       <%= f.file_field :check %>
     </div>
+    <div class="form-group">
     <%= f.button 'Загрузить', class: "btn btn-primary" %>
+    </div>
+    </br>
+    </br>
+    <div class="form-group">
     <p>Или оплатить через paymaster</p>
-    <a href="https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=d2445484-8d40-4603-b43f-76d49c5a755a&LMI_PAYMENT_NO=<%=@payment.id%>&LMI_SIM_MODE=0&LMI_PAYMENT_AMOUNT=<%=@payment.amount%>&LMI_CURRENCY=RUB&LMI_PAYMENT_DESC=good">Оплатить</a>
+    </div>
+    <div style="margin-left:75px;" class="form-group">
+    <a class="btn btn-primary" href="https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=d2445484-8d40-4603-b43f-76d49c5a755a&LMI_PAYMENT_NO=<%=@payment.id%>&LMI_SIM_MODE=0&LMI_SUCCESS_URL=https%3A%2F%2Fadbbacd7.ngrok.io%2Fpayments%2F<%=@payment.id%>%2Fpay&LMI_PAYMENT_AMOUNT=<%=@payment.amount%>&LMI_CURRENCY=RUB&LMI_PAYMENT_DESC=good">Оплатить</a>
+    </div>
   <% end %>
  
   <!--
@@ -39,3 +47,4 @@
 <% elsif @payment.отклонен? %>
   <p>Платеж отклонен</p>
 <% end %>
+

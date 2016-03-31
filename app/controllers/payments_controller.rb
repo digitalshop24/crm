@@ -1,10 +1,10 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:update, :destroy, :upload_check, :show, :approve, :deny]
   skip_before_action :verify_authenticity_token, :if => :allowed_ip?, only: [:confirm_invoice, :notify]
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:notify]
 
   def allowed_ip?
-    request.remote_ip == '127.0.0.1'
+    true
   end
 
   def index
@@ -72,6 +72,7 @@ class PaymentsController < ApplicationController
   end
 
   def pay
+    
     if (current_user.account.amount > @payment.amount)
       account = current_user.account
       account.update(amount: account.amount - @payment.amount)
@@ -105,10 +106,11 @@ class PaymentsController < ApplicationController
   end
 
   def notify
+    
     if params[:LMI_MERCHANT_ID] == Payment::LMI_MERCHANT_ID
       payment = Payment.ожидает.find_by(id: params[:LMI_PAYMENT_NO], amount: params[:LMI_PAYMENT_AMOUNT], currency: params[:LMI_CURRENCY])
       if payment
-        payments.first.update(sys_id: params[:LMI_SYS_PAYMENT_ID], status: :подтвержден, sys_date: params[:LMI_SYS_PAYMENT_DATE])
+        payment.update(sys_id: params[:LMI_SYS_PAYMENT_ID], status: :подтвержден, sys_date: params[:LMI_SYS_PAYMENT_DATE])
       end
     end
     render nothing: true
