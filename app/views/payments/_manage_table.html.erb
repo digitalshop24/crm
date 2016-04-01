@@ -15,7 +15,7 @@
   <tbody>
     <% @payments.each do |payment| %>
       <tr>
-        <td><%= payment.client.name %></td>
+        <td><%= payment.client.name if payment.client %></td>
         <td><%= payment.amount %></td>
         <td><%= payment.created_at %></td>
         <td><%= link_to payment.order.id, payment.order if payment.order %></td>
