@@ -16,10 +16,32 @@ class WelcomeController < ApplicationController
 def fail
 end
 
+ def parse_date_ru date
+    monthes = {
+      "января" => "01",
+      "февраля" => "02",
+      "марта" => "03",
+      "апреля" => "04",
+      "мая" => "05",
+      "июня" => "06",
+      "июля" => "07",
+      "августа" => "08",
+      "сентября" => "09",
+      "октября" => "10",
+      "ноября" => "11",
+      "декабря" => "12"
+    }
+    pattern = /[а-я]+/
+    if date
+      a = date.gsub(pattern, monthes[date[pattern]].to_s)
+      Date.strptime(a, '%d %m %Y')
+    end
+  end
+
   def create_order
     @order = Order.new(order_params.except(:client))
     @order.subspeciality = Subspeciality.where(subspeciality: params[:subspeciality]).first
-    @order.deadline = Date.parse(params[:order][:deadline])
+    @order.deadline = parse_date_ru(params[:order][:deadline])
     if current_user
       @order.client_id = current_user.id if current_user.role = "Client"
       if @order.save
