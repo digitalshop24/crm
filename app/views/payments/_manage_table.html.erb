@@ -27,7 +27,7 @@
             <%= link_to 'Отклонить', deny_payment_path(payment) %>
           <% end %>
         </td>
-        <td><%= payment.client.email %></td>
+        <td><%= payment.client.email if payment.client %></td>
       </tr>
     <% end %>
   </tbody>
