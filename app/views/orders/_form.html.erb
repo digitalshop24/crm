@@ -60,7 +60,7 @@
   <%= f.label :document %><br>
     <% if f.object.materials %>
       <% f.object.materials.each do |file| %>
-       <%= link_to file.document_file_name, file.document.url(:original, false) %>
+       <%= link_to file.document_file_name, file.document.url %>
       <%end%>
      <div class="file_upload oneItem">
     <input type="text" class="form-control" placeholder="Прикрепить файлы" id="f1"/>
