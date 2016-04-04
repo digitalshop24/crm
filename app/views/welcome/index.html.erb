@@ -164,7 +164,7 @@
           <%= image_tag 'new.jpg', class: "img-responsive" %>
           <% if @news %>
             <div class="title_red"><a href="#"><%=@news.title%></a></div>
-             <p><%=@news.text.slice(0, 300)%></p>
+             <p><%=raw (@news.text.slice(0, 300))%></p>
             <p class="date"><%=@news.created_at.to_s(:db)%></p>
           <%end%>
         </div>

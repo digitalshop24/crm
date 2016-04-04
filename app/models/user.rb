@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, foreign_key: "receiver_id", class_name: "Message"
   has_one :account, dependent: :destroy
   has_many :events, dependent: :destroy
-  #after_create :add_event
+  after_create :add_event
 
   def self.search(search)
     if search
@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
   def add_event
+        binding.pry
         @client = self
         token = @client.send(:set_reset_password_token)
         mes1 = ERB::Util.url_encode("Здравствуйте, вы успешно зарегистрировались в системе ")
