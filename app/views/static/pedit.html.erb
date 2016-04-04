@@ -16,7 +16,7 @@
     </br>
 </br>
 </br>
- <%= form_tag("/pay/edit", method: "get") do %>
+ <%= form_tag("/pay/edit", method: "post") do %>
   <%= cktext_area_tag(:content, @c) %>
   <%= submit_tag("Сохранить") %>
 <% end %>

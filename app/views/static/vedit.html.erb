@@ -20,7 +20,7 @@
 </br>
 </br>
 
- <%= form_tag("/vacancies/edit", method: "get") do %>
+ <%= form_tag("/vacancies/edit", method: "post") do %>
   <%= cktext_area_tag(:content, @c) %>
   <%= submit_tag("Сохранить") %>
 <% end %>
