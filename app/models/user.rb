@@ -60,7 +60,6 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
   def add_event
-        binding.pry
         @client = self
         token = @client.send(:set_reset_password_token)
         mes1 = ERB::Util.url_encode("Здравствуйте, вы успешно зарегистрировались в системе ")
