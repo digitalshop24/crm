@@ -1,14 +1,31 @@
 class StaticController < ApplicationController
 layout 'welcome'
-	def conditions
+
+  def about
+     @text = Static.where(:title => 'about').first
+  end
+
+  def aboutedit
+   text = params['content']
+    @text = Static.where(:title => 'about').first
+    @c= @text.text if @text
+    if text
+      record = Static.where(:title => 'about').first
+      if record
+        record.update_attribute(:text, text)
+      else
+        Static.create(:title => 'about', :text => text)
+      end
+    end
+  end
   
+  def conditions
     @text = Static.where(:title => 'condition').first
 	end
-  def 
+
 	def guarantees
     @text = Static.where(:title => 'guarantees').first
   end
-
 
   def guaredit
     text = params['content']
@@ -42,9 +59,11 @@ layout 'welcome'
       end
     end
   end
+
 	def payment
 		@text = Static.where(:title => 'payment').first
 	end
+
 	def pedit
  		text = params['content']
 	  @text = Static.where(:title => 'payment').first
@@ -58,9 +77,11 @@ layout 'welcome'
     	end
     end
  	end
+
 	def vacancy
 		@text = Static.where(:title => 'vacancy').first
 	end
+
 	def vedit
  	  text = params['text']
 	  @text = Static.where(:title => 'vacancy').first
@@ -74,9 +95,11 @@ layout 'welcome'
     	end
     end
 	end
+
 	def partners
 		@text = Static.where(:title => 'partners').first
 	end
+
 	def paedit
  	  text = params['content']
 	  @text = Static.where(:title => 'partners').first
@@ -107,9 +130,11 @@ layout 'welcome'
 	def offer
     @text = Static.where(:title => 'offer').first
 	end
+
 	def contacts
     @text = Static.where(:title => 'contacts').first
 	end
+
 	def cedit
 	  @text = Static.where(:title => 'contacts').first
        @c= @text.text
@@ -123,14 +148,17 @@ layout 'welcome'
     	end
     end
   end
+
   def authors
   end
+
 	def event
     event_params = { :content => "оставлена заявка с номером #{params[:tel]} и типом работы #{params[:type]}", :event_type => "стоимость" }
     event = Event.new(event_params)
     event.save
     redirect_to(:back)
 	end
+
   def condedit
     @text = Static.where(:title => 'condition').first
     @c= @text.text

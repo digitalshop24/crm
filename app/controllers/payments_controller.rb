@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
   end
 
   def index
-    @payments = Payment.preload(:order, client: [:account]).paginate(page: params[:page])
+    @payments = Payment.preload(:order, client: [:account]).paginate(page: params[:page]).order(:created_at)
   end
 
   def show
