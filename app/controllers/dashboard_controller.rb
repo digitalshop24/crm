@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
   end
 
   def new_orders
-    @orders = Order.employee_searching.where(speciality: current_user.speciality).paginate(page: params[:page])
+    @orders = Order.employee_searching.where(speciality: current_user.speciality).paginate(page: params[:page]).order(created_at: :desc)
     render 'dashboard/employee/new_orders'
   end
 
