@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
   belongs_to :receiver, class_name: 'User'
   belongs_to :order
   enum status: %i[moderation approved denied]
-  after_create :add_event
+  #after_create :add_event
 
   def add_event
     if User.current.role!="Manager"

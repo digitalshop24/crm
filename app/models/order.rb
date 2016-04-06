@@ -60,9 +60,12 @@ class Order < ActiveRecord::Base
     end
   end
   def add_event
-    event_params = { :user_id => (User.current.id if User.current), :event_type => "заказ", 
-        :content  => "создал или изменил заказ", :link => "orders/#{self.id}" }
-    event = Event.create(event_params)
+    binding.pry
+    if User.current.role!="Manager"
+      event_params = { :user_id => (User.current.id if User.current), :event_type => "заказ", 
+          :content  => "создал или изменил заказ", :link => "orders/#{self.id}" }
+      event = Event.create(event_params)
+    end
     if User.current
       if User.current.role!="Manager"
         if note_changed?
