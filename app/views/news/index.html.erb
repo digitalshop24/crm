@@ -26,7 +26,7 @@
         <% @newss.each do |news| %>
           <article>
             <div class="col-md-4 col-sm-5 col-xs-12">
-             <%= image_tag news.image.url(:thumb) %>
+             <%= image_tag news.image.url(:medium) %>
             </div>
             <div class="description col-md-8 col-sm-7 col-xs-12">
               <h3><a href="#"><%=news.title%></a></h3>
