@@ -11407,7 +11407,7 @@ img.justifycenter, table.justifycenter {
 
 /* line 1, /Users/administrator/Desktop/crm/app/assets/stylesheets/home/style.scss */
 #foo1 .slide, .service-order .slide {
-  background: url(/assets/slide-1-2dbce97d526799c541df3b9667c38dc63eb96eb96ea27816b9c42f9942405460.jpg) no-repeat center top;
+  background: url(/assets/slide-1-99ab7531d879ce6169fbe639316074a80dd4fdeac67905784e07269b7309fc4a.jpg) no-repeat center top;
   background-size: cover;
   height: 800px;
   padding-top: 88px;
@@ -12026,7 +12026,7 @@ img.justifycenter, table.justifycenter {
 
 /* line 1, /Users/administrator/Desktop/crm/app/assets/stylesheets/home/style.scss */
 .service-order {
-  background: url(/assets/bg-2-24b20e30b5de325e6c6652e18204be6b2f28e7fd2ddf2c76a6d4d7b01c12db94.jpg) no-repeat center top #bfbfbf;
+  background: url(/assets/bg-2-973d6ef79a9d2325ab5c36119e8d5ee93d69be90fb27ff4a5e1339bee71c8785.jpg) no-repeat center top #bfbfbf;
   background-size: cover;
   min-height: 800px;
 }
@@ -13824,12 +13824,4 @@ input[type='submit'].styler[disabled] {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   background-image: none;
-}
-
-/* line 71, /Users/administrator/Desktop/crm/app/assets/stylesheets/welcome.scss */
-footer .menu  {
-  background-color:   #c00;
-  height: 100%;
-  padding-top:  3 0.3rem;
-  color:   #fff;
 }
