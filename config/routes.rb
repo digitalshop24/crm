@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :galleries 
   resources :pictures
  # post '/paytest', to: "welcome#test"
+  post '/payments/details', to: "payments#redact"
   get '/payfail', to: "welcome#fail"
   get '/tform', to: 'welcome#tform'
   get '/authors', to: 'static#authors'

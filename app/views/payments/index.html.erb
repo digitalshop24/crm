@@ -6,3 +6,11 @@
 <%= render 'payments/manage_table' %>
 <br>
 <%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>
+</br>
+</br>
+<div>
+  <%= form_tag("/payments/details", method: "post") do %>
+  <%= cktext_area_tag(:content, @c) %>
+  <%= submit_tag("Сохранить") %>
+  <%end%>
+</div>

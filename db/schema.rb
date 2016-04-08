@@ -187,6 +187,7 @@ ActiveRecord::Schema.define(version: 20161127122427) do
     t.datetime "sys_date"
     t.datetime "created_at",                                                            null: false
     t.datetime "updated_at",                                                            null: false
+    t.string   "details"
   end
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree

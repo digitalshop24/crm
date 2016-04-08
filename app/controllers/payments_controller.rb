@@ -9,9 +9,22 @@ class PaymentsController < ApplicationController
 
   def index
     @payments = Payment.preload(:order, client: [:account]).paginate(page: params[:page]).order(created_at: :desc)
+    @c = Payment.first.details
+  end
+
+  def redact
+     text = params['content']
+    if text
+      record = Payment.first
+      if record
+        record.update_attribute(:details, text)
+      end
+    end
+    redirect_to :back
   end
 
   def show
+    @text = Payment.first.details
   end
 
   def create
