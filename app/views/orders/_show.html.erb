@@ -14,7 +14,7 @@
       Подспециальность
       </td>
       <td>
-      <%=Subspeciality.find(@order.subspeciality_id) if @order.subspeciality_id%>
+      <%=Subspeciality.find(@order.subspeciality_id).subspeciality if @order.subspeciality_id%>
       </td>
   </tr>
   <% if @order.document? %>
