@@ -9,6 +9,14 @@
       <% end %>
     </tr>
   <% end %>
+  <tr>
+      <td>
+      Подспециальность
+      </td>
+      <td>
+      <%=Subspeciality.find(@order.subspeciality_id) if @order.subspeciality_id%>
+      </td>
+  </tr>
   <% if @order.document? %>
     <tr>
       <td><%= t "activerecord.attributes.order.document" %></td>
