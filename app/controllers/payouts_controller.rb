@@ -18,6 +18,7 @@ class PayoutsController < ApplicationController
 
   def approve
     if @payout.waiting?
+      emp = Employee.find(@payout.employee_id)  
       res = emp.account.amount - @payout.amount if emp.account.amount >= @payout.amount
       if @payout.finished! && res >= 0
          emp = Employee.find(@payout.employee_id)  
