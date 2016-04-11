@@ -1,0 +1,10 @@
+<%= render "dashboard/#{current_user.role.downcase}/header" %>
+<div class="page-header">
+  <h2 class="text-center">Выплаты</h2>
+</div>
+<br>
+<%= render 'payouts/manage_table' %>
+<br>
+<%= link_to 'Назад', "javascript:history.back()", class: 'btn btn-default' %>
+</br>
+</br>

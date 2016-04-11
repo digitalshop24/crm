@@ -3,8 +3,14 @@
 <br>
 <%= form_for Payout.new, html: { class: 'form-inline' } do |f| %>
   <div class="form-group">
+  	<p>Сумма</p>
     <%= f.text_field :amount, class: "form-control" %>
   </div>
+   <div class="form-group">
+   <p>Реквизиты</p>
+    <%= f.text_field :details, class: "form-control" %>
+  </div>
+  <p></p>
   <%= f.button 'Заказать выплату', class: "btn btn-default" %>
 <% end %>
 <br>

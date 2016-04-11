@@ -1,7 +1,36 @@
 class PayoutsController < ApplicationController
-  # before_action :set_payout, only: [:update, :destroy, :upload_check, :show, :approve, :deny]
+  before_action :set_payout, only: [:update, :destroy, :upload_check, :show, :approve, :deny]
   load_and_authorize_resource
 
+  def index
+    @payouts = Payout.all.paginate(page: params[:page])
+  end
+  
+  def deny
+     if @payout.waiting?
+      if @payout.denied!
+        redirect_to :back, notice: 'Выплата отклонена'
+      else
+        redirect_to :back, notice: 'Ошибка'
+      end
+    end
+  end
+
+  def approve
+    if @payout.waiting?
+      res = emp.account.amount - @payout.amount if emp.account.amount >= @payout.amount
+      if @payout.finished! && res >= 0
+         emp = Employee.find(@payout.employee_id)  
+         emp.account.update_attribute(:amount, res)
+         redirect_to :back, notice: 'Выплата подтверждена'
+      else
+        redirect_to :back, alert: 'Ошибка'
+      end
+    else
+      redirect_to :back, alert: 'Выплата уже была подтверждена/отклонена ранее'
+    end
+  end
+  
   def pay
     payout = Payout.new(payout_params)
     if payout_params[:order_id]
@@ -38,9 +67,9 @@ class PayoutsController < ApplicationController
     @payout = Payout.find(params[:id])
   end
   def create_params
-    params.require(:payout).permit(:amount)
+    params.require(:payout).permit(:amount, :details)
   end
   def payout_params
-    params.require(:payout).permit(:order_id, :employee_id, :amount, :status)
+    params.require(:payout).permit(:order_id, :employee_id, :amount, :status, :details)
   end
 end

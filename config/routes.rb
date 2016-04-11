@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :stocks
   match '*any' => 'application#options', :via => [:options]
   resources :seos
+  get '/payouts', to: 'payouts#index'
   get '/account', to: 'accounts#show', as: :show_account
+  get 'payouts/deny/:id', to:  'payouts#deny', as: :payout_deny
+  get 'payouts/approve/:id', to:  'payouts#approve', as: :payout_approve
   mount Sidekiq::Web, at: '/sidekiq'
   resources :payments do
     patch '/upload_check', to: 'payments#upload_check', as: :upload_check, on: :member

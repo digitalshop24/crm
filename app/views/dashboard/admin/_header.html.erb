@@ -34,7 +34,18 @@
     <%= link_to 'События', events_path, class: 'btn btn-default' %>
   </div>
   <div class="btn-group" role="group">
-    <%= link_to 'Бухгалтерия', payments_path, class: 'btn btn-default' %>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Бухгалтерия
+            <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to('Выплаты', '/payouts') %>
+      </li>
+      <li>
+        <%= link_to('Платежи',payments_path) %>
+      </li>
+    </ul>
   </div>
   <div class="btn-group" role="group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
